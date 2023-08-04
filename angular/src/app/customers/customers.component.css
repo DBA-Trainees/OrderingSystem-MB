@@ -1,0 +1,44 @@
+@keyframes moveabout {
+
+    from { left: -50px; }
+    to   { left:  170px; }
+}
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+} 
+
+img {
+
+    position: absolute;
+    top: 0px;
+    left:170px;
+    animation: moveabout 3s linear, spin 3000ms linear;
+    border-bottom: 1px solid black;
+    
+  
+   
+}
+
+#div1 {
+    font-family: Arial;
+    font-size: 30px;
+    animation: slide-right 6s;
+   
+  }
+  
+  @keyframes slide-right {
+    from {
+        margin-left: -48%;
+        width: 300%; 
+      }
+    
+      to {
+        margin-left: 0%;
+        width: 100%;
+      }
+    }

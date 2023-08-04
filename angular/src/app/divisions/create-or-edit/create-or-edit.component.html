@@ -1,0 +1,38 @@
+<form  
+  class="form-horizontal"
+  autocomplete="off"
+  #createDivisionModal="ngForm"
+  (ngSubmit)="save()">
+  <abp-modal-header 
+  [title]="'Division'| localize" 
+  (onCloseClick)="bsModalRef.hide()"
+  ></abp-modal-header>
+  <div class="modal-body" >
+        <div class="form-group row required">
+          <label 
+          class="col-md-3 col-form-label" 
+          for="divisionName">
+            {{ "Divisions" | localize }}
+          </label>
+          <div class="col-md-9">
+            <input style="border-color: black;"
+              type="text"
+              class="form-control"
+              name="divisionName"
+              id="divisionName"
+              required
+              [(ngModel)]="division.divisionName"
+             
+            />
+            <!--component for errors display and validation -->
+          
+          </div>
+        </div>
+    </div>
+    <abp-modal-footer
+    [cancelDisabled]="saving"
+    [saveDisabled]="!createDivisionModal.form.valid || saving"
+    (onCancelClick)="bsModalRef.hide()"
+  ></abp-modal-footer>
+</form>
+  

@@ -1,0 +1,61 @@
+<form
+  class="form-horizontal"
+  autocomplete="off"
+  #createCustomerModal="ngForm"
+  (ngSubmit)="save()">
+  <abp-modal-header 
+  [title]="'Customer' | localize" 
+  (onCloseClick)="bsModalRef.hide()"
+  ></abp-modal-header>
+  <div class="modal-body">
+        <div class="form-group row required">
+          <label 
+          class="col-md-3 col-form-label" 
+          for="customerName">
+            {{ "Customer" | localize }}
+          </label>
+          <div class="col-md-9">
+            <input style="border-color: black;"
+              type="text"
+              class="form-control"
+              name="customerName"
+              id="customerName"
+              required
+              [(ngModel)]="customer.customerName"
+              #customerNameModel="ngModel"
+              #customerNameEl
+            />
+            <abp-validation-summary
+              [control]="customerNameModel"
+              [controlEl]="customerNameEl"
+            ></abp-validation-summary>
+          </div>
+        </div>
+        <div class="form-group row required">
+            <label 
+            class="col-md-3 col-form-label" 
+            for="divisionName">
+                {{ "Department" | localize }}
+            </label>
+            <div class="col-md-9" >
+                <select style="border-color: black;" 
+                class="form-control"
+                name="divisionName"
+                id="divisionName"
+                required            
+                [ngModel]="optionDivision"     
+                (ngModelChange)="optionDivision=$event"          
+                >
+                <option *ngFor="let division of divisions"
+                [ngValue]="division.id">{{division.divisionName}}</option>
+                </select>
+            </div>            
+        </div>
+    </div>
+    <abp-modal-footer
+    [cancelDisabled]="saving"
+    [saveDisabled]="!createCustomerModal.form.valid || saving"
+    (onCancelClick)="bsModalRef.hide()"
+  ></abp-modal-footer>
+</form>
+  

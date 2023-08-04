@@ -1,0 +1,36 @@
+@keyframes moveabout {
+
+    from { left: -50px; }
+    to   { left:  145px; }
+}
+    
+
+img {
+
+    position: absolute;
+    top: 5px;
+    left:145px;
+    animation: moveabout 3s linear;
+    border-bottom: 1px solid black;
+  
+   
+}
+
+#div1 {
+    font-family: Arial;
+    font-size: 30px;
+    animation: slide-right 4s;
+   
+  }
+  
+  @keyframes slide-right {
+    from {
+        margin-left: -48%;
+        width: 300%; 
+      }
+    
+      to {
+        margin-left: 0%;
+        width: 100%;
+      }
+    }

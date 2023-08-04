@@ -1,0 +1,61 @@
+<form
+  class="form-horizontal"
+  autocomplete="off"
+  #createfoodTypesModal="ngForm"
+  (ngSubmit)="save()">
+  <abp-modal-header 
+  [title]="'Food Type' | localize" 
+  (onCloseClick)="bsModalRef.hide()"
+  ></abp-modal-header>
+  <div class="modal-body">
+    <div class="form-group row required">
+        <label 
+        class="col-md-2 col-form-label" 
+        for="customerName">
+            {{ "Customer Name" | localize }}
+        </label>
+        <div class="col-md-10">
+            <select 
+            class="form-control"
+            name="customerName"
+            id="customerName"
+            required            
+            [ngModel]="optCustomer"     
+            (ngModelChange)="optCustomer=$event"          
+            >
+            <option *ngFor="let c of customer"
+            [ngValue]="c.id">{{c.customerName}}</option>
+            </select>
+        </div>            
+    </div>
+
+
+    <!--foodtype-->
+    <div class="form-group row required">
+        <label 
+        class="col-md-2 col-form-label" 
+        for="foodName">
+            {{ "Food Name" | localize }}
+        </label>
+        <div class="col-md-10">
+            <select 
+            class="form-control"
+            name="foodName"
+            id="foodName"
+            required            
+            [ngModel]="optFoods"     
+            (ngModelChange)="optFoods=$event"          
+            >
+            <option *ngFor="let f of food"
+            [ngValue]="f.id">{{f.name}}</option>
+            </select>
+        </div>            
+    </div>
+    </div>
+    <abp-modal-footer
+    [cancelDisabled]="saving"
+    [saveDisabled]="!createfoodTypesModal.form.valid || saving"
+    (onCancelClick)="bsModalRef.hide()"
+  ></abp-modal-footer>
+</form>
+  

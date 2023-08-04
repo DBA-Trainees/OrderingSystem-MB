@@ -1,0 +1,110 @@
+
+<div [@routerTransition]>
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6 col-6">
+                            <h1><strong>{{ "List of Available foods  " | localize }}   <img src="assets/img/FL.gif" width="60"/></strong></h1>
+                              
+                        </div>
+                    </div>
+                </div>
+                
+    </section>
+    <section class="content px-2">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-6">&emsp;</div>
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="keyword " 
+                                    [placeholder]="'SearchWithThreeDot' | localize" [(ngModel)]="keyword " 
+                                    (keyup.enter)="getDataPage(1)" />
+                                    <div class="input-group-prepend">
+                                        <button 
+                                        type="button" 
+                                        class="btn bg-info" 
+                                        (click)="getDataPage(1)">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+           <div class="row">
+                <div class="grid-container" *ngFor="let food of foods | paginate
+                : {
+                    id: 'server',
+                    itemsPerPage: pageSize,
+                    currentPage: pageNumber,
+                    totalItems: totalItems
+                    }| search: keyword:['imageName','size','category.categoryName','foodType.foodTypeName', 'quantity', 'price', 'availability', 'name']">
+                    
+                    <div class="card" style="background: #c4d4fd; width:22rem; ">
+                        <div class="card-body" style="width:22rem">
+                        <div class="card-body" style="width:20rem" *ngIf="food.availability==1" (click)="addToCartDetails(food.id)"disabled >
+                                <img [src]="'data:' + food.imageFileType + ';base64,' + food.image" class="center card-img-top" />
+                            <button type="button" class="btn btn-dark" style="margin-top: 5px;"><i class="fa fa-info-circle"></i>
+                                <strong> {{ "See Details" | localize }} </strong>  </button>        
+                        </div>  
+                            <div class="card-body" style="background: #f8f9f9e8;">
+                            <h5 class="card-text text-center" >
+                                <strong>{{food.name}}</strong>
+                            </h5 >
+                            <div class="card-text">
+                                <h6 class="card-text text-center"> <strong>{{food.category?.categoryName}}</strong></h6>
+                            </div>
+                            <div class="card-text text-center">
+                                <label for="foodSize">Food Size: {{food.size}}</label>
+                              </div>
+                            <div class="card-text">
+                                <h6 class="text-center"><strong>{{food.price | currency:'PHP'}}</strong> </h6>
+                            </div>
+
+                            <p class="food-avail text-center" *ngIf="food.availability==1 ; else NotAvailable">
+                                <img src="assets/img/se.gif" alt="" width="20%"/><strong> Available</strong>
+                            </p>
+                            <ng-template #NotAvailable >
+                                <p class="food-unavail text-center">
+                                    <img src="assets/img/dag.gif" alt="" width="20%"/>  <strong> Unavailable</strong></p>
+                                </ng-template>
+                            </div>
+                       
+                        </div>
+                    </div>
+                    </div>
+                    
+                </div>
+              
+           
+        </div>
+        <div class="card-footer table-card-footer bg-light border-top">
+            <div class="row">
+                <div class="col-sm-4 col-12 text-sm-left text-center">
+                    <button class="btn btn-secondary" (click)="refresh()">
+                        <i class="fas fa-redo-alt"></i>
+                    </button>
+                </div>
+                <div class="col-sm-4 col-12 text-center">
+                    <strong>{{  totalItems }}</strong> 
+                     <p>Total Items</p>
+                    
+                </div>
+                <div class="col-sm-4 col-12">
+                    <div class="float-sm-right m-auto">
+                        <abp-pagination-controls
+                                id="server"
+                                (pageChange)="getDataPage($event)"
+                        >
+                        </abp-pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

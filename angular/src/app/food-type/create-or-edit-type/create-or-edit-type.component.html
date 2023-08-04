@@ -1,0 +1,41 @@
+<form
+  class="form-horizontal"
+  autocomplete="off"
+  #createfoodTypesModal="ngForm"
+  (ngSubmit)="save()">
+  <abp-modal-header 
+  [title]="'Food Type' | localize" 
+  (onCloseClick)="bsModalRef.hide()"
+  ></abp-modal-header>
+  <div class="modal-body">
+        <div class="form-group row required">
+          <label 
+          class="col-md-3 col-form-label" 
+          for="typeName">
+            {{ "FoodTypes" | localize }}
+          </label>
+          <div class="col-md-9">
+            <input style="border-color: black;"
+              type="text"
+              class="form-control"
+              name="typeName"
+              id="typeName"
+              required
+              [(ngModel)]="foodType.foodTypeName"
+              #typeNameModel="ngModel"
+              #typeNameEl
+            />
+            <abp-validation-summary
+              [control]="typeNameModel"
+              [controlEl]="typeNameEl"
+            ></abp-validation-summary>
+          </div>
+        </div>
+    </div>
+    <abp-modal-footer
+    [cancelDisabled]="saving"
+    [saveDisabled]="!createfoodTypesModal.form.valid || saving"
+    (onCancelClick)="bsModalRef.hide()"
+  ></abp-modal-footer>
+</form>
+  

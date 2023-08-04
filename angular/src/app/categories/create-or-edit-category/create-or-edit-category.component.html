@@ -1,0 +1,42 @@
+
+<form
+  class="form-horizontal"
+  autocomplete="off"
+  #createCategoriesModal="ngForm"
+  (ngSubmit)="save()">
+  <abp-modal-header 
+  [title]="'Category' | localize" 
+  (onCloseClick)="bsModalRef.hide()"
+  ></abp-modal-header>
+  <div class="modal-body">
+        <div class="form-group row required">
+          <label 
+          class="col-md-3 col-form-label" 
+          for="categoryName">
+            {{ "Categories" | localize }}
+          </label>
+          <div class="col-md-9">
+            <input style="border-color: black;"
+              type="text"
+              class="form-control"
+              name="categoryName"
+              id="categoryName"
+              required
+              [(ngModel)]="category.categoryName"
+              #categoryNameModel="ngModel"
+              #categoryNameEl
+            />
+            <abp-validation-summary
+              [control]="categoryNameModel"
+              [controlEl]="categoryNameEl"
+            ></abp-validation-summary>
+          </div>
+        </div>
+    </div>
+    <abp-modal-footer
+    [cancelDisabled]="saving"
+    [saveDisabled]="!createCategoriesModal.form.valid || saving"
+    (onCancelClick)="bsModalRef.hide()"
+  ></abp-modal-footer>
+</form>
+  

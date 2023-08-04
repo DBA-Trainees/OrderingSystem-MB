@@ -1,0 +1,197 @@
+<form
+  class="form-horizontal"
+  autocomplete="off"
+  #editFoodModal="ngForm"
+  (ngSubmit)="save()">
+  <abp-modal-header 
+  [title]="'Food' | localize" 
+  (onCloseClick)="bsModalRef.hide()"
+  ></abp-modal-header>
+  <div class="modal-body">
+        <div class="form-group row required">
+          <label 
+          class="col-md-2 col-form-label" 
+          for="image">
+            {{ "Food Photo" | localize }}
+          </label>
+          <div class="col-md-10">
+            <input style="height: 40px; border-color: black;"
+              type="file"
+              class="form-control"
+              name="image"
+              id="image"
+              required
+              (change)="selectedImage($event)"
+            /><br>
+          </div>
+        </div>
+          <div class="form-group row required"> 
+            <label 
+            class="col-md-2 col-form-label" 
+            for="name">
+              {{ "Food Name" | localize }}
+            </label>
+            <div class="col-md-10">
+              <input style="border-color: black;"
+                type="text"
+                class="form-control"
+                name="name"
+                id="name"
+                required
+                [(ngModel)]="food.name"
+                #nameModel="ngModel"
+                #nameEl
+              />
+              <abp-validation-summary
+                [control]="nameModel"
+                [controlEl]="nameEl"
+              ></abp-validation-summary>
+            </div>
+          </div>
+          <div class="form-group row required">
+            <label 
+            class="col-md-3 col-form-label" 
+            for="availability">
+              {{ "Is Available?" | localize }}
+            </label>
+            <div class="form-check form-check-inline">
+              <input style="border-color: black;"
+                type="checkbox"
+                class="form-check-input"
+                name="availability"
+                id="availability"                
+                [checked]="food.availability"
+                (change)="createAvailable($event)"
+              />
+              <label class="form-check-label"> Available</label>
+            </div>
+          </div>
+          <!--qty-->
+          <div class="form-group row required">
+            <label 
+            class="col-md-2 col-form-label" 
+            for="foodQuantity">
+              {{ "Quantity" | localize }}
+            </label>
+            <div class="col-md-10">
+              <input style="border-color: black;"
+                type="number"
+                class="form-control"
+                name="foodQty"
+                id="foodQty"
+                required
+                [(ngModel)]="food.quantity"
+                #foodQtyModel="ngModel"
+                #foodQtyEl
+              />
+              <abp-validation-summary
+                [control]="foodQtyModel"
+                [controlEl]="foodQtyEl"
+              ></abp-validation-summary>
+            </div>
+          </div>
+          <!--category-->
+        <div class="form-group row required">
+            <label 
+            class="col-md-2 col-form-label"
+            for="categoryName">
+                {{ "Food Category" | localize }}
+            </label>
+            <div class="col-md-10">
+                <select style="border-color: black;"
+                class="form-control"placeholder="pili ka…"
+                name="categoryName"
+                id="categoryName"
+                required            
+                [ngModel]="optCategories"     
+                (ngModelChange)="optCategories=$event"          
+                >
+                <option *ngFor="let Category of categories"
+                [ngValue]="Category.id">{{Category.categoryName}}    </option>
+                </select>
+            </div>            
+        </div>
+
+
+        <!--foodtype-->
+        <div class="form-group row required">
+            <label 
+            class="col-md-2 col-form-label" 
+            for="foodTypeName">
+                {{ "Food Type" | localize }}
+            </label>
+            <div class="col-md-10">
+                <select style="border-color: black;"
+                class="form-control"
+                name="foodTypeName"
+                id="foodTypeName"
+                required            
+                [ngModel]="optFoodType"     
+                (ngModelChange)="optFoodType=$event"          
+                >
+                <option *ngFor="let type of foodType"
+                [ngValue]="type.id">{{type.foodTypeName}}</option>
+                </select>
+            </div>            
+        </div>
+
+       
+        <div class="form-group row required">
+          <label 
+          class="col-md-2 col-form-label" 
+          for="foodSize">
+              {{ "Size" | localize }}
+          </label>
+          <div class="col-md-10">
+              <select style="border-color: black;"
+              class="form-control"
+              name="foodSize"
+              id="foodSize"          
+              [ngModel]="sizeSelected"     
+              (ngModelChange)="sizeSelected=$event"          
+              >
+              <option *ngFor="let fs of  foodSize"
+            [ngValue]="fs" >{{fs}}</option>
+              </select>
+          </div>            
+      </div>
+      
+
+        <!--price-->
+          <div class="form-group row required">
+            <label 
+            class="col-md-2 col-form-label" 
+            for="foodPrice">
+              {{ "Price" | localize }}
+            </label>
+            <div class="col-md-10">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" style="border-color: black;">&#8369;</span>
+                  </div>
+              <input style="border-color: black;"
+                type="number"
+                class="form-control"
+                name="foodPrice"
+                id="foodPrice"
+                value="₱"
+                required
+                [(ngModel)]="food.price"
+                #foodPriceModel="ngModel"
+                #foodPriceEl
+              />
+              <abp-validation-summary
+                [control]="foodPriceModel"
+                [controlEl]="foodPriceEl"
+              ></abp-validation-summary>
+            </div>
+            </div>
+          </div>
+    </div>
+    <abp-modal-footer
+    [cancelDisabled]="saving"
+    [saveDisabled]="!editFoodModal.form.valid || saving"
+    (onCancelClick)="bsModalRef.hide()"
+  ></abp-modal-footer>
+</form>
+  
