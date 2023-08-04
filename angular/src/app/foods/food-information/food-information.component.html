@@ -4,12 +4,14 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-6 col-6">
-                            <h1><strong>{{ "List of Available foods  " | localize }}   <img src="assets/img/FL.gif" width="60"/></strong></h1>
+                    <div id="div1">
+                        <strong>{{ "Food List  " | localize }}</strong>
+                    </div>
+                    <img src="assets/img/FL.gif" width="50px" id="wiw"/>
                               
                         </div>
                     </div>
                 </div>
-                
     </section>
     <section class="content px-2">
         <div class="container-fluid">
@@ -19,17 +21,21 @@
                         <div class="col-md-6">&emsp;</div>
                         <div class="col-md-6">
                             <div class="input-group">
-                                <input type="text" class="form-control" name="keyword " 
-                                    [placeholder]="'SearchWithThreeDot' | localize" [(ngModel)]="keyword " 
-                                    (keyup.enter)="getDataPage(1)" />
-                                    <div class="input-group-prepend">
-                                        <button 
-                                        type="button" 
-                                        class="btn bg-info" 
-                                        (click)="getDataPage(1)">
-                                            <i class="fas fa-search"></i>
-                                        </button>
-                                    </div>
+                                <div class="input-group-prepend">
+                                    <button 
+                                    type="button" 
+                                    class="btn bg-blue" 
+                                    (click)="getDataPage(1)">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                                <input 
+                                type="text" 
+                                class="form-control" 
+                                name="keyword"                                    
+                                [placeholder]="'SearchWithThreeDot' | localize" 
+                                [(ngModel)]="keyword"
+                                (keyup.enter)="getDataPage(1)" />
                             </div>
                         </div>
                     </div>
@@ -45,14 +51,14 @@
                     totalItems: totalItems
                     }| search: keyword:['imageName','size','category.categoryName','foodType.foodTypeName', 'quantity', 'price', 'availability', 'name']">
                     
-                    <div class="card" style="background: #c4d4fd; width:22rem; ">
+                    <div class="card border border-dark"  id="sh">
                         <div class="card-body" style="width:22rem">
-                        <div class="card-body" style="width:20rem" *ngIf="food.availability==1" (click)="addToCartDetails(food.id)"disabled >
+                        <div class="card-body" id="wut" *ngIf="food.availability==1" (click)="addToCartDetails(food.id)"disabled >
                                 <img [src]="'data:' + food.imageFileType + ';base64,' + food.image" class="center card-img-top" />
                             <button type="button" class="btn btn-dark" style="margin-top: 5px;"><i class="fa fa-info-circle"></i>
                                 <strong> {{ "See Details" | localize }} </strong>  </button>        
-                        </div>  
-                            <div class="card-body" style="background: #f8f9f9e8;">
+                        </div >  
+                            <div class="card-body" style="background: #f8f9f9e8 ; ">
                             <h5 class="card-text text-center" >
                                 <strong>{{food.name}}</strong>
                             </h5 >
@@ -69,10 +75,14 @@
                             <p class="food-avail text-center" *ngIf="food.availability==1 ; else NotAvailable">
                                 <img src="assets/img/se.gif" alt="" width="20%"/><strong> Available</strong>
                             </p>
-                            <ng-template #NotAvailable >
-                                <p class="food-unavail text-center">
-                                    <img src="assets/img/dag.gif" alt="" width="20%"/>  <strong> Unavailable</strong></p>
-                                </ng-template>
+                           
+                                <ng-template #NotAvailable >
+                                    <p class="food-unavail text-center">
+                                        <strong> Unavailable</strong></p>
+                                        <img src="assets/img/dag.gif" alt="" width="50%"  id="wak"/> 
+                                    </ng-template>
+                           
+                           
                             </div>
                        
                         </div>

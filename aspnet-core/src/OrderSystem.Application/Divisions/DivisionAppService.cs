@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace OrderSystem.Divisions
 {
-    [AbpAuthorize(PermissionNames.Pages_Divisions_Admin)]
+    [AbpAuthorize(PermissionNames.Pages_Divisions)]
     public class DivisionAppService : AsyncCrudAppService<Division, DivisionDto, int, PagedDivisionResultRequestDto, CreateDivisionDto, DivisionDto>, IDivisionAppService
     {
        

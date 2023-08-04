@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace OrderSystem.Categories
 {
-    [AbpAuthorize(PermissionNames.Pages_Categories_Vendor)]
+    [AbpAuthorize(PermissionNames.Pages_Categories)]
 
     public class CategoriesAppService : AsyncCrudAppService<Category, CategoriesDto, int, PagedCategoriesResultRequestDto, CreateCategoriesDto, CategoriesDto>, ICategoriesAppService
     {

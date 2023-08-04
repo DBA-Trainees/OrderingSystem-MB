@@ -1,7 +1,7 @@
 @keyframes moveabout {
 
     from { left: -50px; }
-    to   { left:  170px; }
+    to   { left:  105px; }
 }
 @keyframes tilt-shaking  {
     0% { transform: translate(0, 0) rotate(0deg); }
@@ -17,11 +17,9 @@ img {
 
     position: absolute;
     top: 0px;
-    left:170px;
+    left:105px;
     animation: moveabout 3s linear, tilt-shaking 0.31s infinite;
     border-bottom: 1px solid black;
-    
-  
    
 }
 

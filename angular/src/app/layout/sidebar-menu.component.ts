@@ -50,15 +50,15 @@ export class SidebarMenuComponent extends AppComponentBase implements OnInit {
            // new MenuItem(this.l("Admin"), "", "fas fa-user-gear", "Pages.Admin", [
                 new MenuItem(
                   this.l("Divisions"),
-                  "/app/divisions/admin",
+                  "/app/divisions",
                   "fas fa-laptop-house",
-                  "Pages.Divisions.Admin"
+                  "Pages.Divisions"
                 ),
                 new MenuItem(
                     this.l('Customer'),
-                    '/app/customers/admin',
+                    '/app/customers',
                     'fas fa-user-friends',
-                    'Pages.Customers.Admin'
+                    'Pages.Customers'
                     
                 ),
                 new MenuItem(this.l("Roles"),"/app/roles","fas fa-theater-masks","Pages.Roles"),
@@ -68,38 +68,38 @@ export class SidebarMenuComponent extends AppComponentBase implements OnInit {
         //    new MenuItem(this.l("Vendor"), "", "fas fa-user-tie", "Pages.Vendor", [
             new MenuItem(
                 this.l('Category'),
-                '/app/categories/vendor',
+                '/app/categories',
                 'fas fa-edit',
-                'Pages.Categories.Vendor'
+                'Pages.Categories'
             ),
             new MenuItem(
                 this.l('Type'),
-                '/app/foodtypes/vendor',
+                '/app/foodtypes',
                 'fas fa-wine-bottle',
-                'Pages.FoodTypes.Vendor'
+                'Pages.FoodTypes'
             ),
             
 
             new MenuItem(
                 this.l('Food'),
-                '/app/foods/vendor',
+                '/app/foods',
                 'fas fa-glass-cheers',
-                'Pages.Foods.Vendor'
+                'Pages.Foods'
             ),
             new MenuItem(
                 this.l('List of Orders'),
-                '/app/orders/vendor',
+                '/app/orders',
                 'fas fa-shopping-cart',
-                'Pages.Orders.Vendor'
+                'Pages.Orders'
             ),
     //    ]),
 
       //  new MenuItem(this.l("Customer"), "", "fas fa-user-circle", "Pages.Customer", [
             new MenuItem(
                 this.l('List of Foods'),
-                '/app/foodList/customer',
+                '/app/foodList',
                 'fas fa-list',
-               'Pages.FoodList.Customer'
+               'Pages.FoodList'
             ),
             
      //   ]),

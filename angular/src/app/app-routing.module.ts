@@ -32,16 +32,15 @@ import { CustomerCartComponent } from './customer-cart/customer-cart.component';
                     { path: 'about', component: AboutComponent, canActivate: [AppRouteGuard] },
                     { path: 'update-password', component: ChangePasswordComponent, canActivate: [AppRouteGuard] },
 
-                    { path: 'divisions/admin', component: DivisionsComponent, data: { permission: 'Pages.Divisions.Admin'}, canActivate: [AppRouteGuard]  },
-                    { path: 'customers/admin', component: CustomersComponent, data: { permission: 'Pages.Customers.Admin'}, canActivate: [AppRouteGuard] },
+                    { path: 'divisions', component: DivisionsComponent, data: { permission: 'Pages.Divisions'}, canActivate: [AppRouteGuard]  },
+                    { path: 'customers', component: CustomersComponent, data: { permission: 'Pages.Customers'}, canActivate: [AppRouteGuard] },
 
-                    { path: 'categories/vendor', component: CategoriesComponent, data: { permission:'Pages.Categories.Vendor'} ,canActivate: [AppRouteGuard] },
-                    { path: 'foodtypes/vendor', component: FoodTypeComponent, data: { permission: 'Pages.FoodTypes.Vendor'}, canActivate: [AppRouteGuard] },
-                    { path: 'foods/vendor', component: FoodsComponent, data: { permission: 'Pages.Foods.Vendor'},canActivate: [AppRouteGuard] },
-                    { path: 'orders/vendor', component: OrdersComponent, data: { permission: 'Pages.Orders.Vendor'},canActivate: [AppRouteGuard] },
+                    { path: 'categories', component: CategoriesComponent, data: { permission:'Pages.Categories'} ,canActivate: [AppRouteGuard] },
+                    { path: 'foodtypes', component: FoodTypeComponent, data: { permission: 'Pages.FoodTypes'}, canActivate: [AppRouteGuard] },
+                    { path: 'foods', component: FoodsComponent, data: { permission: 'Pages.Foods'},canActivate: [AppRouteGuard] },
+                    { path: 'orders', component: OrdersComponent, data: { permission: 'Pages.Orders'},canActivate: [AppRouteGuard] },
   
-                    { path: 'foodList/customer', component: FoodListInformationComponent,data: { permission: 'Pages.FoodList.Customer'},canActivate: [AppRouteGuard] },
-                    { path: 'food-list/food-details', component: AddToCartDetailsComponent, data: { permission: 'Pages.FoodDetails.Customer' },canActivate: [AppRouteGuard] },
+                    { path: 'foodList', component: FoodListInformationComponent,data: { permission: 'Pages.FoodList'},canActivate: [AppRouteGuard] },
                     { path: 'carts', component: CustomerCartComponent, canActivate: [AppRouteGuard] },
 
 

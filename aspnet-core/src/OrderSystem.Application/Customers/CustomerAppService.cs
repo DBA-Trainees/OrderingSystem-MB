@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace OrderSystem.Customers
 {
-    [AbpAuthorize(PermissionNames.Pages_Customers_Admin)]
+    [AbpAuthorize(PermissionNames.Pages_Customers)]
 
     public class CustomerAppService : AsyncCrudAppService<Customer, CustomerDto, int, PagedCustomerResultRequestDto, CreateCustomerDto, CustomerDto>, ICustomerAppService
     {

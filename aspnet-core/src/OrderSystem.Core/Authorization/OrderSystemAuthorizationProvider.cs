@@ -13,22 +13,15 @@ namespace OrderSystem.Authorization
             context.CreatePermission(PermissionNames.Pages_Roles, L("Roles"));
             context.CreatePermission(PermissionNames.Pages_Tenants, L("Tenants"), multiTenancySides: MultiTenancySides.Host);
 
-            var admin = context.GetPermissionOrNull(PermissionNames.Pages_Admin) ?? context.CreatePermission(PermissionNames.Pages_Admin, L("AdminView"));
-            admin.CreateChildPermission(PermissionNames.Pages_Divisions_Admin, L("Divisions"));
-             admin.CreateChildPermission(PermissionNames.Pages_Customers_Admin, L("Customers"));
+            context.CreatePermission(PermissionNames.Pages_Divisions, L("Divisions"));
+            context.CreatePermission(PermissionNames.Pages_Customers, L("Customers"));
+            context.CreatePermission(PermissionNames.Pages_Categories, L("Category"));
+            context.CreatePermission(PermissionNames.Pages_FoodTypes, L("FoodTypes"));
+            context.CreatePermission(PermissionNames.Pages_Foods, L("Foods"));
+            context.CreatePermission(PermissionNames.Pages_Orders, L("Orders"));
+            context.CreatePermission(PermissionNames.Pages_FoodList, L("FoodList"));
 
 
-            var vendor = context.GetPermissionOrNull(PermissionNames.Pages_Vendor) ?? context.CreatePermission(PermissionNames.Pages_Vendor, L("VendorsView"));
-            vendor.CreateChildPermission(PermissionNames.Pages_Categories_Vendor, L("Category"));
-            vendor.CreateChildPermission(PermissionNames.Pages_FoodTypes_Vendor, L("FoodTypes"));
-            vendor.CreateChildPermission(PermissionNames.Pages_Foods_Vendor, L("Foods"));
-            vendor.CreateChildPermission(PermissionNames.Pages_Orders_Vendor, L("Orders"));
-           
-
-            var customer = context.GetPermissionOrNull(PermissionNames.Pages_Customer) ?? context.CreatePermission(PermissionNames.Pages_Customer, L("CustomersView"));
-            customer.CreateChildPermission(PermissionNames.Pages_FoodList_Customer, L("FoodList"));
-          
-         
         }
 
         private static ILocalizableString L(string name)

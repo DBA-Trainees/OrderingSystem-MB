@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace OrderSystem.FoodTypes
 {
-    [AbpAuthorize(PermissionNames.Pages_FoodTypes_Vendor)]
+    [AbpAuthorize(PermissionNames.Pages_FoodTypes)]
 
     public class FoodTypeAppService : AsyncCrudAppService<FoodType, FoodTypeDto, int, PagedFoodTypeResultRequestDto, CreateFoodTypeDto, FoodTypeDto>, IFoodTypeAppService
     {
