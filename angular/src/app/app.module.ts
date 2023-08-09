@@ -52,8 +52,8 @@ import { CreateOrEditFoodComponent } from './foods/create-or-edit-food/create-or
 import { OrdersComponent } from './orders/orders.component';
 import { EditFoodComponent } from './foods/create-or-edit-food/edit-food/edit-food.component';
 import { CreateOrEditOrderComponent } from './orders/create-or-edit-order/create-or-edit-order.component';
-import { FoodListInformationComponent } from './foods/food-information/food-information.component';
-import { AddToCartDetailsComponent } from './foods/add-to-cart-details/add-to-cart-details.component';
+import { FoodListInformationComponent } from './orders/food-information/food-information.component';
+import { AddToCartDetailsComponent } from './orders/food-information/add-to-cart-details/add-to-cart-details.component';
 import { CustomerCartComponent } from './customer-cart/customer-cart.component';
 
 

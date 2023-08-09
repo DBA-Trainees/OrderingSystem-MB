@@ -54,26 +54,20 @@
                     
                     <div class="card-sl" [ariaDisabled]="food.quantity==0" >
                         <div class="card-content">
-                        <div class="card-body" id="wut" *ngIf="food.availability==1" (click)="addToCartDetails(food.id)"disabled >
+                        <div class="card-body" id="wut" *ngIf="food.availability==1" >
                                 <img [src]="'data:' + food.imageFileType + ';base64,' + food.image" class="center card-img-top" />
-                            <button type="button" class="btn btn-dark" style="margin-top: 5px;"><i class="fa fa-info-circle"></i>
-                                <strong> {{ "See Details" | localize }} </strong>  </button>
-                                <a 
-                             class="cartButton" 
-                        [hidden]="food.quantity==0" 
-                         (click)="Cart(food)">
-                        <i class="fas fa-shopping-cart" ></i>
-                     </a>    
-                                
-                        </div >  
+                                <a class="cartButton" (click)="showModalDetails(food.id)">
+                                <i class="fas fa-shopping-cart" ></i>
+                                </a>
+                        </div>  
                             
                             <div class="card-body">
                             <h5 class="card-text text-center" >
                                 <strong>{{food.name}}</strong>
                             </h5 >
-                            <div class="card-text">
+                            <!-- <div class="card-text">
                                 <h6 class="card-text text-center"> <strong>{{food.category?.categoryName}}</strong></h6>
-                            </div>
+                            </div> -->
                             <div class="card-text text-center">
                                 <label for="foodSize">Food Size: {{food.size}}</label>
                               </div>
@@ -81,15 +75,15 @@
                             <div class="card-text">
                                 <h6 class="text-center"><strong>{{food.price | currency:'PHP'}}</strong> </h6>
                             </div>
-
-                            <p class="food-avail text-center" *ngIf="food.availability==1 ; else NotAvailable">
+  
+                            <!-- <p class="food-avail text-center" *ngIf="food.availability==1 ; else NotAvailable">
                                 <img src="assets/img/se.gif" alt="" width="20%"/><strong> Available</strong>
                             </p>
                                 <ng-template #NotAvailable >
                                     <p class="food-unavail text-center">
                                         <strong> Unavailable</strong></p>
                                         <img src="assets/img/dag.gif" alt="" width="45%"  id="wak"/> 
-                                    </ng-template>
+                                    </ng-template> -->
                             </div>
                        
                         </div>

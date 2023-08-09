@@ -95,7 +95,6 @@ export class CustomerCartComponent extends PagedListingComponentBase<OrderDto> {
     return updatedPrice * this.foodQty;
   }
 
-
   protected delete(order: OrderDto): void {
     abp.message.confirm(
       this.l("OrderDeleteWarningMessage", order.food.name),

@@ -8,27 +8,6 @@
   (onCloseClick)="bsModalRef.hide()"
   ></abp-modal-header>
   <div class="modal-body">
-    <div class="form-group row required">
-        <label 
-        class="col-md-2 col-form-label" 
-        for="customerName">
-            {{ "Customer Name" | localize }}
-        </label>
-        <div class="col-md-10">
-            <select 
-            class="form-control"
-            name="customerName"
-            id="customerName"
-            required            
-            [ngModel]="optCustomer"     
-            (ngModelChange)="optCustomer=$event"          
-            >
-            <option *ngFor="let c of customer"
-            [ngValue]="c.id">{{c.customerName}}</option>
-            </select>
-        </div>            
-    </div>
-
 
     <!--foodtype-->
     <div class="form-group row required">

@@ -15,8 +15,8 @@ import { CustomersComponent } from './customers/customers.component';
 import { FoodsComponent } from './foods/foods.component';
 import { OrdersComponent } from './orders/orders.component';
 
-import { FoodListInformationComponent } from './foods/food-information/food-information.component';
-import { AddToCartDetailsComponent } from './foods/add-to-cart-details/add-to-cart-details.component';
+import { FoodListInformationComponent } from './orders/food-information/food-information.component';
+import { AddToCartDetailsComponent } from  './orders/food-information/add-to-cart-details/add-to-cart-details.component';
 import { CustomerCartComponent } from './customer-cart/customer-cart.component';
 @NgModule({
     imports: [
@@ -39,9 +39,8 @@ import { CustomerCartComponent } from './customer-cart/customer-cart.component';
                     { path: 'foodtypes', component: FoodTypeComponent, data: { permission: 'Pages.FoodTypes'}, canActivate: [AppRouteGuard] },
                     { path: 'foods', component: FoodsComponent, data: { permission: 'Pages.Foods'},canActivate: [AppRouteGuard] },
                     { path: 'orders', component: OrdersComponent, data: { permission: 'Pages.Orders'},canActivate: [AppRouteGuard] },
-  
                     { path: 'foodList', component: FoodListInformationComponent,data: { permission: 'Pages.FoodList'},canActivate: [AppRouteGuard] },
-                    { path: 'carts', component: CustomerCartComponent, canActivate: [AppRouteGuard] },
+                    { path: './app/customer-cart', component: CustomerCartComponent, canActivate: [AppRouteGuard] }
 
 
 

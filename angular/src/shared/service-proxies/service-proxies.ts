@@ -4877,10 +4877,10 @@ export interface ICreateFoodTypeDto {
 }
 
 export class CreateOrderDto implements ICreateOrderDto {
-    customerId: number | undefined;
+    id: number;
     foodId: number | undefined;
     quantity: number | undefined;
-    price: number;
+    totalFoodAmount: number;
     size: string | undefined;
     notes: string | undefined;
     dateTimeOrdered: moment.Moment | undefined;
@@ -4896,10 +4896,10 @@ export class CreateOrderDto implements ICreateOrderDto {
 
     init(_data?: any) {
         if (_data) {
-            this.customerId = _data["customerId"];
+            this.id = _data["id"];
             this.foodId = _data["foodId"];
             this.quantity = _data["quantity"];
-            this.price = _data["price"];
+            this.totalFoodAmount = _data["totalFoodAmount"];
             this.size = _data["size"];
             this.notes = _data["notes"];
             this.dateTimeOrdered = _data["dateTimeOrdered"] ? moment(_data["dateTimeOrdered"].toString()) : <any>undefined;
@@ -4915,10 +4915,10 @@ export class CreateOrderDto implements ICreateOrderDto {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["customerId"] = this.customerId;
+        data["id"] = this.id;
         data["foodId"] = this.foodId;
         data["quantity"] = this.quantity;
-        data["price"] = this.price;
+        data["totalFoodAmount"] = this.totalFoodAmount;
         data["size"] = this.size;
         data["notes"] = this.notes;
         data["dateTimeOrdered"] = this.dateTimeOrdered ? this.dateTimeOrdered.toISOString() : <any>undefined;
@@ -4934,10 +4934,10 @@ export class CreateOrderDto implements ICreateOrderDto {
 }
 
 export interface ICreateOrderDto {
-    customerId: number | undefined;
+    id: number;
     foodId: number | undefined;
     quantity: number | undefined;
-    price: number;
+    totalFoodAmount: number;
     size: string | undefined;
     notes: string | undefined;
     dateTimeOrdered: moment.Moment | undefined;
@@ -6061,12 +6061,10 @@ export interface IIsTenantAvailableOutput {
 
 export class OrderDto implements IOrderDto {
     id: number;
-    customerId: number | undefined;
-    customer: CustomerDto;
     foodId: number | undefined;
     food: FoodDto;
     quantity: number;
-    price: number;
+    totalFoodAmount: number;
     size: string | undefined;
     notes: string | undefined;
     dateTimeOrdered: moment.Moment | undefined;
@@ -6083,12 +6081,10 @@ export class OrderDto implements IOrderDto {
     init(_data?: any) {
         if (_data) {
             this.id = _data["id"];
-            this.customerId = _data["customerId"];
-            this.customer = _data["customer"] ? CustomerDto.fromJS(_data["customer"]) : <any>undefined;
             this.foodId = _data["foodId"];
             this.food = _data["food"] ? FoodDto.fromJS(_data["food"]) : <any>undefined;
             this.quantity = _data["quantity"];
-            this.price = _data["price"];
+            this.totalFoodAmount = _data["totalFoodAmount"];
             this.size = _data["size"];
             this.notes = _data["notes"];
             this.dateTimeOrdered = _data["dateTimeOrdered"] ? moment(_data["dateTimeOrdered"].toString()) : <any>undefined;
@@ -6105,12 +6101,10 @@ export class OrderDto implements IOrderDto {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
-        data["customerId"] = this.customerId;
-        data["customer"] = this.customer ? this.customer.toJSON() : <any>undefined;
         data["foodId"] = this.foodId;
         data["food"] = this.food ? this.food.toJSON() : <any>undefined;
         data["quantity"] = this.quantity;
-        data["price"] = this.price;
+        data["totalFoodAmount"] = this.totalFoodAmount;
         data["size"] = this.size;
         data["notes"] = this.notes;
         data["dateTimeOrdered"] = this.dateTimeOrdered ? this.dateTimeOrdered.toISOString() : <any>undefined;
@@ -6127,12 +6121,10 @@ export class OrderDto implements IOrderDto {
 
 export interface IOrderDto {
     id: number;
-    customerId: number | undefined;
-    customer: CustomerDto;
     foodId: number | undefined;
     food: FoodDto;
     quantity: number;
-    price: number;
+    totalFoodAmount: number;
     size: string | undefined;
     notes: string | undefined;
     dateTimeOrdered: moment.Moment | undefined;

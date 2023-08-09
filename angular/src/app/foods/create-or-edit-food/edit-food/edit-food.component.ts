@@ -26,10 +26,6 @@ export class EditFoodComponent extends AppComponentBase implements OnInit {
   fileName:string;
   fileType:string;
   base64String:any;
-  
-
-
-
 
   @Output() onSave = new EventEmitter<any>();
 

@@ -87,7 +87,7 @@ export class SidebarMenuComponent extends AppComponentBase implements OnInit {
                 'Pages.Foods'
             ),
             new MenuItem(
-                this.l('List of Orders'),
+                this.l('Order'),
                 '/app/orders',
                 'fas fa-shopping-cart',
                 'Pages.Orders'
@@ -103,12 +103,7 @@ export class SidebarMenuComponent extends AppComponentBase implements OnInit {
             ),
             
      //   ]),
-        new MenuItem(
-            this.l("CustomerCart"),
-            "/app/carts",
-            "fa fa-cart-plus",
-          
-            ),
+      
             new MenuItem(this.l('MultiLevelMenu'), '', 'fas fa-circle', '', [
                 new MenuItem('ASP.NET Boilerplate', '', 'fas fa-dot-circle', '', [
                     new MenuItem(

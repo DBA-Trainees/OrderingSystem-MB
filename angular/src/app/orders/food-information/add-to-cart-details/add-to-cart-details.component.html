@@ -1,8 +1,8 @@
 <form 
 class="form-horizontal" 
 autocomplete="off" 
-#foodDetails="ngForm" 
-(ngSubmit)="save()">
+#foodDetails="ngForm"
+>
   <abp-modal-header 
   [title]="'Food Details' | localize" 
   (onCloseClick)="bsModalRef.hide()"></abp-modal-header>
@@ -72,7 +72,6 @@ autocomplete="off"
           id="foodPrice" 
           required            
           [(ngModel)]="food.price"
-          (change)="grandTotalPrice(food)"
           readonly />
         </div>
       </div>
@@ -107,7 +106,7 @@ autocomplete="off"
           class="form-control"
           name="notes"
           id="notes"
-          [(ngModel)]="order.notes"
+          [(ngModel)]="ordering.notes"
         >
         </textarea>
       </div>

@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit } from "@angular/core";
+import { Component, EventEmitter, Injector, OnInit, Output } from "@angular/core";
 import { appModuleAnimation } from "@shared/animations/routerTransition";
 import { AppComponentBase } from "@shared/app-component-base";
 import {
@@ -13,6 +13,8 @@ import {
 import { BsModalService } from "ngx-bootstrap/modal";
 import { finalize } from "rxjs/operators";
 
+import { Router } from "@angular/router";
+
 class PagedOrdersRequestDto extends PagedRequestDto {
   keyword: string;
   isActive: boolean | null;
@@ -26,11 +28,17 @@ export class OrdersComponent extends PagedListingComponentBase<OrderDto> {
   orders: OrderDto[] = [];
   keyword = "";
   isActive: boolean | null;
+  saving=false;
+  order= new OrderDto;
+
+
+  @Output() onSave = new EventEmitter<any>();
 
   constructor(
     injector: Injector,
     private _orderService: OrderServiceProxy,
-    private _modalService: BsModalService
+    private _modalService: BsModalService,
+    private router:Router,
   ) {
     super(injector);
   }
@@ -75,4 +83,6 @@ export class OrdersComponent extends PagedListingComponentBase<OrderDto> {
       }
     );
   }
+
+
 }

@@ -2,6 +2,7 @@
 using Abp.Application.Services.Dto;
 using Abp.Authorization;
 using Abp.Domain.Repositories;
+using Abp.Runtime.Session;
 using Microsoft.EntityFrameworkCore;
 using OrderSystem.Authorization;
 using OrderSystem.Entities;
@@ -18,9 +19,11 @@ namespace OrderSystem.Orders
     public class OrderAppService : AsyncCrudAppService<Order, OrderDto, int, PagedOrderResultRequestDto, CreateOrderDto, OrderDto>, IOrderAppService
     {
         private readonly IRepository<Order, int> _orderRepository;
-        public OrderAppService(IRepository<Order, int> repository) : base(repository)
+        private readonly IRepository<Food, int> _foodRepository;
+        public OrderAppService(IRepository<Order, int> repository, IRepository<Food, int> foodRepository) : base(repository)
         {
             _orderRepository = repository;
+            _foodRepository = foodRepository;
         }
 
         public override Task<OrderDto> CreateAsync(CreateOrderDto input)
@@ -65,11 +68,12 @@ namespace OrderSystem.Orders
                 .GetAll()
                 .Include(x => x.Food)
                 .ThenInclude(x=>x.Category)
-                .Include(x=>x.Customer)
                 .Select(x =>ObjectMapper.Map<OrderDto>(x))
                 .ToListAsync();
 
             return new PagedResultDto<OrderDto>(order.Count,order);
         }
+
+    
     }
 }

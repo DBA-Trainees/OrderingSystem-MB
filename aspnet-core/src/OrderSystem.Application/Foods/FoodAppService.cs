@@ -53,6 +53,7 @@ namespace OrderSystem.Foods
             return base.UpdateAsync(input);
         }
 
+
         public async Task<List<FoodDto>> GetAllFoods()
         {
             var returnQuery = await _foodRepository

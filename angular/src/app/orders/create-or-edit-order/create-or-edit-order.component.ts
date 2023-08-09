@@ -18,7 +18,7 @@ orders: OrderDto = new OrderDto();
 
 customer: CustomerDto[]= [];
 food: FoodDto[]=[];
-id:number=0;
+id:number;
 optCustomer:number=null;
 optFoods:number=null;
 date:DatePipe=new DatePipe('en-us');
@@ -39,15 +39,9 @@ constructor(
     if(this.id){
       this._orderService.get(this.id).subscribe((res)=>{
         this.orders=res;
-        this.optCustomer=res.customerId;
         this.optFoods=res.foodId
       });
     }
-
-    this._customerService.getAllCustomer().subscribe((res)=>{
-      this.customer=res;
-    });
-
     this._foodService.getAllFoods().subscribe((res)=>{
       this.food=res;
       
@@ -57,7 +51,6 @@ constructor(
 
   save():void{
     this.saving=true;
-    this.orders.customerId=this.optCustomer;
     this.orders.foodId=this.optFoods;
   
 
