@@ -17,7 +17,7 @@ namespace OrderSystem.Orders
     [AbpAuthorize(PermissionNames.Pages_Orders)]
     public class OrderAppService : AsyncCrudAppService<Order, OrderDto, int, PagedOrderResultRequestDto, CreateOrderDto, OrderDto>, IOrderAppService
     {
-        private IRepository<Order, int> _orderRepository;
+        private readonly IRepository<Order, int> _orderRepository;
         public OrderAppService(IRepository<Order, int> repository) : base(repository)
         {
             _orderRepository = repository;

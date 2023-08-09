@@ -1,7 +1,7 @@
 @keyframes moveabout {
 
     from { left: -50px; }
-    to   { left:  170px; }
+    to   { left:  320px; }
 }
 @keyframes spin {
     from {
@@ -16,29 +16,84 @@ img {
 
     position: absolute;
     top: 0px;
-    left:170px;
-    animation: moveabout 3s linear, spin 3000ms linear;
+    left:320px;
+    animation: moveabout 2s linear, spin 2000ms linear;
     border-bottom: 1px solid black;
-    
-  
-   
+
 }
 
 #div1 {
-    font-family: Arial;
-    font-size: 30px;
-    animation: slide-right 6s;
+    font-family: Garamond;
+    font-size: 40px;
+    animation: slide-right 1s alternate-reverse;
+    text-align: right;
    
   }
   
   @keyframes slide-right {
     from {
-        margin-left: -48%;
-        width: 300%; 
+       right: 60%;
+        width: 100%; 
       }
     
       to {
-        margin-left: 0%;
-        width: 100%;
+       left:50%;
+        width: 200%;
       }
     }
+
+    #btun {
+      position: absolute;
+      top: -7px;
+      left:1030px;
+      animation: pulsing 1.25s infinite ;
+      font-size: 30px;
+      color: #025197;
+      
+     
+    }
+    
+    @keyframes pulsing {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: .5;
+      }
+    }
+   
+
+    #div3 {
+      
+      padding: 1rem;
+      color: rgb(0, 0, 0);
+      border-width: 3px;
+      border-style: solid;
+      border-image: 
+        linear-gradient(
+          to bottom, 
+          rgb(255, 26, 0), 
+          hsla(149, 89%, 65%, 0)
+        ) 3 200%;
+    }
+    #btun {
+      position: absolute;
+      top: -7px;
+      left:1030px;
+      animation: pulsing 1.25s infinite ;
+      font-size: 30px;
+      color: #025197;
+      
+     
+    }
+    
+
+    @keyframes pulsing {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: .5;
+      }
+    }
+   

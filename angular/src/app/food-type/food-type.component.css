@@ -1,7 +1,7 @@
 @keyframes moveabout {
 
     from { left: -50px; }
-    to   { left:  105px; }
+    to   { left: 400px; }
 }
 @keyframes tilt-shaking  {
     0% { transform: translate(0, 0) rotate(0deg); }
@@ -17,27 +17,63 @@ img {
 
     position: absolute;
     top: 0px;
-    left:105px;
-    animation: moveabout 3s linear, tilt-shaking 0.31s infinite;
+    left:400px;
+    animation: moveabout 2s linear, tilt-shaking 0.35s infinite ;
     border-bottom: 1px solid black;
    
 }
 
 #div1 {
-    font-family: Arial;
-    font-size: 30px;
-    animation: slide-right 4.5s;
+    font-family: Garamond;
+    font-size: 40px;
+    animation: slide-right 2s ;
+    text-align: right;
    
   }
   
   @keyframes slide-right {
     from {
-        margin-left: -48%;
-        width: 300%; 
+        right: 50%;
+        width: 200%; 
       }
     
       to {
-        margin-left: 0%;
+        left:70%;
         width: 100%;
+      }
+    }
+
+
+    #div3 {
+      
+      padding: 1rem;
+      color: rgb(0, 0, 0);
+      border-width: 3px;
+      border-style: solid;
+      border-image: 
+        linear-gradient(
+          to bottom, 
+          rgb(255, 26, 0), 
+          hsla(149, 89%, 65%, 0)
+        ) 3 200%;
+    }
+    #btun {
+      position: absolute;
+      top: -7px;
+      left:1030px;
+      animation: pulsing 1.25s infinite ;
+      font-size: 30px;
+      color: #025197;
+      
+     
+    }
+    
+
+    @keyframes pulsing {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: .5;
       }
     }

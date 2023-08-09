@@ -14,6 +14,6 @@ namespace OrderSystem.Foods
     {
         Task<List<FoodDto>> GetAllFoods();
         Task<PagedResultDto<FoodDto>> GetAllFoodWithCategoryAndFoodType(PagedFoodResultRequestDto input);
-       // Task<List<FoodDto>> GetAllFoodsAsync();
+        //Task<List<FoodDto>> GetAllFoodsAsync();
     }
 }

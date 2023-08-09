@@ -1,7 +1,7 @@
 @keyframes moveabout {
 
     from { left: -50px; }
-    to   { left:  145px; }
+    to   { left:  350px; }
 }
     
 
@@ -9,7 +9,7 @@ img {
 
     position: absolute;
     top: 5px;
-    left:145px;
+    left:350px;
     animation: moveabout 3s linear;
     border-bottom: 1px solid black;
   
@@ -17,9 +17,10 @@ img {
 }
 
 #div1 {
-    font-family: Arial;
-    font-size: 30px;
-    animation: slide-right 4s;
+    font-family: Garamond;
+    font-size: 40px;
+    animation: slide-right 3s;
+    text-align: right;
    
   }
   
@@ -34,3 +35,38 @@ img {
         width: 100%;
       }
     }
+
+    #div3 {
+      
+      padding: 1rem;
+      color: rgb(0, 0, 0);
+      border-width: 3px;
+      border-style: solid;
+      border-image: 
+        linear-gradient(
+          to bottom, 
+          rgb(255, 26, 0), 
+          hsla(149, 89%, 65%, 0)
+        ) 3 200%;
+    }
+    #btun {
+      position: absolute;
+      top: -7px;
+      left:1030px;
+      animation: pulsing 1.25s infinite ;
+      font-size: 30px;
+      color: #2132a1;
+      
+     
+    }
+    
+
+    @keyframes pulsing {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: .5;
+      }
+    }
+   

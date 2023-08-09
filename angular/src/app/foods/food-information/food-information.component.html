@@ -7,7 +7,7 @@
                     <div id="div1">
                         <strong>{{ "Food List  " | localize }}</strong>
                     </div>
-                    <img src="assets/img/FL.gif" width="50px" id="wiw"/>
+                    <img src="assets/img/cat.gif" width="70px" id="wiw"/>
                               
                         </div>
                     </div>
@@ -16,7 +16,7 @@
     <section class="content px-2">
         <div class="container-fluid">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header" style=" background-image: linear-gradient(rgb(90, 168, 247), rgb(254, 255, 255)); ">
                     <div class="row">
                         <div class="col-md-6">&emsp;</div>
                         <div class="col-md-6">
@@ -42,8 +42,9 @@
                 </div>
             </div>
             
-           <div class="row">
-                <div class="grid-container" *ngFor="let food of foods | paginate
+           <div class="row ">
+            
+            <div class="col-xs-12 col-sm-6 col-md-3 p-1 border border-dark " *ngFor="let food of foods  | paginate
                 : {
                     id: 'server',
                     itemsPerPage: pageSize,
@@ -51,14 +52,22 @@
                     totalItems: totalItems
                     }| search: keyword:['imageName','size','category.categoryName','foodType.foodTypeName', 'quantity', 'price', 'availability', 'name']">
                     
-                    <div class="card border border-dark"  id="sh">
-                        <div class="card-body" style="width:22rem">
+                    <div class="card-sl" [ariaDisabled]="food.quantity==0" >
+                        <div class="card-content">
                         <div class="card-body" id="wut" *ngIf="food.availability==1" (click)="addToCartDetails(food.id)"disabled >
                                 <img [src]="'data:' + food.imageFileType + ';base64,' + food.image" class="center card-img-top" />
                             <button type="button" class="btn btn-dark" style="margin-top: 5px;"><i class="fa fa-info-circle"></i>
-                                <strong> {{ "See Details" | localize }} </strong>  </button>        
+                                <strong> {{ "See Details" | localize }} </strong>  </button>
+                                <a 
+                             class="cartButton" 
+                        [hidden]="food.quantity==0" 
+                         (click)="Cart(food)">
+                        <i class="fas fa-shopping-cart" ></i>
+                     </a>    
+                                
                         </div >  
-                            <div class="card-body" style="background: #f8f9f9e8 ; ">
+                            
+                            <div class="card-body">
                             <h5 class="card-text text-center" >
                                 <strong>{{food.name}}</strong>
                             </h5 >
@@ -68,6 +77,7 @@
                             <div class="card-text text-center">
                                 <label for="foodSize">Food Size: {{food.size}}</label>
                               </div>
+
                             <div class="card-text">
                                 <h6 class="text-center"><strong>{{food.price | currency:'PHP'}}</strong> </h6>
                             </div>
@@ -75,14 +85,11 @@
                             <p class="food-avail text-center" *ngIf="food.availability==1 ; else NotAvailable">
                                 <img src="assets/img/se.gif" alt="" width="20%"/><strong> Available</strong>
                             </p>
-                           
                                 <ng-template #NotAvailable >
                                     <p class="food-unavail text-center">
                                         <strong> Unavailable</strong></p>
-                                        <img src="assets/img/dag.gif" alt="" width="50%"  id="wak"/> 
+                                        <img src="assets/img/dag.gif" alt="" width="45%"  id="wak"/> 
                                     </ng-template>
-                           
-                           
                             </div>
                        
                         </div>
@@ -93,7 +100,7 @@
               
            
         </div>
-        <div class="card-footer table-card-footer bg-light border-top">
+        <div class="card-footer table-card-footer bg-light border-top" style="background-color: rgb(249, 74, 71); background-image: linear-gradient(rgb(129, 175, 224), rgb(190, 243, 249)); ">
             <div class="row">
                 <div class="col-sm-4 col-12 text-sm-left text-center">
                     <button class="btn btn-secondary" (click)="refresh()">
@@ -101,8 +108,7 @@
                     </button>
                 </div>
                 <div class="col-sm-4 col-12 text-center">
-                    <strong>{{  totalItems }}</strong> 
-                     <p>Total Items</p>
+                    
                     
                 </div>
                 <div class="col-sm-4 col-12">

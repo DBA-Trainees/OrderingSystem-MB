@@ -8,25 +8,29 @@ import { Router } from '@angular/router';
 import { Moment } from 'moment';
 import * as moment from 'moment';
 import { AddToCartDetailsComponent } from '../add-to-cart-details/add-to-cart-details.component';
+import { CustomerCartComponent } from '@app/customer-cart/customer-cart.component';
+
 enum fsize{
   Small='Small',
   Medium='Medium',
   Large='Large'
 }
+
 class PagedFoodRequestDto extends PagedRequestDto{
   keyword:string;
   isActive:boolean|null;
 }
+
 @Component({
   selector: 'app-food-information',
   templateUrl: './food-information.component.html',
   styleUrls: ['./food-info.css'],
   animations:[appModuleAnimation()]
 })
-export class FoodListInformationComponent extends PagedListingComponentBase<FoodDto> implements OnInit{
+export class FoodListInformationComponent extends PagedListingComponentBase<FoodDto> {
 
   saving =false;
-  id:number=1;
+  id:number;
   orders: OrderDto[]=[];
   order= new OrderDto();
   orderCreate= new CreateOrderDto();
@@ -36,19 +40,16 @@ export class FoodListInformationComponent extends PagedListingComponentBase<Food
   isActive:boolean|null;
   skipCount:number;
   maxResultCount:number;
-  qty:number=1;
+  qty:number;
   availability:boolean|null;
   foodSize:string[];
   selectedSize:{[key:string]:string[]}={};
   date=new Date(); 
   foodSizes=[fsize.Small,fsize.Medium,fsize.Large];
   sizeSelected:string;
+  public totalItems: number;
 
   @Output() onSave = new EventEmitter<any>();
-  @Input() cancelLabel = this.l('Cancel');
-  @Input() cancelDisabled: boolean;
-  @Input() saveLabel = this.l('Add To Cart');
-  @Input() saveDisabled: boolean;
 
 constructor(
   private _foodService: FoodServiceProxy,
@@ -56,28 +57,10 @@ constructor(
   private _orderService:OrderServiceProxy,
   public _modalRef: BsModalRef,
   injector:Injector,
-  public router:Router
+ public router:Router
 ){
   super(injector)
 }
-
-ngOnInit(): void {
-  this.getFoods();
-}
-getFoods(): void{
-  this._foodService.getAllFoodWithCategoryAndFoodType(
-    this.keyword,
-    this.isActive,
-    this.skipCount,
-    this.maxResultCount)
-    .subscribe((result) =>
-    {
-    this.foods = result.items;
-    this.foodSizeDefault();
-    this.foods.forEach((food)=>(this.qty=1));
-  })
-}
-
 
   protected list(request: PagedFoodRequestDto, pageNumber: number, finishedCallback: Function): void {
     request.keyword = this.keyword;
@@ -103,42 +86,37 @@ getFoods(): void{
     }
     addToCartDetails(id): void{
      
-      this.showaddToCartDetailsComponent(id);
+      this.showCustomerCartComponent(id);
     }
 
-    
-  TimeAndDateFormat(TimeAndDate: Date): string {
+TimeAndDateFormat = (TimeAndDate: Date): string => {
     const currentTime = new Date();
     const difference = Math.round((currentTime.getTime() - new Date(TimeAndDate).getTime()) / 60000);
-    if (difference < 1) {
-      return 'just now';
-    } else if (difference === 1) {
-      return '1 min ago';
-    } else {
-      return `${difference} ago`;
-    }
-  }
+    return difference < 1 ? 'just now' : difference === 1 ? 'a minute ago' : `${difference} ago`;
+  };
+  
 
-
-    private showaddToCartDetailsComponent(id?: number): void{
+    private showCustomerCartComponent(id?: number): void{
       let addToCartDetails: BsModalRef;
 
         addToCartDetails = this._modalService.show(AddToCartDetailsComponent,{
           class: 'modal-lg',
           initialState: {
-          id: id,
+          id:id
         },
         })
       }
 
-    private foodSizeDefault():void{
-      this.foods.forEach( food=> { if(food.size){
-        var sizes=food.size.split(',').map((size)=>size.trim());
-        food.size = sizes[0];
-        this.selectedSize[food.id] = sizes;
+    price(food: FoodDto): number {
+      let updatedPrice = food.price;
+  
+      if (food.size == "Medium") {
+        updatedPrice += 10;
+      } else if (food.size == "Large") {
+        updatedPrice += 15;
       }
-        
-      });
+  
+      return updatedPrice * this.qty;
     }
 
    Cart(selectedFood: FoodDto): void {
@@ -149,28 +127,26 @@ getFoods(): void{
       this.order.size = selectedFood.size;
 
   
-      if(this.id >0){
+      if(this.id > 0){
         this._orderService.update(this.order).subscribe(
-          (res) => {
+          () => {
             this.notify.info(this.l("SavedSuccessfully"));
             this._modalRef.hide();
-            this.onSave.emit(res);
-    
-            /* this.foods = this.foods.filter(food => food.id !== this.food.id); */
-    
-            this.router.navigate(["./app/customer/carts"]);
+            this.onSave.emit();
+        
+            this.router.navigate(["./app/carts"]);
           },
         );
       }else{
-        this._orderService.create(this.order).subscribe(
-          (res) => {
+        this._orderService.create(this.orderCreate).subscribe(
+          () => {
             this.notify.info(this.l("SavedSuccessfully"));
             this._modalRef.hide();
-            this.onSave.emit(res);
+            this.onSave.emit();
     
-            this.foods = this.foods.filter(food => food.id !== this.food.id);
+          
     
-            this.router.navigate(["./app/customer/carts"]);
+           this.router.navigate(["./app/carts"]);
           },
         );
       }

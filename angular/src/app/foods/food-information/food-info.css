@@ -1,59 +1,84 @@
 @keyframes moveabout {
 
-  from { left: -50px; }
-  to   { left:  150px; }
+  from { left: -40px; }
+  to   { left:  360px; }
 }
 
 #wiw {
 
   position: absolute;
   top: -5px;
-  left:150px;
+  left:360px;
   animation: moveabout 3s linear;
   border-bottom: 1px solid black;
  
 }
 
 #div1 {
-  font-family: Arial;
+  font-family: Garamond;
   font-size: 30px;
-  animation: slide-right 4.5s;
- 
+  animation: slide-right 1s;
+  text-align: right;
+
 }
 
 @keyframes slide-right {
   from {
-      margin-left: -48%;
+    right:90%;
       width: 300%; 
     }
   
     to {
-      margin-left: 0%;
+     left: 200%;
       width: 100%;
     }
   }
-  .grid-container {
-    display: grid;
-    justify-content: center;
-    gap: 10px;
-    padding: 10px;
-  }
- 
-  @keyframes moveabout {
 
-    from { left: -30px; }
-    to   { left:  140px; }
-  }
+  @keyframes tilt-shaking  {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(5px, 6px) rotate(5deg); }
+    50% { transform: translate(0, 0) rotate(0eg); }
+    75% { transform: translate(-5px, 5px) rotate(-5deg); }
+    95% { transform: translate(0, 0) rotate(0deg); }
+    
+}
   
   #wak {
   
     position: absolute;
-    top: 180px;
-    left:125px;
-    animation: moveabout 3s linear alternate infinite;
+    top: 150px;
+    left:88px;
+    animation: tilt-shaking 1s infinite;
     
    
   }
 
+  .cartButton {
+    display: flex;
+    justify-content: right ;
+    align-items: right;
+    animation: pulsing 1.25s infinite ;
+    font-size: 30px;
+    color: #2004f5;
+    
+   
+  }
+  
+  
+  a.cartButton:hover {
+    animation: none;
+    color: #000100;
+  }
+  
+  @keyframes pulsing {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: .5;
+    }
+  }
+ 
 
+  
  

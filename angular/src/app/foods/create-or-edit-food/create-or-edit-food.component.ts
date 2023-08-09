@@ -50,7 +50,6 @@ export class CreateOrEditFoodComponent extends AppComponentBase implements OnIni
         this.food = res;
         this.optCategories = res.categoryId;
         this.optFoodType = res.foodTypeId;
-        //this.optSize = res.size ? res.size.split(", ") : [];
         this.sizeSelected=res.size;
 
       
