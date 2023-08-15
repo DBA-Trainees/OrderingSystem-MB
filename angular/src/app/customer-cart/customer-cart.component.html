@@ -1,10 +1,29 @@
-<p>customer-cart works!</p>
-<p>carts works!</p>
+<!-- 
 <div [@routerTransition]>
+     <section class="content-header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6 col-6">
+                    <div id="div1">
+                        <strong>{{ "Your Orders " | localize }}</strong>
+                    </div>
+                    <img class="babi"src="assets/img/tt.gif" width="70px"/>
+                </div>
+                <div class="col-12 text-right"style="font-size:20px"  >
+                    <a id="btun"
+                    href="javascript:;" 
+                    class="create-button btn btn-md " 
+                     > <i class="fa fa-plus-circle " style="font-size:36px"  ></i> 
+                    </a>
+                    {{"Create"|localize}}
+                </div>
+            </div>
+        </div>
+     </section>
     <section class="content px-2">
         <div class="container-fluid">
-            <div class="card">
-                <div class="card-header">
+            <div class="card"  id="div3">
+                <div class="card-header" style=" background-image: linear-gradient(rgb(90, 168, 247), rgb(254, 255, 255)); ">
                     <div class="row">
                         <div class="col-md-6">&emsp;</div>
                         <div class="col-md-6">
@@ -24,15 +43,16 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-bordered" [busy]="isTableLoading">
-                            <thead class="bg-light">
+                            <thead style="background-color: rgb(205, 227, 246);">
                                 <tr >
                                     <th>{{ "Food Name" | localize }}</th>
+                                    <th>{{ "Picture" | localize }}</th>
                                     <th>{{ "Regular Price" | localize }}</th>
                                     <th>{{ "Qty" | localize }}</th>
                                     <th>{{ "Size" | localize }}</th>
-                                    <th>{{ "Category" | localize }}</th>
                                     <th>{{ "Total Amount" | localize }}</th>
-                                    <th class="action-th" [width]="150" style="text-align:center">{{ "Actions" | localize }}</th>
+                                    <th>{{ "Notes" | localize }}</th>
+                                    <th class="action-th" [width]="160" style="text-align:center">{{ "Actions" | localize }}</th>
                                
                                 </tr>
                             </thead>
@@ -44,31 +64,25 @@
                                         currentPage: pageNumber,
                                         totalItems: totalItems
                                         } ">
-                                        <td><div class="col-2">
-                                            <input 
-                                            type="checkbox"
-                                            [id]="order.food.id"
-                                            [name]="order.food.name"
-                                            [value]="order.id"
-                                            >
-                                        </div></td>
-                                        <td><img
+                                        <td>{{ order.food?.name }}</td>
+                                        <td style="width: 260px;"><img
                                             [src]="'data:image/png;base64,' + order.food.image"
-                                              alt="profile-sample1" class="background" /></td>
-                                        <td>{{ order.food.name }}</td>
-                                        <td>{{ order.food.price | currency: 'PHP' }}</td>
-                                        <td style="text-align:center">
-                                            <input
-                                              type="number"
-                                              class="form-control"
-                                              [(ngModel)]="order.quantity"
-                                            />
-                                        </td>
-                                        
-                                        <td>{{ order.food?.category?.name }}</td>
-                                        <td>{{ totalPrice(order) | currency:'PHP'}}</td>                                    
+                                              alt="profile-sample1" class="background" style="width: 250px;" /></td>
+                                        <td style="width: 150px;">{{ order.food?.price | currency: 'PHP' }}</td>
+                                        <td>{{ order.quantity }}</td>
+                                        <td>{{ order.food.size }}</td>
+                                        <td> {{ order.totalFoodAmount|currency:'PHP' }}</td>
+                                        <td>{{ order.notes }}</td>                                    
                                         <td>
+                                            <button 
+                                            type="button" 
+                                            class="btn btn-sm bg-blue"
+                                            (click)="editFood(order)">
+                                            {{'Edit'|localize}}
+                                                <i class="fas fa-pencil-alt"></i>
+                                            </button>
                                             <button type="button" class="btn btn-md bg-danger mx-2" (click)="delete(order)">
+                                                {{'Delete'|localize}}
                                                 <i class="fas fa-trash"></i>
                                             </button>
                                         </td>
@@ -80,7 +94,139 @@
                 </div>
             </div>
         </div>
-        <div class="card-footer table-card-footer bg-light border-top">
+        <div class="card-footer table-card-footer bg-light border-top" style="background-color: rgb(249, 74, 71); background-image: linear-gradient(rgb(129, 175, 224), rgb(190, 243, 249)); ">
+            <div class="row">
+                <div class="col-sm-4 col-12 text-sm-left text-center">
+                    <button class="btn btn-secondary" (click)="refresh()">
+                        <i class="fas fa-redo-alt"></i>
+                    </button>
+                </div>
+                <div class="col-sm-4 col-12 text-center">
+                    <strong>{{  totalItems }}</strong> 
+                     <p>Total Items</p>
+                    
+                </div>
+                <div class="col-sm-4 col-12">
+                    <div class="float-sm-right m-auto">
+                        <abp-pagination-controls
+                                id="server"
+                                (pageChange)="getDataPage($event)"
+                        >
+                        </abp-pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div> -->
+
+<div [@routerTransition]>
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6 col-6">
+                    <div id="div1">
+                        <strong>{{ "Your Orders " | localize }}</strong>
+                    </div>
+                    <img class="babi"src="assets/img/tt.gif" width="70px"/>
+                </div>
+                <div class="col-12 text-right"style="font-size:20px"  >
+                    <a id="btun"
+                    href="javascript:;" 
+                    class="create-button btn btn-md " 
+                     > <i class="fa fa-plus-circle " style="font-size:36px"  ></i> 
+                    </a>
+                    {{"Create"|localize}}
+                </div>
+            </div>
+        </div>
+     </section>
+    <section class="content px-2">
+        <div class="container-fluid">
+            <div class="card"  id="div3">
+                <div class="card-header" style=" background-image: linear-gradient(rgb(90, 168, 247), rgb(254, 255, 255)); ">
+                    <div class="row">
+                        <div class="col-md-6">&emsp;</div>
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <button type="button" class="btn bg-info" (click)="getDataPage(1)">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                                <input type="text" class="form-control" name="keyword"
+                                    [placeholder]="'SearchWithThreeDot' | localize" [(ngModel)]="keyword"
+                                    (keyup.enter)="getDataPage(1)" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" [busy]="isTableLoading">
+                            <thead style="background-color: rgb(205, 227, 246);">
+                                <tr >
+                                    <th>{{"Photo"|localize}}</th>
+                                    <th>{{ "Food Name" | localize }}</th>
+                                    <th>{{ "Price" | localize }}</th>
+                                    <th>{{ "Qty" | localize }}</th>
+                                    <th>{{ "Size" | localize }}</th>
+                                    <th>{{ "Total Price" | localize }}</th>
+                                    <th>{{ "Notes" | localize }}</th>
+                                    <th class="action-th" [width]="160" style="text-align:center">{{ "Actions" | localize }}</th>
+                               
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let order of orders | paginate
+                                    : {
+                                        id: 'server',
+                                        itemsPerPage: pageSize,
+                                        currentPage: pageNumber,
+                                        totalItems: totalItems
+                                        } ">
+                                        
+                                        <td style="width: 160px;"><img width=" 150px"
+                                            [src]="'data:image/png;base64,' + order.food.image"
+                                              alt="profile-sample1" class="background" /></td>
+                                        <td>{{ order.food.name }}</td>
+                                        <td>{{ order.food.price | currency: 'PHP' }}</td>
+                                        <!-- <td style="text-align:center">
+                                            <input style="border-color: black"
+                                            type="number" 
+                                            class="form-control" 
+                                            name="foodQuantity" 
+                                            id="foodQuantity" 
+                                            [(ngModel)]="foodQty" 
+                                            [min]="1"
+                                            [max]="order.food.quantity">
+                                        </td> -->
+                                        <td>{{ order.quantity }}</td>
+                                        <td>{{ order.size }}</td>
+                                        <td>{{ order.totalFoodAmount | currency:'PHP'}}</td> 
+                                        <td>{{ order.notes | currency:'PHP'}}</td>                                     
+                                        <td>
+                                            <button 
+                                            type="button" 
+                                            class="btn btn-sm bg-blue"
+                                            (click)="editFood(order.id)">
+                                            {{'Edit'|localize}}
+                                                <i class="fas fa-pencil-alt"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-md bg-danger mx-2" (click)="delete(order)">
+                                                {{'Delete'|localize}}
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="card-footer table-card-footer bg-light border-top" style="background-color: rgb(249, 74, 71); background-image: linear-gradient(rgb(129, 175, 224), rgb(190, 243, 249)); ">
             <div class="row">
                 <div class="col-sm-6 col-12 text-sm-left text-center">
                     <button class="btn btn-secondary" (click)="refresh()">

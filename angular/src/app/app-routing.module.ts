@@ -40,7 +40,7 @@ import { CustomerCartComponent } from './customer-cart/customer-cart.component';
                     { path: 'foods', component: FoodsComponent, data: { permission: 'Pages.Foods'},canActivate: [AppRouteGuard] },
                     { path: 'orders', component: OrdersComponent, data: { permission: 'Pages.Orders'},canActivate: [AppRouteGuard] },
                     { path: 'foodList', component: FoodListInformationComponent,data: { permission: 'Pages.FoodList'},canActivate: [AppRouteGuard] },
-                    { path: './app/customer-cart', component: CustomerCartComponent, canActivate: [AppRouteGuard] }
+                    { path: 'customer-cart', component: CustomerCartComponent, canActivate: [AppRouteGuard] }
 
 
 

@@ -1,20 +1,16 @@
-@keyframes grow {
-    0% {
-       transform: scale(1);
-    }
-    100% {
-       transform: scale(3.5);
-   
-    }
+/* @keyframes moveabout {
+
+    from { left: -50px; }
+    to   { left:  330px; }
 }
 .babi {
 
     position: absolute;
-    top: 0px;
-    left:470px;
-    animation:  grow  ease-out 2s;
+    top: -2px;
+    left:330px;
+    animation: moveabout 2s linear;
     border-bottom: 1px solid black;
-    
+  
   
    
 }
@@ -22,8 +18,8 @@
 
 #div1 {
     font-family:Garamond ;
-    font-size: 40px;
-    animation: slide-right 2s;
+    font-size: 30px;
+    animation: slide-right 1s;
     text-align: right;
 
   }
@@ -53,24 +49,5 @@
           hsla(149, 89%, 65%, 0)
         ) 3 200%;
     }
-    #btun {
-      position: absolute;
-      top: -7px;
-      left:1200px;
-      animation: pulsing 1.25s infinite ;
-      font-size: 30px;
-      color: #025197;
-      
-     
-    }
-    
 
-    @keyframes pulsing {
-      0%, 100% {
-        opacity: 1;
-      }
-      50% {
-        opacity: .5;
-      }
-    }
-   
+     */

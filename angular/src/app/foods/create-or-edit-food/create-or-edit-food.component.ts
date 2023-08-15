@@ -88,7 +88,7 @@ export class CreateOrEditFoodComponent extends AppComponentBase implements OnIni
     this.food.foodTypeId = this.optFoodType;
     this.food.image=this.base64String;
     this.food.imageName=this.fileName;
-    this.food.imageFileType=this.fileType
+    this.food.imageFileType=this.fileType;
     this.food.size=this.sizeSelected;
   
    

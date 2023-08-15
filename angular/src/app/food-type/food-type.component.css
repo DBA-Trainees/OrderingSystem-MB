@@ -1,7 +1,7 @@
 @keyframes moveabout {
 
     from { left: -50px; }
-    to   { left: 400px; }
+    to   { left: 480px; }
 }
 @keyframes tilt-shaking  {
     0% { transform: translate(0, 0) rotate(0deg); }
@@ -17,7 +17,7 @@ img {
 
     position: absolute;
     top: 0px;
-    left:400px;
+    left:480px;
     animation: moveabout 2s linear, tilt-shaking 0.35s infinite ;
     border-bottom: 1px solid black;
    
@@ -60,7 +60,7 @@ img {
     #btun {
       position: absolute;
       top: -7px;
-      left:1030px;
+      left:1200px;
       animation: pulsing 1.25s infinite ;
       font-size: 30px;
       color: #025197;

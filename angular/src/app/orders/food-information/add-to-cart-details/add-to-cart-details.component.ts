@@ -10,12 +10,10 @@ import { Router } from "@angular/router";
 import { AppComponentBase } from "@shared/app-component-base";
 import {
   CreateOrderDto,
-  CustomerDto,
   FoodDto,
   FoodServiceProxy,
   OrderDto,
   OrderServiceProxy,
-  UserDto,
 } from "@shared/service-proxies/service-proxies";
 import * as moment from "moment";
 import { BsModalRef } from "ngx-bootstrap/modal";
@@ -32,21 +30,21 @@ enum fsize{
 
 })
 export class AddToCartDetailsComponent extends AppComponentBase implements OnInit {
-  // foods: FoodDto[] = [];
    food = new FoodDto;
-  //order: OrderDto = new OrderDto();
   orderDto : OrderDto[] = [];
+  order= new OrderDto();
   ordering =new CreateOrderDto();
   keyword = "";
   isActive: boolean | null;
   id: number;
   foodQty: number = 1;
-  typeName: string;
+  foodName: string;
   saving = false;
   today = new Date();
   foodSize=[fsize.Small,fsize.Medium,fsize.Large];
   sizeSelected: string;
   foodPrice : number;
+  foodNotes:string;
 
   @Output() onSave = new EventEmitter<any>();
   @Input() formDisabled: boolean;
@@ -61,43 +59,41 @@ export class AddToCartDetailsComponent extends AppComponentBase implements OnIni
   }
 
   ngOnInit(): void {
-  //  this.order.food = this.food;
     if (this.id) {
-      this._foodService.get(this.id).subscribe((res) => {
-        this.food = res;
-        this.food.foodType = res.foodType;
-        this.food.category = res.category;
+      this._orderService.get(this.id).subscribe((res) => {
+        this.order = res;
         this.sizeSelected = res.size;
+        this.order.foodId=res.foodId;
+        this.foodNotes=res.notes;
       });
     }   
   }
 
- formatDate = (date) => {
-    const d = new Date(date);
-    return `${d.getFullYear()}-${("0" + (d.getMonth() + 1)).slice(-2)}-${("0" + d.getDate()).slice(-2)}`;
-  };
 
-
-  save(id? : number): void {
+  save(order:OrderDto): void {
     this.saving = true;   
     this.ordering.foodId = this.food.id;
     this.ordering.quantity = this.foodQty;
     this.ordering.totalFoodAmount = this.foodQty * this.food.price;
     this.ordering.dateTimeOrdered = moment(this.today);
     this.ordering.size = this.sizeSelected;
+    this.food.quantity=this.foodQty;
+    this.ordering.notes=this.foodNotes;
+   
+    
 
     
-    
-      this._orderService.create(this.ordering).subscribe(
+    if (this.id!=0){
+      this._orderService.update(this.order).subscribe(
         () => {
-          this.notify.info(this.l("SavedSuccessfully"));
+          this.notify.info(this.l(this.food.name+" "+ 'Saved Successfully'));
           this.bsModalRef.hide();
           this.onSave.emit();
-  
         },
         () => {
           this.saving = false;
         }
       );
+    }
   }
-}
+  }

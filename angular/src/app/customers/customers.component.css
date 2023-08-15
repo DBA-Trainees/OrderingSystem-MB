@@ -1,7 +1,7 @@
 @keyframes moveabout {
 
     from { left: -50px; }
-    to   { left:  320px; }
+    to   { left: 410px; }
 }
 @keyframes spin {
     from {
@@ -15,8 +15,8 @@
 img {
 
     position: absolute;
-    top: 0px;
-    left:320px;
+    top: 2px;
+    left:410px;
     animation: moveabout 2s linear, spin 2000ms linear;
     border-bottom: 1px solid black;
 
@@ -45,7 +45,7 @@ img {
     #btun {
       position: absolute;
       top: -7px;
-      left:1030px;
+      left:1200px;
       animation: pulsing 1.25s infinite ;
       font-size: 30px;
       color: #025197;
@@ -79,7 +79,7 @@ img {
     #btun {
       position: absolute;
       top: -7px;
-      left:1030px;
+      left:1200px;
       animation: pulsing 1.25s infinite ;
       font-size: 30px;
       color: #025197;

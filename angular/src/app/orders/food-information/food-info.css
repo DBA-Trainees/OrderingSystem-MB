@@ -1,14 +1,14 @@
 @keyframes moveabout {
 
   from { left: -40px; }
-  to   { left:  360px; }
+  to   { left:  450px; }
 }
 
 #wiw {
 
   position: absolute;
   top: -5px;
-  left:360px;
+  left:450px;
   animation: moveabout 3s linear;
   border-bottom: 1px solid black;
  
@@ -34,24 +34,22 @@
     }
   }
 
-  @keyframes tilt-shaking  {
-    0% { transform: translate(0, 0) rotate(0deg); }
-    25% { transform: translate(5px, 6px) rotate(5deg); }
-    50% { transform: translate(0, 0) rotate(0eg); }
-    75% { transform: translate(-5px, 5px) rotate(-5deg); }
-    95% { transform: translate(0, 0) rotate(0deg); }
-    
+  @keyframes pulse{
+    50%{
+        Transform:scale(1.5);
+    }
 }
   
   #wak {
   
     position: absolute;
-    top: 150px;
+    top: 160px;
     left:88px;
-    animation: tilt-shaking 1s infinite;
-    
-   
-  }
+    animation:pulse linear infinite;
+    animation-duration:2s;
+    border-bottom: 1px solid black;
+    border-radius: 50%;
+}
 
   .cartButton {
     display: flex;
@@ -81,5 +79,17 @@
   }
  
 
-  
+  #div3 {
+      
+    padding: 1.5rem;
+    color: rgb(0, 0, 0);
+    border-width: 5px;
+    border-style: solid;
+    border-image: 
+      linear-gradient(
+        to bottom, 
+        rgb(255, 26, 0), 
+        hsla(149, 89%, 65%, 0)
+      ) 3 200%;
+  }
  

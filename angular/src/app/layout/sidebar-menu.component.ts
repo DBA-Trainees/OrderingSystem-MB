@@ -86,12 +86,7 @@ export class SidebarMenuComponent extends AppComponentBase implements OnInit {
                 'fas fa-glass-cheers',
                 'Pages.Foods'
             ),
-            new MenuItem(
-                this.l('Order'),
-                '/app/orders',
-                'fas fa-shopping-cart',
-                'Pages.Orders'
-            ),
+            
     //    ]),
 
       //  new MenuItem(this.l("Customer"), "", "fas fa-user-circle", "Pages.Customer", [
@@ -100,6 +95,19 @@ export class SidebarMenuComponent extends AppComponentBase implements OnInit {
                 '/app/foodList',
                 'fas fa-list',
                'Pages.FoodList'
+            ),
+            new MenuItem(
+                this.l('Cart'),
+                '/app/customer-cart',
+                'fas fa-shopping-cart',
+            
+            ),
+
+            new MenuItem(
+                this.l('Order'),
+                '/app/orders',
+                'fas fa-shopping-cart',
+            
             ),
             
      //   ]),

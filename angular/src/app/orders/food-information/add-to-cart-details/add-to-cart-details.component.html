@@ -2,11 +2,12 @@
 class="form-horizontal" 
 autocomplete="off" 
 #foodDetails="ngForm"
+(ngSubmit)="save(order)"
 >
   <abp-modal-header 
   [title]="'Food Details' | localize" 
   (onCloseClick)="bsModalRef.hide()"></abp-modal-header>
-  <div class="modal-body">
+  <!-- <div class="modal-body">
     <div class="form-group row">
       <label class="col-md-2 col-form-label" for="image">
       </label>
@@ -29,34 +30,33 @@ autocomplete="off"
         name="name" 
         id="name" 
         required 
-        readonly 
-        [(ngModel)]="food.name"          
+        [(ngModel)]="order.food.name"          
         #nameModel="ngModel" 
         #nameEl />
         <abp-validation-summary 
         [control]="nameModel" 
         [controlEl]="nameEl"></abp-validation-summary>
       </div>
-    </div>
+    </div> -->
     <div class="form-group row required">
       <label for="foodQuantity" class="col-md-2 col-form-label">
         {{"Quantity" | localize}}</label>
       <div class="col-md-2"  >
         <div class="input-group">
-          <input style="border-color: black"
-          type="number" 
-          class="form-control" 
-          name="foodQuantity" 
-          id="foodQuantity" 
-          [(ngModel)]="foodQty" 
-          [min]="1"
-          [max]="food.quantity">
-          <div class="input-group-prepend">
+           <td style="text-align:center">
+           <input style="border-color: black"
+             type="number" 
+             class="form-control" 
+             name="foodQuantity" 
+             id="foodQuantity" 
+              [(ngModel)]="foodQty" 
+               [min]="1"
+               [max]="food.quantity">
+           </td>
           </div>
-        </div>
       </div>
-    </div>
-    <div class="form-group row required">
+    </div> 
+    <!-- <div class="form-group row required">
       <label class="col-md-2 col-form-label" for="foodPrice">
         {{ "Price" | localize }}
       </label>
@@ -72,10 +72,10 @@ autocomplete="off"
           id="foodPrice" 
           required            
           [(ngModel)]="food.price"
-          readonly />
+          />
         </div>
       </div>
-    </div>
+    </div> -->
     
     <div class="form-group row required">
       <label 
@@ -88,7 +88,7 @@ autocomplete="off"
           class="form-control"
           name="foodSize"
           id="foodSize"          
-          [ngModel]="sizeSelected"     
+          [ngModel]="sizeSelected"                                                                 
           (ngModelChange)="sizeSelected=$event"          
           >
           <option *ngFor="let fs of  foodSize"
@@ -106,14 +106,14 @@ autocomplete="off"
           class="form-control"
           name="notes"
           id="notes"
-          [(ngModel)]="ordering.notes"
+          [(ngModel)]="order.notes"
         >
         </textarea>
       </div>
     </div>
-  </div>
+  
   <abp-modal-footer
     [cancelDisabled]="saving"
-    [saveDisabled]="!foodDetails.form.valid || saving || food.quantity==0"
+    [saveDisabled]="!foodDetails.form.valid || saving"
     (onCancelClick)="bsModalRef.hide()"></abp-modal-footer>
 </form>

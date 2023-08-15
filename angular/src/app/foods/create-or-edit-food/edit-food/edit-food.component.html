@@ -16,7 +16,7 @@
             {{ "Food Photo" | localize }}
           </label>
           <div class="col-md-10" >
-            <input style="height: 40px ;border-color: black;"
+            <input style="height: 50px ;border-color: black;"
               type="file"
               class="form-control"
               name="image"
@@ -24,10 +24,9 @@
               required
               (change)="selectedImage($event)"
             /><br>
-            <div class="center" style="border-color: black;">
+            <div class="text-center" style="border-color: black;">
               <img 
-              width="150"
-              [src]="'data:' + food.imageFileType + ';base64,' + food.image" 
+              [src]="'data:' + food.imageFileType + ';base64,' + food.image"  width="300" height="300"
               /><br>         
             </div>
           </div>
@@ -97,6 +96,7 @@
               ></abp-validation-summary>
             </div>
           </div>
+          
           <!--category-->
         <div class="form-group row required">
             <label 

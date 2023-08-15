@@ -1,7 +1,7 @@
 @keyframes moveabout {
 
     from { left: -50px; }
-    to   { left:  350px; }
+    to   { left:  445px; }
 }
     
 
@@ -9,7 +9,7 @@ img {
 
     position: absolute;
     top: 5px;
-    left:350px;
+    left:445px;
     animation: moveabout 3s linear;
     border-bottom: 1px solid black;
   
@@ -55,7 +55,7 @@ img {
     #btun {
       position: absolute;
       top: -7px;
-      left:1030px;
+      left:1200px;
       animation: pulsing 1.25s infinite ;
       font-size: 30px;
       color: #025197;

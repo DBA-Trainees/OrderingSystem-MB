@@ -1,3 +1,6 @@
+
+
+
 import { Component, Injector, OnInit } from "@angular/core";
 import { Routes } from "@angular/router";
 import { appModuleAnimation } from "@shared/animations/routerTransition";
@@ -11,8 +14,9 @@ import {
   OrderDtoPagedResultDto,
   OrderServiceProxy,
 } from "@shared/service-proxies/service-proxies";
-import { BsModalService } from "ngx-bootstrap/modal";
+import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
 import { finalize } from "rxjs/operators";
+import { AddToCartDetailsComponent } from "@app/orders/food-information/add-to-cart-details/add-to-cart-details.component";
 
 class PagedOrdersRequestDto extends PagedRequestDto {
   keyword: string;
@@ -20,28 +24,36 @@ class PagedOrdersRequestDto extends PagedRequestDto {
 }
 
 @Component({
-  selector: "add-to-cart",
+  // selector: "add-to-cart",
   templateUrl: "customer-cart.component.html",
   styleUrls: ["./customer-cart.component.css"],
   animations: [appModuleAnimation()],
 })
 export class CustomerCartComponent extends PagedListingComponentBase<OrderDto> {
+
   orders: OrderDto[] = [];
   keyword = "";
   isActive: boolean | null;
+
   foodQty: number = 1;
   order: OrderDto = new OrderDto();
   selectedFoodOrder: number;
   selected: boolean;
   overallTotalAmount: number = 0;
+  priceTotal:number;
 
   constructor(
     injector: Injector,
     private _orderService: OrderServiceProxy,
-    private _modalService: BsModalService
+    private _modalService: BsModalService,
+    private BsModalRef:BsModalRef
   ) {
     super(injector);
   }
+
+  editFood(id): void {
+        this.showEditOrderModal(id);
+      }
 
   protected list(
     request: PagedOrdersRequestDto,
@@ -69,31 +81,7 @@ export class CustomerCartComponent extends PagedListingComponentBase<OrderDto> {
 
       });
   }
-  updateCart(order: OrderDto): void {
-    this._orderService.update(order).subscribe(() => {
-      this.notify.info(this.l("OrderUpdatedSuccessfully"));
-    });
-  }
 
-
-  onOrderSelection(order: OrderDto, checked:boolean): void{
-    if(checked){
-      this.overallTotalAmount += order.food.price * order.quantity;
-    }else{
-      this.overallTotalAmount -= order.food.price * order.quantity;
-    }
-  }
-  totalPrice(food: FoodDto): number {
-    let updatedPrice = food.price;
-
-    if (food.size == "Medium") {
-      updatedPrice += 10;
-    } else if (food.size == "Large") {
-      updatedPrice += 15;
-    }
-
-    return updatedPrice * this.foodQty;
-  }
 
   protected delete(order: OrderDto): void {
     abp.message.confirm(
@@ -109,4 +97,26 @@ export class CustomerCartComponent extends PagedListingComponentBase<OrderDto> {
       }
     );
   }
+
+  private showEditOrderModal(id?: number): void{
+    let EditOrderModal: BsModalRef;
+
+      EditOrderModal = this._modalService.show(
+        AddToCartDetailsComponent,
+        {
+          class: 'modal-lg',
+          initialState: {
+            id: id,
+          },
+        }
+      );    
+    
+    EditOrderModal.content.onSave.subscribe(() =>{
+      this.refresh();
+    })
+  }
 }
+
+ 
+ 
+  

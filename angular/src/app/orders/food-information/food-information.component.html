@@ -1,5 +1,5 @@
 
-<div [@routerTransition]>
+<!-- <div [@routerTransition]>
     <section class="content-header">
         <div class="container-fluid">
             <div class="row">
@@ -65,9 +65,9 @@
                             <h5 class="card-text text-center" >
                                 <strong>{{food.name}}</strong>
                             </h5 >
-                            <!-- <div class="card-text">
+                            <div class="card-text">
                                 <h6 class="card-text text-center"> <strong>{{food.category?.categoryName}}</strong></h6>
-                            </div> -->
+                            </div> 
                             <div class="card-text text-center">
                                 <label for="foodSize">Food Size: {{food.size}}</label>
                               </div>
@@ -76,14 +76,14 @@
                                 <h6 class="text-center"><strong>{{food.price | currency:'PHP'}}</strong> </h6>
                             </div>
   
-                            <!-- <p class="food-avail text-center" *ngIf="food.availability==1 ; else NotAvailable">
+                             <p class="food-avail text-center" *ngIf="food.availability==1 ; else NotAvailable">
                                 <img src="assets/img/se.gif" alt="" width="20%"/><strong> Available</strong>
                             </p>
                                 <ng-template #NotAvailable >
                                     <p class="food-unavail text-center">
                                         <strong> Unavailable</strong></p>
                                         <img src="assets/img/dag.gif" alt="" width="45%"  id="wak"/> 
-                                    </ng-template> -->
+                                    </ng-template> 
                             </div>
                        
                         </div>
@@ -117,4 +117,74 @@
             </div>
         </div>
     </section>
-</div>
+</div> -->
+
+ <div [@routerTransition]>
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6 col-6">
+                    <div id="div1">
+                        <strong>{{ "Food List  " | localize }}</strong>
+                    </div>
+                    <img src="assets/img/cat.gif" width="70px" id="wiw"/>
+                              
+                        </div>
+                    </div>
+                </div>
+    </section>
+    <section class="content px-2">
+        <div class="container-fluid" >
+            <div class="card" id="div3" >
+          <div class="container">
+            <div class="row" >
+              <div class="col-xs-12 col-sm-6 col-md-3 p-1 border border-dark " *ngFor="let food of foods">
+                <div class="card-sl" [ariaDisabled]="food.quantity==0">
+                  <div class="card-content"  >
+                    <div class="card-image"  *ngIf="food.availability==1" >
+                      <img [src]="'data:' + food.imageFileType + ';base64,' + food.image" class="center card-img-top" />
+                      <a 
+                      class="cartButton"
+                      [hidden]="food.quantity==0" 
+                      (click)="cartButton(food)"> 
+                      <i class="fa fa-shopping-cart"></i> 
+                    
+                        <!-- <button class="card-button bg-danger" 
+                        (click)="displayFoodDetails(food.id)"><strong>
+                            details</strong></button> -->
+                      </a>
+                      
+                  <button class="card-button bg-danger" disabled *ngIf="food.quantity==0"><strong>Sold
+                      Out</strong></button>
+                    </div>
+                   
+                     <h4 class="card-text text-center" >
+                                <strong>{{food.name}}</strong>
+                            </h4>
+                            <div class="card-text text-center">
+                                <label for="categories">Category: {{food.category?.categoryName}}</label>
+                              </div>
+                    <div class="card-text text-center">
+                        <label for="foodSize">Food Size: {{food.size}}</label>
+                      </div>
+                      <div class="card-text">
+                        <h6 class="text-center"><strong>{{food.price | currency:'PHP'}}</strong> </h6>
+                    </div>
+                    <p class="food-avail text-center" *ngIf="food.availability==1 ; else NotAvailable">
+                        <img src="assets/img/se.gif" alt="" width="20%"/><strong> Available</strong>
+                    </p>
+                        <ng-template #NotAvailable >
+                            <p class="food-unavail text-center">
+                                <strong> Unavailable</strong></p>
+                                <img src="assets/img/dag.gif" alt="" width="45%"  id="wak"/> 
+                            </ng-template> 
+                    
+                    <div class="col-2">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+  </div> 

@@ -1,14 +1,15 @@
+
+  
+
 import { Component, Injector, OnInit, Output, EventEmitter, Input} from '@angular/core';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
-import { PagedListingComponentBase, PagedRequestDto } from '@shared/paged-listing-component-base';
+import { PagedRequestDto } from '@shared/paged-listing-component-base';
 import { CreateOrderDto, FoodDto, FoodDtoPagedResultDto, FoodServiceProxy, OrderDto, OrderServiceProxy,} from '@shared/service-proxies/service-proxies';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { finalize } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { Moment } from 'moment';
 import * as moment from 'moment';
+import { AppComponentBase } from '@shared/app-component-base';
 import { AddToCartDetailsComponent } from './add-to-cart-details/add-to-cart-details.component';
-import { CustomerCartComponent } from '@app/customer-cart/customer-cart.component';
 
 enum fsize{
   Small='Small',
@@ -27,27 +28,28 @@ class PagedFoodRequestDto extends PagedRequestDto{
   styleUrls: ['./food-info.css'],
   animations:[appModuleAnimation()]
 })
-export class FoodListInformationComponent extends PagedListingComponentBase<OrderDto> {
+export class FoodListInformationComponent extends AppComponentBase implements OnInit {
 
   saving =false;
   orders: OrderDto[]=[];
   orderCreate= new CreateOrderDto();
   foods: FoodDto[]=[];
+
   keyword='';
   isActive:boolean|null;
+  foodSizes=[fsize.Small,fsize.Medium,fsize.Large];
+  sizeSelected:string;
+  date= new Date();
+  //
+  food= new FoodDto();
+  skipCount: number;
+  maxResultCount: number;
+  foodQty: number = 1;
+  id: number = 0;
+  sizes: string[];
+  availableSizesDict: { [key: number]: string[] } = {};
+  availability:boolean|null;
 
-  // id:number;
-  //orders: OrderDto[]=[];
-  // orderCreate= new CreateOrderDto();  
-  //order= new OrderDto();  
-  // food= new FoodDto;  
-  // qty:number;
-  // availability:boolean|null;
-  // foodSize:string[];
-  // selectedSize:{[key:string]:string[]}={};
-  // date=new Date(); 
-  // foodSizes=[fsize.Small,fsize.Medium,fsize.Large];
-  // sizeSelected:string;
 
   @Output() onSave = new EventEmitter<any>();
 
@@ -55,71 +57,73 @@ constructor(
   injector:Injector,
   private _foodService: FoodServiceProxy,  
   private _orderService:OrderServiceProxy,  
-  private router:Router
+  private router:Router,
+  //
+
+  private _modalService: BsModalService,
+  public bsModalRef: BsModalRef,
 ){
   super(injector)
 }
 
-  protected list(request: PagedFoodRequestDto, pageNumber: number, finishedCallback: Function): void {
-    request.keyword = this.keyword;
-    request.isActive = this.isActive;
+ngOnInit(): void {
+  this.getAllFoods();
+  if (this.id) {
+    this._orderService.get(this.id).subscribe((res) => {
+      this.orderCreate.foodId = res.foodId;
+ 
+    });
+  }
 
-    this._foodService
-      .getAllFoodWithCategoryAndFoodType(
-        request.keyword,
-        request.isActive,
-        request.skipCount,
-        request.maxResultCount
-      )
-      .pipe(
-        finalize(() => {
-          finishedCallback();
-        })
-      )
-      .subscribe((result: FoodDtoPagedResultDto) => {
-        this.foods = result.items;
-        this.showPaging(result, pageNumber);
+}
 
-      });    
-    }
-    
-    protected delete(order: OrderDto): void {
-      abp.message.confirm(
-        this.l("OrdernDeleteWarningMessage", order.foodId),
-        undefined,
-        (result: boolean) => {
-          if (result) {
-            this._orderService.delete(order.id).subscribe(() => {
-              abp.notify.success(this.l("SuccessfullyDeleted"));
-              this.refresh();
-            });
-          }
-        }
-      );
-    }
-
-    showModalDetails(foodId : number) : void {
-      this.saving= true;
-      this.orderCreate.foodId = foodId;
-
-      this._orderService.create(this.orderCreate).subscribe(()=> {
-        this.notify.info(this.l('Saved Successfully'));
-        this.onSave.emit();
-        this.router.navigate(["./app/customer-cart"]);
-       })
+getAllFoods(): void {
+  this._foodService
+    .getAllFoodWithCategoryAndFoodType(
+      this.keyword,
+      this.isActive,
+      this.skipCount,
+      this.maxResultCount
+    )
+    .subscribe((result) => {
+      this.foods = result.items;
+      this.setDefaultFoodSizes();
+      this.foods.forEach((food) => (this.foodQty = 1));
      
-     }
+    });
+}
+
+private setDefaultFoodSizes(): void {
+  this.foods.forEach((food) => {
+    if (food.size) {
+      var sizeArray = food.size.split(",").map((size) => size.trim());
+      food.size = sizeArray[0];
+      this.availableSizesDict[food.id] = sizeArray;
     
+    }
+  });
+}
+ 
+    
+    cartButton(availableFoods: FoodDto): void {
+      this.orderCreate.foodId = availableFoods.id;
+      this.orderCreate.quantity = this.foodQty;
+      this.orderCreate.totalFoodAmount = availableFoods.price * this.foodQty;
+      this.orderCreate.dateTimeOrdered =moment(this.date);
+      this.orderCreate.size = availableFoods.size;
+  
+      this._orderService.create(this. orderCreate).subscribe((res) => {
+        this.notify.info(this.l("SavedSuccessfully"));
+        this.onSave.emit();
+
+        this.router.navigate(["./app/customer-cart"]);
+      });
+    }
   
 }
 
 
-// TimeAndDateFormat = (TimeAndDate: Date): string => {
-//     var currentTime = new Date();
-//     var difference = Math.round((currentTime.getTime() - new Date(TimeAndDate).getTime()) / 60000);
-//     return difference < 1 ? 'just now' : difference === 1 ? 'a minute ago' : `${difference} ago`;
-//   };
-  
+
   
 
 

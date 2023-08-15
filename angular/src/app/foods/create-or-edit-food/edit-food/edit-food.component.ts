@@ -11,6 +11,7 @@ enum fsize{
 @Component({
   selector: 'app-create-or-edit-food-modal',
   templateUrl: './edit-food.component.html',
+  styleUrls: ['./edit-food.component.css']
 })
 export class EditFoodComponent extends AppComponentBase implements OnInit {
   saving= false;
