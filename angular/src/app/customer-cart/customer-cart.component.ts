@@ -22,7 +22,11 @@ class PagedOrdersRequestDto extends PagedRequestDto {
   keyword: string;
   isActive: boolean | null;
 }
-
+enum fsize{
+  Small='Small',
+  Medium='Medium',
+  Large='Large'
+}
 @Component({
   // selector: "add-to-cart",
   templateUrl: "customer-cart.component.html",
@@ -34,14 +38,14 @@ export class CustomerCartComponent extends PagedListingComponentBase<OrderDto> {
   orders: OrderDto[] = [];
   keyword = "";
   isActive: boolean | null;
-
   foodQty: number = 1;
   order: OrderDto = new OrderDto();
   selectedFoodOrder: number;
   selected: boolean;
   overallTotalAmount: number = 0;
   priceTotal:number;
-
+  foodSize=[fsize.Small,fsize.Medium,fsize.Large];
+  sizeSelected:string;
   constructor(
     injector: Injector,
     private _orderService: OrderServiceProxy,
@@ -78,6 +82,7 @@ export class CustomerCartComponent extends PagedListingComponentBase<OrderDto> {
       .subscribe((result: OrderDtoPagedResultDto) => {
         this.orders = result.items;
         this.showPaging(result, pageNumber);
+        
 
       });
   }
@@ -98,10 +103,17 @@ export class CustomerCartComponent extends PagedListingComponentBase<OrderDto> {
     );
   }
 
-  private showEditOrderModal(id?: number): void{
-    let EditOrderModal: BsModalRef;
+  updateCart(order: OrderDto): void {
+ 
+    this._orderService.update(order).subscribe(() => {
+      this.notify.info(this.l("Order Updated Successfully"));
+    });
+  }
 
-      EditOrderModal = this._modalService.show(
+  private showEditOrderModal(id?: number): void{
+    let editFood: BsModalRef;
+
+      editFood = this._modalService.show(
         AddToCartDetailsComponent,
         {
           class: 'modal-lg',
@@ -111,7 +123,7 @@ export class CustomerCartComponent extends PagedListingComponentBase<OrderDto> {
         }
       );    
     
-    EditOrderModal.content.onSave.subscribe(() =>{
+    editFood.content.onSave.subscribe(() =>{
       this.refresh();
     })
   }

@@ -17,11 +17,6 @@ enum fsize{
   Large='Large'
 }
 
-class PagedFoodRequestDto extends PagedRequestDto{
-  keyword:string;
-  isActive:boolean|null;
-}
-
 @Component({
   selector: 'app-food-information',
   templateUrl: './food-information.component.html',
@@ -34,20 +29,17 @@ export class FoodListInformationComponent extends AppComponentBase implements On
   orders: OrderDto[]=[];
   orderCreate= new CreateOrderDto();
   foods: FoodDto[]=[];
-
   keyword='';
   isActive:boolean|null;
   foodSizes=[fsize.Small,fsize.Medium,fsize.Large];
   sizeSelected:string;
   date= new Date();
-  //
   food= new FoodDto();
   skipCount: number;
   maxResultCount: number;
   foodQty: number = 1;
   id: number = 0;
   sizes: string[];
-  availableSizesDict: { [key: number]: string[] } = {};
   availability:boolean|null;
 
 
@@ -58,9 +50,6 @@ constructor(
   private _foodService: FoodServiceProxy,  
   private _orderService:OrderServiceProxy,  
   private router:Router,
-  //
-
-  private _modalService: BsModalService,
   public bsModalRef: BsModalRef,
 ){
   super(injector)
@@ -71,7 +60,7 @@ ngOnInit(): void {
   if (this.id) {
     this._orderService.get(this.id).subscribe((res) => {
       this.orderCreate.foodId = res.foodId;
- 
+      
     });
   }
 
@@ -85,25 +74,10 @@ getAllFoods(): void {
       this.skipCount,
       this.maxResultCount
     )
-    .subscribe((result) => {
-      this.foods = result.items;
-      this.setDefaultFoodSizes();
-      this.foods.forEach((food) => (this.foodQty = 1));
-     
+    .subscribe((res) => {
+      this.foods = res.items;
     });
 }
-
-private setDefaultFoodSizes(): void {
-  this.foods.forEach((food) => {
-    if (food.size) {
-      var sizeArray = food.size.split(",").map((size) => size.trim());
-      food.size = sizeArray[0];
-      this.availableSizesDict[food.id] = sizeArray;
-    
-    }
-  });
-}
- 
     
     cartButton(availableFoods: FoodDto): void {
       this.orderCreate.foodId = availableFoods.id;

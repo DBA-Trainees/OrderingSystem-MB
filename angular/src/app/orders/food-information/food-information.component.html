@@ -148,14 +148,8 @@
                       [hidden]="food.quantity==0" 
                       (click)="cartButton(food)"> 
                       <i class="fa fa-shopping-cart"></i> 
-                    
-                        <!-- <button class="card-button bg-danger" 
-                        (click)="displayFoodDetails(food.id)"><strong>
-                            details</strong></button> -->
                       </a>
                       
-                  <button class="card-button bg-danger" disabled *ngIf="food.quantity==0"><strong>Sold
-                      Out</strong></button>
                     </div>
                    
                      <h4 class="card-text text-center" >

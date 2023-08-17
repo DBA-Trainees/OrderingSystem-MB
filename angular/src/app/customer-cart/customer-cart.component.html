@@ -168,11 +168,13 @@
                                 <tr >
                                     <th>{{"Photo"|localize}}</th>
                                     <th>{{ "Food Name" | localize }}</th>
+                                    <th>{{ "Category" | localize }}</th>
                                     <th>{{ "Price" | localize }}</th>
                                     <th>{{ "Qty" | localize }}</th>
                                     <th>{{ "Size" | localize }}</th>
                                     <th>{{ "Total Price" | localize }}</th>
                                     <th>{{ "Notes" | localize }}</th>
+                                    
                                     <th class="action-th" [width]="160" style="text-align:center">{{ "Actions" | localize }}</th>
                                
                                 </tr>
@@ -184,27 +186,37 @@
                                         itemsPerPage: pageSize,
                                         currentPage: pageNumber,
                                         totalItems: totalItems
-                                        } ">
+                                        } | search:keyword:['food.name', 'food.size', 'food.category.categoryName']">
                                         
                                         <td style="width: 160px;"><img width=" 150px"
                                             [src]="'data:image/png;base64,' + order.food.image"
                                               alt="profile-sample1" class="background" /></td>
                                         <td>{{ order.food.name }}</td>
+                                        <td>{{ order.food?.category?.categoryName }}</td> 
                                         <td>{{ order.food.price | currency: 'PHP' }}</td>
-                                        <!-- <td style="text-align:center">
-                                            <input style="border-color: black"
+                                        <td>
+                                            <input 
                                             type="number" 
                                             class="form-control" 
-                                            name="foodQuantity" 
-                                            id="foodQuantity" 
-                                            [(ngModel)]="foodQty" 
+                                            [(ngModel)]="order.quantity" 
                                             [min]="1"
-                                            [max]="order.food.quantity">
-                                        </td> -->
-                                        <td>{{ order.quantity }}</td>
-                                        <td>{{ order.size }}</td>
+                                            [max]="order.food.quantity"                                           
+                                            (change)="updateCart(order)" />
+                                        </td>
+                                        <td>{{ order.food?.size }}</td>
                                         <td>{{ order.totalFoodAmount | currency:'PHP'}}</td> 
-                                        <td>{{ order.notes | currency:'PHP'}}</td>                                     
+                                        <td>
+                                            <textarea
+                                            type="text"
+                                            class="form-control"
+                                            name="description"
+                                            id="description"
+                                            [(ngModel)]="order.notes"
+                                            (change)="updateCart(order)"
+                                            >
+                                            </textarea>
+                                        </td>  
+                                                                    
                                         <td>
                                             <button 
                                             type="button" 
