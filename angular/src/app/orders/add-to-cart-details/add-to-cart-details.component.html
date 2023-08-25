@@ -1,0 +1,98 @@
+<form
+class="form-horizontal"
+autocomplete="off"
+#editFoodModal="ngForm"
+>
+
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-5">
+        <div class="text-center">
+          <img [src]="'data:' + food.imageFileType + ';base64,' + food.image" class="img-fluid" title="" alt="">
+        </div>
+      </div>
+      <div class="col-md-7" id="bodyinfo">
+        <div class="body">
+        <span class="text-white">Brand name</span>
+          </div>
+          <div class="products-title mb-2">
+            <h1 class="h4 text-white"><strong>{{ food.name }}</strong></h1>
+          <div class="price">
+             <div class="rating-star text small pb-4">
+            <span style="font-size:200%;color:yellow;">&starf;</span>
+            <span style="font-size:200%;color:yellow;">&starf;</span>
+            <span style="font-size:200%;color:yellow;">&starf;</span>
+            <span style="font-size:200%;color:yellow;">&starf;</span>
+            <span style="font-size:200%;color:yellow;">&star;</span>
+          </div>
+          <label class="fs-6 text-mode pb-2 fw-500 text-white">Price</label>
+            <div class="product-price fs-3 fw-500 mb-2 text-white">
+                <del class="text-muted fs-6 text-white"><small>{{ food.price+1000 | currency : "PHP" }}</small>
+                </del>  
+                  <span class="text-primary text-white">{{ food.price | currency : "PHP" }}</span>      
+          </div>
+          <div class="mt-2">
+            <span class="intro-3 text-white"><strong>{{ food.category?.categoryName }}</strong></span>
+          </div>
+          <div class="mt-2">
+            <span class="intro-3 text-white">Number of Available Items:<strong> {{ food.quantity }}</strong></span>
+          </div>
+          <div class="mt-2 text-white">
+          <label class="fs-6 text-mode pb-2 fw-500">Size</label>
+                <div class="col-sm-6 ">
+                    <select 
+                    class="form-control " 
+                     id="foodSize"
+                    name="foodSize" 
+                    [(ngModel)]="food.size">
+                     <option 
+                    class="dropdown-item text-center" 
+                    disabled 
+                    selected 
+                    [ngValue]="null">
+                    </option>
+                        <option *ngFor="let size of foodSizes" [value]="size">
+                     {{ size }}
+                    </option>
+                     </select>
+                    </div> 
+          </div>
+          <div class="mt-2 text-white">
+            <div class="form-group required">
+              <label class="fs-6 text-mode pb-2 fw-500">Quantity </label>
+              <div class="mt-1">
+                <div class="col-sm-6 ">
+                    <input 
+                    type="number"
+                      class="form-control"
+                      [value]="foodQty"
+                      min="1"
+                      [max]= food.quantity
+                      (input)="updateQuantity($event.target.valueAsNumber)"                                    
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="fs-6 text-mode pb-2 fw-500">
+              <label class="fs-6 text-mode pb-2 fw-500 text-white">Notes </label>
+              <div class="col-sm-6">
+                <textarea type="text" class="form-control" name="description" id="description" placeholder="Comment text......(Optional)"
+                [(ngModel)]="reminder" >
+             
+            </textarea>
+              </div>
+          </div>
+
+          <div class="buttons-container">
+          <button class="button-arounder" (click)="cartButton(food.id)"><strong>Add To Cart</strong></button></div>
+                </div>
+
+          <button class="button-cancel" (click)="bsModalRef.hide()"><strong>Cancel</strong> </button></div>
+
+         
+        </div>
+      </div>
+    </div>
+   

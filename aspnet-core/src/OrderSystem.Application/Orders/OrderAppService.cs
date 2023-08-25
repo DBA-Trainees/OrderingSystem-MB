@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace OrderSystem.Orders
 {
-    [AbpAuthorize(PermissionNames.Pages_Orders)]
+   // [AbpAuthorize(PermissionNames.Pages_Orders)]
     public class OrderAppService : AsyncCrudAppService<Order, OrderDto, int, PagedOrderResultRequestDto, CreateOrderDto, OrderDto>, IOrderAppService
     {
         private readonly IRepository<Order, int> _orderRepository;

@@ -1,20 +1,3 @@
-@keyframes moveabout {
-
-    from { left: -50px; }
-    to   { left:  445px; }
-}
-    
-
-img {
-
-    position: absolute;
-    top: 5px;
-    left:445px;
-    animation: moveabout 3s linear;
-    border-bottom: 1px solid black;
-  
-   
-}
 
 #div1 {
     font-family: Garamond;
@@ -24,19 +7,12 @@ img {
 
    
   }
+
+  a.division{
+    font-size: 35px;
+    font-family: Garamond;
+  }
   
-  @keyframes slide-right {
-    from {
-       right: 200%;
-        width: 100%; 
-      }
-    
-      to {
-       left: 50%;
-        width: 200%;
-      }
-    }
-    
     
     
     #div3 {
@@ -51,25 +27,19 @@ img {
           rgb(255, 0, 0), 
           hsla(149, 89%, 65%, 0)
         ) 3 200%;
+       
     }
     #btun {
-      position: absolute;
-      top: -7px;
-      left:1200px;
-      animation: pulsing 1.25s infinite ;
-      font-size: 30px;
-      color: #025197;
-      
-     
+      font-size: 15px;
+      color: #ffffff;
     }
-    
-
-    @keyframes pulsing {
-      0%, 100% {
-        opacity: 1;
-      }
-      50% {
-        opacity: .5;
-      }
+    .cname{
+      font-size: 20px;
+      font-family: garamond;
     }
+.form-inline{
+  position: relative;
+  right: auto;
+}
    
+ 

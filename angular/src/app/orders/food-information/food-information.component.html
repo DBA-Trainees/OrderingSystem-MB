@@ -1,184 +1,70 @@
+<!--PREEEEE YUNG IYONG UI AT FUCK YUNG IYONG NOT AVAILABLE POTCHAAAAAA-->
 
-<!-- <div [@routerTransition]>
-    <section class="content-header">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-6 col-6">
-                    <div id="div1">
-                        <strong>{{ "Food List  " | localize }}</strong>
-                    </div>
-                    <img src="assets/img/cat.gif" width="70px" id="wiw"/>
-                              
-                        </div>
-                    </div>
-                </div>
-    </section>
+    <div [@routerTransition]>
+        <section class="content-header" >
+          <nav class="navbar navbar-light justify-content-center" style="  background-image: linear-gradient(rgb(10, 10, 10) , rgb(133, 50, 50));">
+              <a class="foodlist text-white" >Food List Available</a>
+            </nav>
+      </section>
     <section class="content px-2">
         <div class="container-fluid">
-            <div class="card">
-                <div class="card-header" style=" background-image: linear-gradient(rgb(90, 168, 247), rgb(254, 255, 255)); ">
-                    <div class="row">
-                        <div class="col-md-6">&emsp;</div>
-                        <div class="col-md-6">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <button 
-                                    type="button" 
-                                    class="btn bg-blue" 
-                                    (click)="getDataPage(1)">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                </div>
-                                <input 
-                                type="text" 
-                                class="form-control" 
-                                name="keyword"                                    
-                                [placeholder]="'SearchWithThreeDot' | localize" 
-                                [(ngModel)]="keyword"
-                                (keyup.enter)="getDataPage(1)" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-           <div class="row ">
-            
-            <div class="col-xs-12 col-sm-6 col-md-3 p-1 border border-dark " *ngFor="let food of foods  | paginate
-                : {
-                    id: 'server',
-                    itemsPerPage: pageSize,
-                    currentPage: pageNumber,
-                    totalItems: totalItems
-                    }| search: keyword:['imageName','size','category.categoryName','foodType.foodTypeName', 'quantity', 'price', 'availability', 'name']">
-                    
-                    <div class="card-sl" [ariaDisabled]="food.quantity==0" >
-                        <div class="card-content">
-                        <div class="card-body" id="wut" *ngIf="food.availability==1" >
-                                <img [src]="'data:' + food.imageFileType + ';base64,' + food.image" class="center card-img-top" />
-                                <a class="cartButton" (click)="showModalDetails(food.id)">
-                                <i class="fas fa-shopping-cart" ></i>
-                                </a>
-                        </div>  
+            <div class="container">
+              <div class="container-fluid">
+                <div class="row" >
+                  <div class="col-xs-12 col-sm-6 col-md-2 p-1" *ngFor="let food of foods" style="margin: 5px;">
+                    <div class="card-sl">
+                      <div class="card-content">
+                        <div class="ribbon" *ngIf="food.availability==1"><span>TRY ME!</span></div>
+                        <div class="card-image"*ngIf="food.availability==1">
+                        <img [src]="'data:' + food.imageFileType + ';base64,' + food.image" class="card-img-top" />
+                         </div>
+
+                         <div class="ribbon red" *ngIf="food.availability==0"><span>SOLD OUT</span></div>
+                         <div class="card-image-notavailable" *ngIf="food.availability==0">
+                            <img [src]="'data:' + food.imageFileType + ';base64,' + food.image" class="center card-img-top" id="imgtop" />
+                          </div>
+                        
+
+                         <div class="heading text-white">
+                          <a 
+                          class="cartButton" *ngIf="food.availability==1"
+                          (click)="cartButton(food)">
+                          <i class="fas fa-cart-plus"> Add To Cart</i>
+                          </a>
+                            {{food.name}}
+                            <h6>{{ food.price | currency:'PHP'}}</h6>
+
+                            <h6>{{food.category?.categoryName}}</h6>
                             
-                            <div class="card-body">
-                            <h5 class="card-text text-center" >
-                                <strong>{{food.name}}</strong>
-                            </h5 >
-                            <div class="card-text">
-                                <h6 class="card-text text-center"> <strong>{{food.category?.categoryName}}</strong></h6>
-                            </div> 
-                            <div class="card-text text-center">
-                                <label for="foodSize">Food Size: {{food.size}}</label>
-                              </div>
+                            <div class="card-text" *ngIf="food.availability==1">  <h6>Food Size:</h6>
+                                <select 
+                                class="form-control" 
+                                 id="foodSize"
+                                name="foodSize" 
+                                [(ngModel)]="food.size">
+                                 <option 
+                                class="dropdown-item" 
+                                disabled 
+                                selected 
+                                [ngValue]="null">
+                                </option>
+                                    <option *ngFor="let size of foodSizes" [value]="size">
+                                 {{ size }}
+                                </option>
+                                 </select>
+                                 
+                                 </div>
+                          </div>
 
-                            <div class="card-text">
-                                <h6 class="text-center"><strong>{{food.price | currency:'PHP'}}</strong> </h6>
-                            </div>
-  
-                             <p class="food-avail text-center" *ngIf="food.availability==1 ; else NotAvailable">
-                                <img src="assets/img/se.gif" alt="" width="20%"/><strong> Available</strong>
-                            </p>
-                                <ng-template #NotAvailable >
-                                    <p class="food-unavail text-center">
-                                        <strong> Unavailable</strong></p>
-                                        <img src="assets/img/dag.gif" alt="" width="45%"  id="wak"/> 
-                                    </ng-template> 
-                            </div>
-                       
-                        </div>
-                    </div>
-                    </div>
-                    
-                </div>
-              
-           
-        </div>
-        <div class="card-footer table-card-footer bg-light border-top" style="background-color: rgb(249, 74, 71); background-image: linear-gradient(rgb(129, 175, 224), rgb(190, 243, 249)); ">
-            <div class="row">
-                <div class="col-sm-4 col-12 text-sm-left text-center">
-                    <button class="btn btn-secondary" (click)="refresh()">
-                        <i class="fas fa-redo-alt"></i>
-                    </button>
-                </div>
-                <div class="col-sm-4 col-12 text-center">
-                    
-                    
-                </div>
-                <div class="col-sm-4 col-12">
-                    <div class="float-sm-right m-auto">
-                        <abp-pagination-controls
-                                id="server"
-                                (pageChange)="getDataPage($event)"
-                        >
-                        </abp-pagination-controls>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-</div> -->
-
- <div [@routerTransition]>
-    <section class="content-header">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-6 col-6">
-                    <div id="div1">
-                        <strong>{{ "Food List  " | localize }}</strong>
-                    </div>
-                    <img src="assets/img/cat.gif" width="70px" id="wiw"/>
-                              
-                        </div>
-                    </div>
-                </div>
-    </section>
-    <section class="content px-2">
-        <div class="container-fluid" >
-            <div class="card" id="div3" >
-          <div class="container">
-            <div class="row" >
-              <div class="col-xs-12 col-sm-6 col-md-3 p-1 border border-dark " *ngFor="let food of foods">
-                <div class="card-sl" [ariaDisabled]="food.quantity==0">
-                  <div class="card-content"  >
-                    <div class="card-image"  *ngIf="food.availability==1" >
-                      <img [src]="'data:' + food.imageFileType + ';base64,' + food.image" class="center card-img-top" />
-                      <a 
-                      class="cartButton"
-                      [hidden]="food.quantity==0" 
-                      (click)="cartButton(food)"> 
-                      <i class="fa fa-shopping-cart"></i> 
-                      </a>
-                      
-                    </div>
-                   
-                     <h4 class="card-text text-center" >
-                                <strong>{{food.name}}</strong>
-                            </h4>
-                            <div class="card-text text-center">
-                                <label for="categories">Category: {{food.category?.categoryName}}</label>
-                              </div>
-                    <div class="card-text text-center">
-                        <label for="foodSize">Food Size: {{food.size}}</label>
+                          <div class="btn"  *ngIf="food.availability==1"><a  
+                            (click)="foodDetails(food)" >Discover More</a></div> 
+                     </div>
                       </div>
-                      <div class="card-text">
-                        <h6 class="text-center"><strong>{{food.price | currency:'PHP'}}</strong> </h6>
-                    </div>
-                    <p class="food-avail text-center" *ngIf="food.availability==1 ; else NotAvailable">
-                        <img src="assets/img/se.gif" alt="" width="20%"/><strong> Available</strong>
-                    </p>
-                        <ng-template #NotAvailable >
-                            <p class="food-unavail text-center">
-                                <strong> Unavailable</strong></p>
-                                <img src="assets/img/dag.gif" alt="" width="45%"  id="wak"/> 
-                            </ng-template> 
-                    
-                    <div class="col-2">
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-      </div>
+    </section>
   </div> 
+

@@ -3,38 +3,7 @@
     from { left: -50px; }
     to   { left:  438px; }
 }
-    
-
-img {
-
-    position: absolute;
-    top: 5px;
-    left:438px;
-    animation: moveabout 3s linear;
-    border-bottom: 1px solid black;
   
-   
-}
-
-#div1 {
-    font-family: Garamond;
-    font-size: 40px;
-    animation: slide-right 3s;
-    text-align: right;
-   
-  }
-  
-  @keyframes slide-right {
-    from {
-        margin-left: -48%;
-        width: 300%; 
-      }
-    
-      to {
-        margin-left: 0%;
-        width: 100%;
-      }
-    }
 
     #div3 {
       
@@ -49,24 +18,17 @@ img {
           hsla(149, 89%, 65%, 0)
         ) 3 200%;
     }
-    #btun {
-      position: absolute;
-      top: -7px;
-      left:1200px;
-      animation: pulsing 1.25s infinite ;
-      font-size: 30px;
-      color: #2132a1;
-      
-     
-    }
     
-
-    @keyframes pulsing {
-      0%, 100% {
-        opacity: 1;
-      }
-      50% {
-        opacity: .5;
-      }
+    #btun {
+      font-size: 15px;
+      color: #ffffff;
     }
-   
+    .cname{
+      font-size: 20px;
+      font-family: garamond;
+    }
+    a.category{
+    font-size: 35px;
+    font-family: Garamond;
+    }
+     

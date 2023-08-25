@@ -1,99 +1,27 @@
-@keyframes moveabout {
-
-    from { left: -50px; }
-    to   { left: 410px; }
+#btun {
+  font-size: 15px;
+  color: #ffffff;
 }
-@keyframes spin {
-    from {
-        transform:rotate(0deg);
-    }
-    to {
-        transform:rotate(360deg);
-    }
-} 
-
-img {
-
-    position: absolute;
-    top: 2px;
-    left:410px;
-    animation: moveabout 2s linear, spin 2000ms linear;
-    border-bottom: 1px solid black;
-
+.cname{
+  font-size: 20px;
+  font-family: garamond;
 }
-
-#div1 {
-    font-family: Garamond;
-    font-size: 40px;
-    animation: slide-right 1s alternate-reverse;
-    text-align: right;
-   
-  }
-  
-  @keyframes slide-right {
-    from {
-       right: 60%;
-        width: 100%; 
-      }
-    
-      to {
-       left:50%;
-        width: 200%;
-      }
-    }
-
-    #btun {
-      position: absolute;
-      top: -7px;
-      left:1200px;
-      animation: pulsing 1.25s infinite ;
-      font-size: 30px;
-      color: #025197;
+a.customer{
+font-size: 35px;
+font-family: Garamond;
+}
+ 
+#div3 {
       
-     
-    }
-    
-    @keyframes pulsing {
-      0%, 100% {
-        opacity: 1;
-      }
-      50% {
-        opacity: .5;
-      }
-    }
+  padding: 1rem;
+  color: rgb(0, 0, 0);
+  border-width: 3px;
+  border-style: solid;
+  border-image: 
+    linear-gradient(
+      to bottom, 
+      rgb(255, 0, 0), 
+      hsla(149, 89%, 65%, 0)
+    ) 3 200%;
    
-
-    #div3 {
-      
-      padding: 1rem;
-      color: rgb(0, 0, 0);
-      border-width: 3px;
-      border-style: solid;
-      border-image: 
-        linear-gradient(
-          to bottom, 
-          rgb(255, 26, 0), 
-          hsla(149, 89%, 65%, 0)
-        ) 3 200%;
-    }
-    #btun {
-      position: absolute;
-      top: -7px;
-      left:1200px;
-      animation: pulsing 1.25s infinite ;
-      font-size: 30px;
-      color: #025197;
-      
-     
-    }
-    
-
-    @keyframes pulsing {
-      0%, 100% {
-        opacity: 1;
-      }
-      50% {
-        opacity: .5;
-      }
-    }
-   
+}

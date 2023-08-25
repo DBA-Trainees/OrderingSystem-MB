@@ -1,14 +1,15 @@
 
 
 
-import { Component, Injector, OnInit } from "@angular/core";
-import { Routes } from "@angular/router";
+import { Component, Injector, OnInit, SimpleChanges } from "@angular/core";
+import { Router, Routes } from "@angular/router";
 import { appModuleAnimation } from "@shared/animations/routerTransition";
 import {
   PagedListingComponentBase,
   PagedRequestDto,
 } from "@shared/paged-listing-component-base";
 import {
+  CategoriesDto,
   FoodDto,
   OrderDto,
   OrderDtoPagedResultDto,
@@ -16,7 +17,7 @@ import {
 } from "@shared/service-proxies/service-proxies";
 import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
 import { finalize } from "rxjs/operators";
-import { AddToCartDetailsComponent } from "@app/orders/food-information/add-to-cart-details/add-to-cart-details.component";
+import * as moment from "moment";
 
 class PagedOrdersRequestDto extends PagedRequestDto {
   keyword: string;
@@ -42,23 +43,48 @@ export class CustomerCartComponent extends PagedListingComponentBase<OrderDto> {
   order: OrderDto = new OrderDto();
   selectedFoodOrder: number;
   selected: boolean;
-  overallTotalAmount: number = 0;
-  priceTotal:number;
-  foodSize=[fsize.Small,fsize.Medium,fsize.Large];
-  sizeSelected:string;
+  overallTotalPrice: number = 0;
+  total: number;
+  shippingCost: number=10;
+  overallSub:number=0;
+
   constructor(
     injector: Injector,
     private _orderService: OrderServiceProxy,
     private _modalService: BsModalService,
-    private BsModalRef:BsModalRef
+    private BsModalRef:BsModalRef,
+    private router:Router
   ) {
     super(injector);
   }
 
-  editFood(id): void {
-        this.showEditOrderModal(id);
-      }
+  calculateTotalPrice(): void {
+    // Calculate the subtotal (sum of individual prices)
+    const subtotal = this.orders.reduce((total, order) => {
+      return total + this.individualPrice(order);
+    }, 0);
 
+    // Add the shipping cost to the subtotal to get the total price
+    this.overallTotalPrice = subtotal + this.shippingCost;
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.orders) {
+      // Calculate the total price whenever orders change
+      this.calculateTotalPrice();
+    }
+  }
+
+  calculateSubtotal(): void {
+    this.overallSub= this.orders.reduce((total, order) => {
+      return total + this.individualPrice(order);
+    }, 0);
+  }
+  ngOnChangesSubtotal(changes: SimpleChanges): void {
+    if (changes.orders) {
+      // Calculate the total price whenever orders change
+      this.calculateSubtotal();
+    }
+  }
   protected list(
     request: PagedOrdersRequestDto,
     pageNumber: number,
@@ -77,6 +103,8 @@ export class CustomerCartComponent extends PagedListingComponentBase<OrderDto> {
       .pipe(
         finalize(() => {
           finishedCallback();
+          this.calculateTotalPrice();
+          this.calculateSubtotal()
         })
       )
       .subscribe((result: OrderDtoPagedResultDto) => {
@@ -86,6 +114,8 @@ export class CustomerCartComponent extends PagedListingComponentBase<OrderDto> {
 
       });
   }
+ 
+
 
 
   protected delete(order: OrderDto): void {
@@ -102,33 +132,28 @@ export class CustomerCartComponent extends PagedListingComponentBase<OrderDto> {
       }
     );
   }
-
+  
   updateCart(order: OrderDto): void {
- 
+    this.calculateTotalPrice();
+    this.calculateSubtotal();
     this._orderService.update(order).subscribe(() => {
-      this.notify.info(this.l("Order Updated Successfully"));
+      this.notify.info(this.l("Changes are Updated Successfully"));
     });
   }
 
-  private showEditOrderModal(id?: number): void{
-    let editFood: BsModalRef;
-
-      editFood = this._modalService.show(
-        AddToCartDetailsComponent,
-        {
-          class: 'modal-lg',
-          initialState: {
-            id: id,
-          },
-        }
-      );    
-    
-    editFood.content.onSave.subscribe(() =>{
-      this.refresh();
-    })
+  individualPrice(order: OrderDto): number {
+    let updatedPrice = order.food?.price;
+    return updatedPrice * order.quantity;
   }
-}
 
- 
- 
-  
+  proceedOrder() {
+    // Check if there are orders to proceed
+    if (this.orders.length === 0) {
+      // Handle the case where there are no orders
+      console.error('No orders to proceed.');
+      return;
+    }
+    this.router.navigate(['/app/dashboard'])
+  }
+   
+}

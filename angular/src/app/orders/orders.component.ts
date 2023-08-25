@@ -13,7 +13,7 @@ import {
 } from "@shared/service-proxies/service-proxies";
 import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
 import { finalize } from "rxjs/operators";
-import { AddToCartDetailsComponent } from "./food-information/add-to-cart-details/add-to-cart-details.component";
+import { AddToCartDetailsComponent } from "./add-to-cart-details/add-to-cart-details.component";
 import { Router } from "@angular/router";
 
 class PagedOrdersRequestDto extends PagedRequestDto {
@@ -75,11 +75,6 @@ export class OrdersComponent extends PagedListingComponentBase<OrderDto> {
       });
   }
   
-  TimeAndDateFormat = (TimeAndDate:Date): string => {
-    var currentTime = new Date();
-    var difference = Math.round((currentTime.getTime() - new Date(TimeAndDate).getTime()) / 60000);
-    return difference < 1 ? 'just now' : difference === 1 ? 'a minute ago' : `${difference} ago`;
-  };
   
 
   protected delete(order: OrderDto): void {
