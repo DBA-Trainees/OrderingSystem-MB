@@ -1,130 +1,74 @@
 
-<div [@routerTransition]>
-    <section class="content-header" >
-        <nav class="navbar navbar-light justify-content-center" style="  background-image: linear-gradient(rgb(10, 10, 10) , rgb(133, 50, 50));">
-            <a class="cart text-white" >Your Cart</a>
-          </nav>
-    
-    </section>
-    <section class="content px-2">
-        <div class="container-fluid">
-            <div class="card"  id="div3">
-                <div class="card-header"  style=" background-image: linear-gradient(to right, rgb(10, 10, 10) , rgb(133, 50, 50));">
-                    <div class="row">
-                        <div class="col-md-6">&emsp;</div>
-                        <div class="col-md-6">
-                            <div class="input-group">
-                                <input 
-                                type="text" 
-                                class="form-control" 
-                                name="keyword"                                    
-                                [placeholder]="'SearchWithThreeDot' | localize" 
-                                [(ngModel)]="keyword"
-                                (keyup.enter)="getDataPage(1)" 
-                                />
-                                <button 
-                                    type="button" 
-                                    class="btn bg-light" 
-                                    (click)="getDataPage(1)">
-                                        <i class="fas fa-search" ></i>
-                                    </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered" [busy]="isTableLoading">
-                            <thead>
-                                <tr >
-                                    <th>{{"Photo"|localize}}</th>
-                                    <th>{{ "Food Name" | localize }}</th>
-                                    <th>{{ "Category" | localize }}</th>
-                                    <th>{{ "Price" | localize }}</th>
-                                    <th>{{ "Qty" | localize }}</th>
-                                    <th>{{ "Size" | localize }}</th>
-                                    <th>{{ "Notes" | localize }}</th>
-                                    
-                                    <th class="action-th" [width]="160" style="text-align:center">{{ "Actions" | localize }}</th>
-                               
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let order of orders | paginate
-                                    : {
-                                        id: 'server',
-                                        itemsPerPage: pageSize,
-                                        currentPage: pageNumber,
-                                        totalItems: totalItems
-                                        } | search:keyword:['food.name', 'food.size', 'food.category.categoryName']">
-                                        
-                                        <td style="width: 80px;"><img width=" 80px"
-                                            [src]="'data:image/png;base64,' + order.food.image"
-                                              alt="profile-sample1" class="background" /></td>
-                                        <td>{{ order.food.name }}</td>
-                                        <td>{{ order.food?.category?.categoryName }}</td> 
-                                       
-                                            <td> {{ individualPrice(order) | currency:'PHP'}}</td>
-                                                                                    
-                                            <td>  {{order.quantity}}</td>
-                                            <td>{{order.size}}</td>
-                                            <td style=" width: 100px;
-                                            word-wrap: break-word;">{{order.notes}} </td>   
-                                        
-                                                                    
-                                        <td  style="text-align:center">
-                                            <button type="button" class="btn btn-md bg-danger mx-2" (click)="delete(order)">
-                                                {{'Delete'|localize}}
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Basket</title>
+</head>
 
-                </div>
+<body>
+  <main>
+    <div class="basket" >
+      <div class="basket-labels">
+        <ul>
+          <li class="item item-heading"><strong>Food Item</strong></li>
+          <li class="price"><strong>Individual <br> Price</strong></li>
+          <li class="quantity"><strong>Quantity</strong></li>
+          <li class="subtotal"><strong>Subtotal</strong></li>
+        </ul>
+      </div>
+      <div class="basket-product"  *ngFor="let order of orders">
+        <div class="item">
+          <div class="product-image">
+            <img [src]="'data:image/png;base64,' + order.food.image" alt="Image goes here.." class="product-frame">
+          </div>
+          <div class="product-details">
+            <h1><strong><span class="item-quantity">{{order.quantity}}</span> x  {{order.food.name}}</strong> </h1>
+            <p><strong>{{ order.food?.category?.categoryName}}, Size: {{order.size}}</strong></p>
+              <p>Additional Notes:</p>
+              <textarea type="text" class="form-control smaller-textarea" name="description" id="description"
+              [(ngModel)]="order.notes" (change)="updateCart(order)">
+          </textarea>
 
-                        <div class="totalPrice" style="background-color: rgb(249, 74, 71); background-image: linear-gradient(  rgb(133, 50, 50),rgb(10, 10, 10));">
-                            <div class="cart-summary">
-                               
-                                <div class="cart-total">
-                                    <div class="cart-total-label">Subtotal</div>
-                                    <div class="cart-total-amount">{{ overallSub | currency : "PHP" }}</div>
-                                  </div>
-                                <div class="cart-total">
-                                  <div class="cart-total-label"><small>Shipping Cost:</small></div>
-                                  <div class="cart-total-amount"><small>{{ shippingCost | currency : "PHP" }}</small></div>
-                                </div>
-                               
-                                <div class="cart-total">
-                                  <div class="cart-total-label">Total Price:</div>
-                                  <div class="cart-total-amount">{{ overallTotalPrice | currency : "PHP" }}</div>
-                                </div>
-                                
-                                    <button class="button-86 " (click)="proceedOrder()">Proceed Order</button>
-                                
-                                  
-                              </div>
-                        </div>
-            </div>
+          </div>
         </div>
-        <div class="card-footer table-card-footer bg-light border-top" style="background-color: rgb(249, 74, 71); background-image: linear-gradient(  rgb(133, 50, 50),rgb(10, 10, 10));">
-            <div class="row">
-                <div class="col-sm-6 col-12 text-sm-left text-center">
-          
-                    <button class="btn btn-secondary" (click)="refresh()">
-                        <i class="fas fa-redo-alt"></i>
-                    </button>
-                </div>
-                <div class="col-sm-6 col-12">
-                    <div class="float-sm-right m-auto">
-                        <abp-pagination-controls id="server" (pageChange)="getDataPage($event)">
-                        </abp-pagination-controls>
-                    </div>
-                </div>
-            </div>
+        <div class="price">{{ order.food.price | currency:'PHP'}}</div>
+        <div class="quantity">
+          <input type="number"  [(ngModel)]="order.quantity"
+          [min]="1"
+          [max]="order.food.quantity"
+          (change)="updateCart(order)" class="quantity-field">
+        </div>
+        <div class="subtotal">{{ individualPrice(order) | currency:'PHP'}}</div>
+        <div class="remove" >
+          <button (click)="delete(order)" >Remove</button>
+        </div>
+      </div>
+    </div>
+
+
+     <!--pri essss-->
+    <aside>
+      <div class="summary">
+        <div class="summary-total-items"><span class="total-items"></span> <strong>Items in your Cart: {{totalItems}}</strong></div>
+        <div class="summary-subtotal">
+          <div class="subtotal-title">Subtotal</div>
+          <div class="subtotal-value final-value" id="basket-subtotal">{{ overallSub | currency : "PHP" }}</div>
+        </div>
+        <div class="summary-subtotal">
+          <div class="subtotal-title">Shipping Cost</div>
+          <div class="subtotal-value final-value" id="basket-subtotal">{{ shippingCost | currency : "PHP" }}</div>
         </div>
         
-    </section>
-</div>
+        <div class="summary-total">
+          <div class="total-title">Total</div>
+          <div class="total-value final-value" id="basket-total">{{ overallTotalPrice | currency : "PHP" }}</div>
+          
+        </div>
+        <div class="summary-checkout">
+          <button class="checkout-cta" (click)="proceedOrder()">Proceed to Checkout</button>
+        </div>
+      </div>
+    </aside>
+  </main>
+</body>

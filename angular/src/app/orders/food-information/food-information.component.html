@@ -1,70 +1,62 @@
-<!--PREEEEE YUNG IYONG UI AT FUCK YUNG IYONG NOT AVAILABLE POTCHAAAAAA-->
 
-    <div [@routerTransition]>
-        <section class="content-header" >
-          <nav class="navbar navbar-light justify-content-center" style="  background-image: linear-gradient(rgb(10, 10, 10) , rgb(133, 50, 50));">
-              <a class="foodlist text-white" >Food List Available</a>
-            </nav>
-      </section>
-    <section class="content px-2">
-        <div class="container-fluid">
-            <div class="container">
-              <div class="container-fluid">
-                <div class="row" >
-                  <div class="col-xs-12 col-sm-6 col-md-2 p-1" *ngFor="let food of foods" style="margin: 5px;">
-                    <div class="card-sl">
-                      <div class="card-content">
-                        <div class="ribbon" *ngIf="food.availability==1"><span>TRY ME!</span></div>
-                        <div class="card-image"*ngIf="food.availability==1">
-                        <img [src]="'data:' + food.imageFileType + ';base64,' + food.image" class="card-img-top" />
-                         </div>
+<main>
+	<section class="jumbo">
+	<h1 >what's ur cravings for today?</h1>
+  <p class=" line-1 typing-demo">Discover it with us</p>
+	</section>
 
-                         <div class="ribbon red" *ngIf="food.availability==0"><span>SOLD OUT</span></div>
-                         <div class="card-image-notavailable" *ngIf="food.availability==0">
-                            <img [src]="'data:' + food.imageFileType + ';base64,' + food.image" class="center card-img-top" id="imgtop" />
-                          </div>
-                        
+	<section class="wrapper product">
+		<h2 class="section-name">our delicious collections</h2>
+		<article class="card "  *ngFor="let food of foods">
+			<div class="box" >
+        <div class="ribbon" *ngIf="food.availability==1"><span>TRY ME!</span></div>
+        <div class="ribbon-2 text-white" *ngIf="food.availability!=1"><span>Not Available</span></div>
+         <img [src]="'data:' + food.imageFileType + ';base64,' + food.image" class="card-img-top" /> 
+         <div class="foodDetails" *ngIf="food.availability==1"  (click)="foodDetails(food)">
+          <button class="details">
+           discover more
+          </button>
+        </div>
+        </div>
 
-                         <div class="heading text-white">
-                          <a 
-                          class="cartButton" *ngIf="food.availability==1"
-                          (click)="cartButton(food)">
-                          <i class="fas fa-cart-plus"> Add To Cart</i>
-                          </a>
-                            {{food.name}}
-                            <h6>{{ food.price | currency:'PHP'}}</h6>
+			<header class="card-content">
+				<span class="card-category chicken">{{food.category?.categoryName}}</span>
+				<span class="card-header">{{food.name}}  <br> <small>{{food.price|currency: 'PHP'}}</small></span>
+				<span class="card-desc">Choose the size you desire:</span>
+        <span class="card-desc"> <select 
+          class="form-control" 
+           id="foodSize"
+          name="foodSize" 
+          [(ngModel)]="food.size">
+           <option 
+          class="dropdown-item" 
+          disabled 
+          selected 
+          [ngValue]="null">
+          </option>
+              <option *ngFor="let size of foodSizes" [value]="size">
+           {{ size }}
+          </option>
+           </select></span>
+			</header>
+			<footer class="card-content">
+				<div class="contributor">
+          <span class="contributor-name"> 
+            <div class="button-wrapper" data-tippy-content="Click to copy button 54"*ngIf="food.availability==1"  (click)="cartButton(food)">
+            <button class="button-54" role="button">Add To Cart</button>
+          </div>
 
-                            <h6>{{food.category?.categoryName}}</h6>
-                            
-                            <div class="card-text" *ngIf="food.availability==1">  <h6>Food Size:</h6>
-                                <select 
-                                class="form-control" 
-                                 id="foodSize"
-                                name="foodSize" 
-                                [(ngModel)]="food.size">
-                                 <option 
-                                class="dropdown-item" 
-                                disabled 
-                                selected 
-                                [ngValue]="null">
-                                </option>
-                                    <option *ngFor="let size of foodSizes" [value]="size">
-                                 {{ size }}
-                                </option>
-                                 </select>
-                                 
-                                 </div>
-                          </div>
-
-                          <div class="btn"  *ngIf="food.availability==1"><a  
-                            (click)="foodDetails(food)" >Discover More</a></div> 
-                     </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+          
+            
+              <div class="button-wrapper" data-tippy-content="Click to copy button 54"*ngIf="food.availability!=1"  (click)="cartButton(food)">
+                <i class="fa fa-exclamation-triangle rotate"></i>
+                &nbsp; &nbsp;
+                <span>Oops! UNAVAILABLE</span>
             </div>
-    </section>
-  </div> 
+          
 
+          </span>
+         </div>
+			</footer>
+		</article>
+    </section>

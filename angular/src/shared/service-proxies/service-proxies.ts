@@ -6068,6 +6068,8 @@ export class OrderDto implements IOrderDto {
     size: string | undefined;
     notes: string | undefined;
     dateTimeOrdered: moment.Moment | undefined;
+  status: any;
+  deliveryLocation: string;
 
     constructor(data?: IOrderDto) {
         if (data) {

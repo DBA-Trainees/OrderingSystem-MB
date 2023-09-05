@@ -45,9 +45,6 @@ export class OrdersComponent extends PagedListingComponentBase<OrderDto> {
   ) {
     super(injector);
   }
-  editOrder( id): void {
-    this.showEditOrderModal(id);
-  }
   
   protected list(
     request: PagedOrdersRequestDto,
@@ -90,25 +87,6 @@ export class OrdersComponent extends PagedListingComponentBase<OrderDto> {
         }
       }
     );
-  }
-
-  private showEditOrderModal(id?: number): void{
-    let EditOrderModal: BsModalRef;
-
-    EditOrderModal = this._modalService.show(
-      AddToCartDetailsComponent  ,
-        {
-          class: 'modal-lg',
-          initialState: {
-            id: id,
-          },
-        }
-      );
-    
-    
-    EditOrderModal.content.onSave.subscribe(() =>{
-      this.refresh();
-    })
   }
 
 

@@ -132,12 +132,13 @@ export class CustomerCartComponent extends PagedListingComponentBase<OrderDto> {
       }
     );
   }
+
   
   updateCart(order: OrderDto): void {
     this.calculateTotalPrice();
     this.calculateSubtotal();
     this._orderService.update(order).subscribe(() => {
-      this.notify.info(this.l("Changes are Updated Successfully"));
+     
     });
   }
 

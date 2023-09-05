@@ -1,16 +1,16 @@
 <div [@routerTransition]>
     <section class="content-header" >
-        <nav class="navbar navbar-light justify-content-between" style="  background-image: linear-gradient(rgb(10, 10, 10) , rgb(133, 50, 50));">
-            <a class="food text-white" >Food</a>
+        <nav class="navbar navbar-light justify-content-between" style="  background-image: linear-gradient(to right, #B2FEFA     0%, #0ED2F7    100%);">
+            <div class="food " >Food</div>
             <form class="inline">
             <div class="col-12 text-right"style="font-size:20px"  >
                 <a id="btun"
                 href="javascript:;" 
                 class="btn btn-md my-2 my-sm-0 " 
                 (click)="createFood()" >
-                    <i class="fa fa-plus-circle " style="font-size:36px"  ></i> 
+                    <i class="fa fa-plus-circle " style="font-size:30px"  ></i> 
                 </a>
-                <label class="cname text-white">{{"Create"|localize}}</label>
+                <label class="cname ">{{"Add Food"|localize}}</label>
             </div>
             </form>
           </nav>
@@ -18,7 +18,7 @@
     <section class="content px-2">
         <div class="container-fluid">
             <div class="card" id="div3">
-                <div class="card-header"  style=" background-image: linear-gradient(to right, rgb(10, 10, 10) , rgb(133, 50, 50));">
+                <div class="card-header"  style="  background-image: linear-gradient(to left, #007991    0%, #56CCF2    100%);">
                     <div class="row">
                         <div class="col-md-6">&emsp;</div>
                         <div class="col-md-6">
@@ -99,14 +99,14 @@
                 </div>
             </div>
         </div>
-        <div class="card-footer table-card-footer bg-light border-top" style="background-color: rgb(249, 74, 71); background-image: linear-gradient(  rgb(133, 50, 50),rgb(10, 10, 10)); ">
+        <div class="card-footer table-card-footer bg-light border-top" style="  background-image: linear-gradient(to bottom, #B2FEFA     0%, #0ED2F7    100%);">
             <div class="row">
                 <div class="col-sm-4 col-12 text-sm-left text-center">
                     <button class="btn btn-secondary" (click)="refresh()">
                         <i class="fas fa-redo-alt"></i>
                     </button>
                 </div>
-                <div class="col-sm-4 col-12 text-center text-white">
+                <div class="col-sm-4 col-12 text-center ">
                     <strong>{{  totalItems }}</strong> 
                      <p>Total Items</p>
                     

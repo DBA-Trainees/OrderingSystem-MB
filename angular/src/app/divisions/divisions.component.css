@@ -8,7 +8,7 @@
    
   }
 
-  a.division{
+  div.division{
     font-size: 35px;
     font-family: Garamond;
   }
@@ -41,5 +41,3 @@
   position: relative;
   right: auto;
 }
-   
- 

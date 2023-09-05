@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit } from "@angular/core";
+import { Component, Injector, OnInit, SimpleChanges} from "@angular/core";
 import {
   PagedListingComponentBase,
   PagedRequestDto,
@@ -12,15 +12,11 @@ class PagedOrdersRequestDto extends PagedRequestDto {
   isActive: boolean | null;
 }
 
-class SalesData {
-  dateTimeOrdered: string;
-  totalAmount: number;
-}
-
 
 @Component({
   selector: "customer-dashboard.componentt",
   templateUrl: "customer-dashboard.component.html",
+  styleUrls: ['./customer-dashboard.component.css']
 })
 export class CustomerDashboardComponent extends PagedListingComponentBase<OrderDto> {
   protected delete(entity: OrderDto): void {
@@ -29,14 +25,17 @@ export class CustomerDashboardComponent extends PagedListingComponentBase<OrderD
   orders: OrderDto[] = [];
   keyword = "";
   isActive: boolean | null;
-  workingDays: Date[] = [];
-  totalSales: number = 0;
   selectedFiltered: "day" | "month" | "year" = "year";
-  totalSalesForSelectedDay: number = 0;
-  salesData: SalesData[] =[];
   customer: CustomerDto = new CustomerDto();
   customers:CustomerDto[]=[];
   id:number;
+
+  overallTotalPrice: number = 0;
+  total: number;
+  shippingCost: number=10;
+  overallSub:number=0;
+  reminder:string;
+  
 
   constructor(
     injector: Injector,
@@ -44,6 +43,38 @@ export class CustomerDashboardComponent extends PagedListingComponentBase<OrderD
     private _customerService:CustomerServiceProxy
   ) {
     super(injector);
+  }
+
+  calculateTotalPrice(): void {
+    const subtotal = this.orders.reduce((total, order) => {
+      return total + this.individualPrice(order);
+    }, 0);
+    this.overallTotalPrice = subtotal + this.shippingCost;
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.orders) {
+      this.calculateTotalPrice();
+    }
+  }
+  individualPrice(order: OrderDto): number {
+    let updatedPrice = order.food?.price;
+    return updatedPrice * order.quantity;
+  }
+
+  calculateDiscountedPrice(): number {
+    const discountAmount = this.overallTotalPrice * 0.10; // 10% discount  
+    // Calculate the discounted price by subtracting the discount amount
+    const discountedPrice = this.overallTotalPrice - discountAmount;
+    return discountedPrice;
+  }
+  calculateSavings(): number {
+    // Calculate the discount as 10% of the overall total price
+    const discountAmount = this.overallTotalPrice * 0.10; // 10% discount
+    // Calculate the discounted price by subtracting the discount amount
+    const discountedPrice = this.overallTotalPrice - discountAmount;
+    // Calculate and return the savings
+    const savings = this.overallTotalPrice - discountedPrice;
+    return savings;
   }
 
   protected list(
@@ -55,7 +86,7 @@ export class CustomerDashboardComponent extends PagedListingComponentBase<OrderD
     request.isActive = this.isActive;
 
     this._orderService
-      .getAll(
+      .getAllOrderWithFoodAndCustomers(
         request.keyword,
         request.isActive,
         request.skipCount,
@@ -64,44 +95,17 @@ export class CustomerDashboardComponent extends PagedListingComponentBase<OrderD
       .pipe(
         finalize(() => {
           finishedCallback();
+          this.calculateTotalPrice();
+         
+         
         })
       )
       .subscribe((result: OrderDtoPagedResultDto) => {
         this.orders = result.items;
         this.showPaging(result, pageNumber);
       });
-
-      this._customerService.getAllCustomer().subscribe((res)=>{
-        this.customers=res
-      });
   }
 
 
-
-  dateFilter() {
-    const today = new Date();
-    let startDate: Date, endDate: Date;
-
-    switch (this.selectedFiltered) {
-      case "day":
-        startDate = moment(today).startOf("month").toDate();
-        endDate = moment(today).endOf("month").toDate();
-      
-        break;
-      case 'month':
-        startDate = moment(today).startOf('year').toDate();
-        endDate = today;
-       
-     
-        break;
-      case 'year':
-        startDate = moment(today).startOf('year').toDate();
-        endDate = today;
-      
-      
-        break;
-    }
-  }
-  
 
 }

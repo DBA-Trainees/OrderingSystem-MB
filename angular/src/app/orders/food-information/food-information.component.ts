@@ -25,6 +25,7 @@ enum fsize{
 })
 export class FoodListInformationComponent extends AppComponentBase implements OnInit {
 
+
   saving =false;
   orders: OrderDto[]=[];
   order=new OrderDto();
@@ -43,6 +44,7 @@ export class FoodListInformationComponent extends AppComponentBase implements On
   sizes: string[];
   availability:boolean|null;
   optCategories: number = null;
+
 
   @Output() onSave = new EventEmitter<any>();
   refresh: any;
@@ -97,9 +99,10 @@ getAllFoods(): void {
       this.orderCreate.foodId = availableFoods.id;
       this.orderCreate.quantity = this.foodQty;
       this.orderCreate.totalFoodAmount = availableFoods.price * this.foodQty;
-      this.orderCreate.dateTimeOrdered =moment(this.date);
+      this.orderCreate.dateTimeOrdered =moment();
       this.orderCreate.size = availableFoods.size;
       this.food.categoryId=this.optCategories;
+    
   
       this._orderService.create(this. orderCreate).subscribe((res) => {
         this.notify.info(this.l("SavedSuccessfully"));

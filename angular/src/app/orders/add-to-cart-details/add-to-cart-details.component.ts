@@ -29,7 +29,6 @@ date=new Date();
 foodQty:number=1;
 reminder:string;
 
-
 @Output() onSave = new EventEmitter<any>();
 
 
@@ -60,10 +59,7 @@ updateQuantity(newQuantity: number) {
   // Check if the new quantity is within the allowed range (e.g., minimum of 1)
   if (newQuantity >= 1) {
     this.foodQty = newQuantity;
-  } else {
-    // Optionally, handledinvalid input here, pag error
-    console.error('Invalid quantity input.');
-  }
+  } 
 }
 
 
@@ -72,10 +68,12 @@ updateQuantity(newQuantity: number) {
 cartButton(availableFoods: number): void {
   this.orders.foodId = availableFoods;
   this.orders.totalFoodAmount = this.food.price * this.foodQty;
-  this.orders.dateTimeOrdered =moment(this.date);
+  this.orders.dateTimeOrdered =moment();
   this.orders.size = this.food.size;
   this.orders.notes=this.reminder;
   this.orders.quantity = this.foodQty;
+ 
+
 
   
 

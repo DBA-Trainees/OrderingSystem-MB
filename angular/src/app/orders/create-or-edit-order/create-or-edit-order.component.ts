@@ -21,7 +21,7 @@ food: FoodDto[]=[];
 id:number;
 optCustomer:number=null;
 optFoods:number=null;
-date:DatePipe=new DatePipe('en-us');
+date:DatePipe=new DatePipe('ph');
 
 
 
