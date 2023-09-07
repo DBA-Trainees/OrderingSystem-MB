@@ -1808,6 +1808,9 @@ namespace OrderSystem.Migrations
                     b.Property<long?>("CreatorUserId")
                         .HasColumnType("bigint");
 
+                    b.Property<int?>("CustomerId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("DateTimeOrdered")
                         .HasColumnType("datetime2");
 
@@ -1838,10 +1841,15 @@ namespace OrderSystem.Migrations
                     b.Property<string>("Size")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<double>("TotalFoodAmount")
                         .HasColumnType("float");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
 
                     b.HasIndex("FoodId");
 
@@ -2162,9 +2170,15 @@ namespace OrderSystem.Migrations
 
             modelBuilder.Entity("OrderSystem.Entities.Order", b =>
                 {
+                    b.HasOne("OrderSystem.Entities.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId");
+
                     b.HasOne("OrderSystem.Entities.Food", "Food")
                         .WithMany()
                         .HasForeignKey("FoodId");
+
+                    b.Navigation("Customer");
 
                     b.Navigation("Food");
                 });

@@ -1,8 +1,8 @@
 
 <div [@routerTransition]>
     <section class="content-header" >
-        <nav class="navbar navbar-light justify-content-between" style="  background-image: linear-gradient(to left, #a653f9   0%, #e678f4   100%);">
-            <div class="foodtype " >Food Type</div>
+        <nav class="navbar navbar-light justify-content-between"  style="  background-image: linear-gradient(to right, rgb(78, 215, 169), rgb(57, 185, 70));">
+            <div class="logo">FOOD<span class="yellow">TYPE</span></div>
             <form class="inline">
             <div class="col-12 text-right"style="font-size:20px"  >
                 <a id="btun"
@@ -11,7 +11,7 @@
                 (click)="createType()" >
                     <i class="fa fa-plus-circle " style="font-size:30px"  ></i> 
                 </a>
-                <label class="cname ">{{"Add Type"|localize}}</label>
+                <label class="cname text-white">{{"Add Type"|localize}}</label>
             </div>
             </form>
           </nav>
@@ -19,7 +19,7 @@
     <section class="content px-2">
         <div class="container-fluid">
             <div class="card" id="div3">
-                <div class="card-header"  style="  background-image: linear-gradient(to right, #EF32D9    0%, #89FFFD   100%);">
+                <div class="card-header"  style="  background-image: linear-gradient(to right, rgb(78, 215, 169), rgb(57, 185, 70));">
                     <div class="row">
                         <div class="col-md-6">&emsp;</div>
                         <div class="col-md-6">
@@ -34,7 +34,7 @@
                                 />
                                 <button 
                                     type="button" 
-                                    class="btn bg-light" 
+                                    class="btn bg-success" 
                                     (click)="getDataPage(1)">
                                         <i class="fas fa-search" ></i>
                                     </button>
@@ -86,8 +86,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="card-footer table-card-footer bg-light border-top" style="  background-image: linear-gradient(to bottom, #EF32D9    0%, #89FFFD   100%);">
+        </div><br>
+        <div class="card-footer table-card-footer bg-light border-top"  style="  background-image: linear-gradient(to right, rgb(78, 215, 169), rgb(57, 185, 70));">
             <div class="row">
                 <div class="col-sm-4 col-12 text-sm-left text-center">
                     <button class="btn btn-secondary" (click)="refresh()">

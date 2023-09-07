@@ -15,7 +15,9 @@ namespace OrderSystem.Orders.Dto
     [AutoMapFrom(typeof(OrderDto))]
     public class CreateOrderDto : EntityDto<int>
     {
+        public int? CustomerId { get; set; }
         public int? FoodId { get; set; }
+        public string? Status { get; set; }
         public int? Quantity { get; set; }
         public double TotalFoodAmount { get; set; }
         public string? Size { get; set; }

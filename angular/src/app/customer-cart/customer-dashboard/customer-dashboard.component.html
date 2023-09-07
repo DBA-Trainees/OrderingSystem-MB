@@ -21,7 +21,7 @@
     <p>
       This section shows your expenses and quick preview of your orders!
     </p>
-  </div>
+
   
   <div class="container"  >
     <div class="box" *ngFor="let order of orders;">
@@ -32,7 +32,7 @@
         <div>
           <h2>{{order.food.name}}</h2>
           <p>This delicacies is one of your order which came from the category of {{order.food.category?.categoryName}} and your
-             chosen size of {{order.size}} 
+             chosen size is {{order.size}} 
             for the quantity of {{order.quantity}}. If you wish to modify your order kindly click the link below.
           </p> <br>
           <a href="./app/customer-cart" class="text-white" >View More >></a>
@@ -40,6 +40,8 @@
       </div>
     </div>
     </div>
+  </div>
+    <br>
 
   <div class="bottom">
     <div class="box">

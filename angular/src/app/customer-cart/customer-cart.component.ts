@@ -120,12 +120,12 @@ export class CustomerCartComponent extends PagedListingComponentBase<OrderDto> {
 
   protected delete(order: OrderDto): void {
     abp.message.confirm(
-      this.l("OrderDeleteWarningMessage", order.food.name),
+      this.l("You want to delete " + order.food.name),
       undefined,
       (result: boolean) => {
         if (result) {
           this._orderService.delete(order.id).subscribe(() => {
-            abp.notify.success(this.l("SuccessfullyDeleted"));
+            abp.notify.success(this.l(order.food.name +" Successfully Deleted"));
             this.refresh();
           });
         }
@@ -138,6 +138,7 @@ export class CustomerCartComponent extends PagedListingComponentBase<OrderDto> {
     this.calculateTotalPrice();
     this.calculateSubtotal();
     this._orderService.update(order).subscribe(() => {
+      abp.notify.warn(this.l("Details Are Successfully Updated"));
      
     });
   }
@@ -151,7 +152,7 @@ export class CustomerCartComponent extends PagedListingComponentBase<OrderDto> {
     // Check if there are orders to proceed
     if (this.orders.length === 0) {
       // Handle the case where there are no orders
-      console.error('No orders to proceed.');
+      abp.notify.error(this.l("No Order To Proceed"));
       return;
     }
     this.router.navigate(['/app/dashboard'])

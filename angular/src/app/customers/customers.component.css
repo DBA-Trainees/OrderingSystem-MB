@@ -11,17 +11,27 @@ font-size: 35px;
 font-family: Garamond;
 }
  
+.yellow {
+  color: var(--yellow);
+}
+
+.logo {
+  font-size: 3.6rem;
+  font-weight: 700;
+}
 #div3 {
       
   padding: 1rem;
   color: rgb(0, 0, 0);
-  border-width: 3px;
+  border-width: 5px;
   border-style: solid;
   border-image: 
     linear-gradient(
       to bottom, 
-      rgb(255, 0, 0), 
-      hsla(149, 89%, 65%, 0)
+      rgb(78, 215, 169), 
+      rgb(57, 185, 70)
     ) 3 200%;
    
+   
 }
+

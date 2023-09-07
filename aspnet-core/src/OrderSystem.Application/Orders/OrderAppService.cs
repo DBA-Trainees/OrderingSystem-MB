@@ -26,10 +26,10 @@ namespace OrderSystem.Orders
             _foodRepository = foodRepository;
         }
 
-        public override Task<OrderDto> CreateAsync(CreateOrderDto input)
-        {
-            return base.CreateAsync(input);
-        }
+        //public override Task<OrderDto> CreateAsync(CreateOrderDto input)
+        //{
+        //    return base.CreateAsync(input);
+        //}
 
         public override Task DeleteAsync(EntityDto<int> input)
         {
@@ -61,11 +61,46 @@ namespace OrderSystem.Orders
             return returnQuery;
 
         }
+        public async Task<OrderDto> CreateOrUpdate(OrderDto input)
+        {
+           var notexisting= ObjectMapper.Map<Order>(input);
+            var orderEx=await _orderRepository.GetAll().AsNoTracking()
+                . Where(x => x.FoodId==input.FoodId)
+                .FirstOrDefaultAsync();
+
+            try
+            {
+                if (orderEx==null) {
+                    notexisting.DateTimeOrdered =input.DateTimeOrdered?.ToLocalTime();
+                    await _orderRepository.InsertAsync(notexisting);
+                    return ObjectMapper.Map<OrderDto>(notexisting);
+                }
+                else
+                {
+                    orderEx.Quantity += input.Quantity;
+                    orderEx.DateTimeOrdered = input.DateTimeOrdered?.ToLocalTime();
+                    await _orderRepository.UpdateAsync(orderEx);
+                    return ObjectMapper.Map<OrderDto>(orderEx);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        } 
+
+
+
+
+
+
 
         public async Task<PagedResultDto<OrderDto>> GetAllOrderWithFoodAndCustomers(PagedOrderResultRequestDto input)
         {
             var order= await _orderRepository
                 .GetAll()
+                .Include(x=> x.Customer)
                 .Include(x => x.Food)
                 .ThenInclude(x=>x.Category)
                 .Select(x =>ObjectMapper.Map<OrderDto>(x))
@@ -73,7 +108,20 @@ namespace OrderSystem.Orders
 
             return new PagedResultDto<OrderDto>(order.Count,order);
         }
+      
 
-       
+        public async Task<Order> GetAllStatus(int id)
+        {
+            var orderStatus = await _orderRepository.GetAll()
+                .Include(x => x.Food)
+                .Where(x => x.Food.Id == id)
+                .Select(x => ObjectMapper.Map<Order>(x))
+                .FirstOrDefaultAsync();
+
+            return orderStatus;
+
+        }
+
+
     }
 }

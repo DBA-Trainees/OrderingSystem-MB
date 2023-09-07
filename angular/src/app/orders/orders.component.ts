@@ -29,23 +29,16 @@ class PagedOrdersRequestDto extends PagedRequestDto {
 })
 export class OrdersComponent extends PagedListingComponentBase<OrderDto> {
   orders: OrderDto[] = [];
-  keyword = "";
+  keyword: string = "";
   isActive: boolean | null;
-  saving=false;
-  order= new OrderDto;
- 
-  @Output() onSave = new EventEmitter<any>();
 
   constructor(
     injector: Injector,
-    private _orderService: OrderServiceProxy,
-    private _modalService: BsModalService,
-    private router:Router,
-    public BsModalRef:BsModalRef,
+    private _orderService: OrderServiceProxy
   ) {
     super(injector);
   }
-  
+
   protected list(
     request: PagedOrdersRequestDto,
     pageNumber: number,
@@ -56,7 +49,7 @@ export class OrdersComponent extends PagedListingComponentBase<OrderDto> {
 
     this._orderService
       .getAllOrderWithFoodAndCustomers(
-        request.keyword,                                            
+        request.keyword,
         request.isActive,
         request.skipCount,
         request.maxResultCount
@@ -71,12 +64,10 @@ export class OrdersComponent extends PagedListingComponentBase<OrderDto> {
         this.showPaging(result, pageNumber);
       });
   }
-  
-  
 
   protected delete(order: OrderDto): void {
     abp.message.confirm(
-      this.l("OrdernDeleteWarningMessage"),
+      this.l("OrdernDeleteWarningMessage", order.food?.name),
       undefined,
       (result: boolean) => {
         if (result) {
@@ -88,7 +79,4 @@ export class OrdersComponent extends PagedListingComponentBase<OrderDto> {
       }
     );
   }
-
-
-
 }

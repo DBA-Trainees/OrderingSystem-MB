@@ -23,11 +23,10 @@ orders = new OrderDto;
 saving=false;
 id:number;
 foodSizes=[fsize.Small,fsize.Medium,fsize.Large];
-// sizeSelected:string;
-//orderCreate= new CreateOrderDto();
 date=new Date();
 foodQty:number=1;
 reminder:string;
+orderStatus:string;
 
 @Output() onSave = new EventEmitter<any>();
 
@@ -47,12 +46,7 @@ ngOnInit(): void {
         this.food=res;
       });
     }
-    // if (parseInt(sessionStorage.getItem('id'))) {
-    //   this._foodService.get(parseInt(sessionStorage.getItem('id'))).subscribe((result) => {
-    //     this.food = result;
-    //   });
-    // }
-  
+ 
 }
 
 updateQuantity(newQuantity: number) {
@@ -72,11 +66,8 @@ cartButton(availableFoods: number): void {
   this.orders.size = this.food.size;
   this.orders.notes=this.reminder;
   this.orders.quantity = this.foodQty;
+  this.orders.status=this.orderStatus;
  
-
-
-  
-
   this._orderService.create(this. orders).subscribe((res) => {
     this.notify.info(this.l("SavedSuccessfully"));
     this.onSave.emit();

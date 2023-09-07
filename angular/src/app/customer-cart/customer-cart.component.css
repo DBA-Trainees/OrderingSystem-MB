@@ -127,7 +127,7 @@ li.subtotal:before {
 }
 
 .item {
-  width: 55%;
+  width: 45%;
 }
 
 .price,
@@ -168,10 +168,12 @@ li.subtotal:before {
   border-bottom: 1px solid #ccc;
   padding: 1rem 0;
   position: relative;
+  background: radial-gradient(328px at 2.9% 15%, rgb(191, 224, 251) 0%, rgb(232, 233, 251) 25.8%, rgb(252, 239, 250) 50.8%, rgb(234, 251, 251) 77.6%, rgb(240, 251, 244) 100.7%);
 }
 
 .product-image {
-  width: 35%;
+  width: 30%;
+  margin-left: 10px;
 }
 
 .product-details {
@@ -205,7 +207,7 @@ aside {
 }
 
 .summary {
-  background-color: #eee;
+  background: radial-gradient(circle at 10% 20%, rgb(220, 217, 249) 0%, rgb(172, 224, 217) 89.8%);
   border: 1px solid #aaa;
   padding: 1rem;
   position: relative;
@@ -216,7 +218,7 @@ aside {
 }
 
 .summary-total-items {
-  color: #666;
+  color: #000000;
   font-size: 0.875rem;
   text-align: center;
 }
@@ -361,3 +363,26 @@ aside {
   width: 150px; /* Adjust the width as needed */
   height: 40px; 
 }
+
+
+
+.yellow {
+  color: var(--yellow);
+}
+
+.logo {
+  font-size: 3.6rem;
+  font-weight: 700;
+
+}
+
+.navbar{
+  justify-content: left;
+}
+
+
+
+
+
+
+

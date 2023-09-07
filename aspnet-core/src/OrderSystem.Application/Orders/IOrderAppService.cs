@@ -14,7 +14,9 @@ namespace OrderSystem.Orders
     {
         Task<List<OrderDto>> GetAllOrders();
        Task<PagedResultDto<OrderDto>> GetAllOrderWithFoodAndCustomers(PagedOrderResultRequestDto input);
+        
+        Task<Order> GetAllStatus(int id);
 
-       
+
     }
 }

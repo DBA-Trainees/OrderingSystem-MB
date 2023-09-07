@@ -18,6 +18,7 @@ import { FoodListInformationComponent } from './orders/food-information/food-inf
 import { CustomerCartComponent } from './customer-cart/customer-cart.component';
 import { CustomerDashboardComponent } from './customer-cart/customer-dashboard/customer-dashboard.component';
 import { AddToCartDetailsComponent } from './orders/add-to-cart-details/add-to-cart-details.component';
+import { VendorDashboardComponent } from './orderVendor/vendor-dashboard/vendor-dashboard.component';
 @NgModule({
     imports: [
         RouterModule.forChild([
@@ -37,13 +38,13 @@ import { AddToCartDetailsComponent } from './orders/add-to-cart-details/add-to-c
 
                     { path: 'categories', component: CategoriesComponent, data: { permission:'Pages.Categories'} ,canActivate: [AppRouteGuard] },
                     { path: 'foodtypes', component: FoodTypeComponent, data: { permission: 'Pages.FoodTypes'}, canActivate: [AppRouteGuard] },
-                    { path: 'foods', component: FoodsComponent,canActivate: [AppRouteGuard] },
-                    { path: 'orders', component: OrdersComponent, canActivate: [AppRouteGuard] },
+                    { path: 'foods', component: FoodsComponent, data: { permission: 'Pages.Foods'},canActivate: [AppRouteGuard] },
+                    { path: 'orders', component: OrdersComponent, data: { permission: 'Pages.Orders'}, canActivate: [AppRouteGuard] },
                     { path: 'foodList', component: FoodListInformationComponent,canActivate: [AppRouteGuard] },
                     { path: 'customer-cart', component: CustomerCartComponent, canActivate: [AppRouteGuard] },
                     { path: 'dashboard', component: CustomerDashboardComponent, canActivate: [AppRouteGuard] },
-                    {path: 'foodList/FoodDetails', component: AddToCartDetailsComponent, canActivate: [AppRouteGuard],}
-
+                    {path: 'foodList/FoodDetails', component: AddToCartDetailsComponent, canActivate: [AppRouteGuard],},
+                    { path: 'vendorDashboard', component: VendorDashboardComponent, canActivate: [AppRouteGuard] },
 
 
 

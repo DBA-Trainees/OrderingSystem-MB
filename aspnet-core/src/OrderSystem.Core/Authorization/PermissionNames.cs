@@ -19,9 +19,9 @@
 
         public const string Pages_FoodTypes = "Pages.FoodTypes";
 
-        //public const string Pages_Foods = "Pages.Foods";
+        public const string Pages_Foods = "Pages.Foods";
 
-        //public const string Pages_Orders = "Pages.Orders";
+        public const string Pages_Orders = "Pages.Orders";
 
         //public const string Pages_FoodList = "Pages.FoodList";
     }

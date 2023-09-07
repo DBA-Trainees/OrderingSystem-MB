@@ -17,8 +17,8 @@ namespace OrderSystem.Authorization
             context.CreatePermission(PermissionNames.Pages_Customers, L("Customers"));
             context.CreatePermission(PermissionNames.Pages_Categories, L("Category"));
             context.CreatePermission(PermissionNames.Pages_FoodTypes, L("FoodTypes"));
-            //context.CreatePermission(PermissionNames.Pages_Foods, L("Foods"));
-            //context.CreatePermission(PermissionNames.Pages_Orders, L("Orders"));
+            context.CreatePermission(PermissionNames.Pages_Foods, L("Foods"));
+            context.CreatePermission(PermissionNames.Pages_Orders, L("Orders"));
             //context.CreatePermission(PermissionNames.Pages_FoodList, L("FoodList"));
 
 

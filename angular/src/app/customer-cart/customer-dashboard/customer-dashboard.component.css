@@ -66,7 +66,7 @@ section {
   right: 0;
   padding: 1rem 7%;
   height: 8rem;
-  background: var(--white);
+  background-image: linear-gradient(to right, rgb(78, 215, 169), rgb(57, 185, 70));
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -145,7 +145,7 @@ section {
   color: var(--white);
   font-weight: 500;
   border-radius: 0.5rem;
-  background-color: var(--yellow);
+  background-color: rgb(21, 172, 21);
   padding: 1rem 1.5rem;
   margin-top: 1rem;
   transition: var(--transition);
@@ -203,12 +203,12 @@ section.services {
 }
 .services .bottom {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
   gap: 3rem;
 }
 .services .bottom {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
   gap: 3rem;
 }
 
@@ -216,22 +216,27 @@ section.services {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 3rem 2rem;
+  padding: 1rem 1rem;
   border-radius: 0.5rem;
 }
 
+
+
+
+
 .services .bottom .box:hover {
-  background-color: var(--white);
+ background-color: #faa499;
+ background-image: linear-gradient(to right, rgb(78, 215, 169), rgb(57, 185, 70));
   box-shadow: var(--box-shadow);
 }
 
 .services .bottom .box img {
-  height: 6rem;
+  height: 4rem;
 }
 
 .services .bottom .box h4 {
-  font-size: 2.4rem;
-  margin: 1.5rem 0;
+  font-size: 1.2rem;
+  margin: 1.2rem 0;
 }
 
 .services .bottom .box p {
@@ -314,24 +319,11 @@ section.about {
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*image gallery*/
 
 .container {
   position: relative;
-  width: 1160px;
+  width: 1150px;
   display: flex;
   justify-content: left;
   flex-wrap: wrap;
@@ -344,8 +336,8 @@ section.about {
 }
 .container .box {
   position: relative;
-  width: 275px;
-  height: 275px;
+  width: 260px;
+  height: 260px;
   background: #000;
   transition: 0.5s;
   transform-style: preserve-3d;
@@ -378,7 +370,7 @@ section.about {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(180deg,rgb(160, 3, 3),#000);
+  background: linear-gradient(180deg,#EFE9F4,#5078F2);
   z-index: 1;
   opacity: 0;
   transition: 0.5s;
