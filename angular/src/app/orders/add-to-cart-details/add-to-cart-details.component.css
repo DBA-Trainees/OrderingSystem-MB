@@ -24,7 +24,8 @@
   
   .button-arounder {
     position: absolute;
-    top:60%;
+    top:65%;
+    left:1px;
     background-color:#ffffff;
     color: #000000;
     border:none;
@@ -48,13 +49,14 @@
 
    .button-cancel {
     position: absolute;
-    top:60%;
+    top:65%;
     right: 1%;
     border:none;
     border-radius:10px;
     box-shadow: 0px 0px 2px 2px rgb(0,0,0);
     width: 40%;
     height: 5vh;
+    left:110px;
 
   }
 
@@ -95,7 +97,7 @@
 .page1 {
   position: relative;
   width: 700px;
-  height: 500px;
+  height: 550px;
   margin: 0 auto;
   margin-top: -10px
 }
@@ -103,36 +105,62 @@
 .body-wrap {
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 98%;
   background: #2D3A4B;
   color: #fff;
-  box-shadow: 0px 50px 100px rgba(0, 0, 0, 0.5)
+  box-shadow: 0px 50px 100px rgba(0, 0, 0, 0.5);
+  top:-35px
 }
 
 .image{
   position: absolute;
-  top:-450px;
+  top:-520px;
   left: -8%;
   right:50%;
   width: 400px;
   height: 400px;
 }
 
-.bname{
-  position:absolute ;
-  top:-450px;
-  left: 150%;
-
-}
 
 
 .bodyname{
   position:absolute ;
-  top:-470px;
+  top:-525px;
   left: 65%;
 
 }
 .notes{
   border-radius: 5%;
   width:130px;
+  left:1px;
+  position: absolute;
+  top:2px
+}
+
+.quantity{
+  left:35px;
+  position: absolute;
+ margin-bottom: 5px;
+ width: 70px;
+
+}
+
+.size{
+  left:1px;
+  position: absolute;
+ margin-bottom: 5px;
+ width:80px;
+}
+.max-quantity-message{
+  color:red;
+}
+.minus{
+  left: -3px;
+  position: absolute;
+}
+.plus{
+  left: 110px;
+  position: absolute;
+ 
+
 }

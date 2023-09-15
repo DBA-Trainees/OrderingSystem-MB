@@ -28,6 +28,7 @@ namespace OrderSystem.Orders.Dto
         public string? Notes { get; set; }
         public DateTime? DateTimeOrdered { get; set; }
 
+        public int totalSales { get; set; }
     }
 }
 

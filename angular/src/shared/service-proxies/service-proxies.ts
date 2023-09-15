@@ -2640,6 +2640,73 @@ export class OrderServiceProxy {
     }
 
     /**
+     * @param year (optional) 
+     * @param month (optional) 
+     * @param day (optional) 
+     * @return Success
+     */
+    getTotalSalesByDate(year: number | undefined, month: number | undefined, day: number | undefined): Observable<number> {
+        let url_ = this.baseUrl + "/api/services/app/Order/GetTotalSalesByDate?";
+        if (year === null)
+            throw new Error("The parameter 'year' cannot be null.");
+        else if (year !== undefined)
+            url_ += "year=" + encodeURIComponent("" + year) + "&";
+        if (month === null)
+            throw new Error("The parameter 'month' cannot be null.");
+        else if (month !== undefined)
+            url_ += "month=" + encodeURIComponent("" + month) + "&";
+        if (day === null)
+            throw new Error("The parameter 'day' cannot be null.");
+        else if (day !== undefined)
+            url_ += "day=" + encodeURIComponent("" + day) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetTotalSalesByDate(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetTotalSalesByDate(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<number>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<number>;
+        }));
+    }
+
+    protected processGetTotalSalesByDate(response: HttpResponseBase): Observable<number> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+                result200 = resultData200 !== undefined ? resultData200 : <any>null;
+    
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
      * @param body (optional) 
      * @return Success
      */
@@ -4952,6 +5019,7 @@ export class CreateFoodDto implements ICreateFoodDto {
     price: number;
     categoryId: number;
     foodTypeId: number;
+    foodId: number;
 
     constructor(data?: ICreateFoodDto) {
         if (data) {
@@ -4974,6 +5042,7 @@ export class CreateFoodDto implements ICreateFoodDto {
             this.price = _data["price"];
             this.categoryId = _data["categoryId"];
             this.foodTypeId = _data["foodTypeId"];
+            this.foodId = _data["foodId"];
         }
     }
 
@@ -4996,6 +5065,7 @@ export class CreateFoodDto implements ICreateFoodDto {
         data["price"] = this.price;
         data["categoryId"] = this.categoryId;
         data["foodTypeId"] = this.foodTypeId;
+        data["foodId"] = this.foodId;
         return data;
     }
 
@@ -5018,6 +5088,7 @@ export interface ICreateFoodDto {
     price: number;
     categoryId: number;
     foodTypeId: number;
+    foodId: number;
 }
 
 export class CreateFoodTypeDto implements ICreateFoodTypeDto {
@@ -5073,6 +5144,7 @@ export class CreateOrderDto implements ICreateOrderDto {
     size: string | undefined;
     notes: string | undefined;
     dateTimeOrdered: moment.Moment | undefined;
+    totalSales: number;
 
     constructor(data?: ICreateOrderDto) {
         if (data) {
@@ -5094,6 +5166,7 @@ export class CreateOrderDto implements ICreateOrderDto {
             this.size = _data["size"];
             this.notes = _data["notes"];
             this.dateTimeOrdered = _data["dateTimeOrdered"] ? moment(_data["dateTimeOrdered"].toString()) : <any>undefined;
+            this.totalSales = _data["totalSales"];
         }
     }
 
@@ -5115,6 +5188,7 @@ export class CreateOrderDto implements ICreateOrderDto {
         data["size"] = this.size;
         data["notes"] = this.notes;
         data["dateTimeOrdered"] = this.dateTimeOrdered ? this.dateTimeOrdered.toISOString() : <any>undefined;
+        data["totalSales"] = this.totalSales;
         return data;
     }
 
@@ -5136,6 +5210,7 @@ export interface ICreateOrderDto {
     size: string | undefined;
     notes: string | undefined;
     dateTimeOrdered: moment.Moment | undefined;
+    totalSales: number;
 }
 
 export class CreateRoleDto implements ICreateRoleDto {
@@ -6046,6 +6121,8 @@ export class FoodDto implements IFoodDto {
     category: CategoriesDto;
     foodTypeId: number;
     foodType: FoodTypeDto;
+    originalQuantity: number;
+    foodId: number;
 
     constructor(data?: IFoodDto) {
         if (data) {
@@ -6071,6 +6148,8 @@ export class FoodDto implements IFoodDto {
             this.category = _data["category"] ? CategoriesDto.fromJS(_data["category"]) : <any>undefined;
             this.foodTypeId = _data["foodTypeId"];
             this.foodType = _data["foodType"] ? FoodTypeDto.fromJS(_data["foodType"]) : <any>undefined;
+            this.originalQuantity = _data["originalQuantity"];
+            this.foodId = _data["foodId"];
         }
     }
 
@@ -6096,6 +6175,8 @@ export class FoodDto implements IFoodDto {
         data["category"] = this.category ? this.category.toJSON() : <any>undefined;
         data["foodTypeId"] = this.foodTypeId;
         data["foodType"] = this.foodType ? this.foodType.toJSON() : <any>undefined;
+        data["originalQuantity"] = this.originalQuantity;
+        data["foodId"] = this.foodId;
         return data;
     }
 
@@ -6121,6 +6202,8 @@ export interface IFoodDto {
     category: CategoriesDto;
     foodTypeId: number;
     foodType: FoodTypeDto;
+    originalQuantity: number;
+    foodId: number;
 }
 
 export class FoodDtoPagedResultDto implements IFoodDtoPagedResultDto {
@@ -6625,6 +6708,7 @@ export class Order implements IOrder {
     size: string | undefined;
     notes: string | undefined;
     dateTimeOrdered: moment.Moment | undefined;
+    totalSales: number;
 
     constructor(data?: IOrder) {
         if (data) {
@@ -6655,6 +6739,7 @@ export class Order implements IOrder {
             this.size = _data["size"];
             this.notes = _data["notes"];
             this.dateTimeOrdered = _data["dateTimeOrdered"] ? moment(_data["dateTimeOrdered"].toString()) : <any>undefined;
+            this.totalSales = _data["totalSales"];
         }
     }
 
@@ -6685,6 +6770,7 @@ export class Order implements IOrder {
         data["size"] = this.size;
         data["notes"] = this.notes;
         data["dateTimeOrdered"] = this.dateTimeOrdered ? this.dateTimeOrdered.toISOString() : <any>undefined;
+        data["totalSales"] = this.totalSales;
         return data;
     }
 
@@ -6715,9 +6801,14 @@ export interface IOrder {
     size: string | undefined;
     notes: string | undefined;
     dateTimeOrdered: moment.Moment | undefined;
+    totalSales: number;
 }
 
 export class OrderDto implements IOrderDto {
+    orderDate: string | number | Date;
+    reduce(arg0: (total: any, order: any) => any, arg1: number) {
+      throw new Error('Method not implemented.');
+    }
     id: number;
     customerId: number | undefined;
     customer: CustomerDto;
@@ -6729,6 +6820,7 @@ export class OrderDto implements IOrderDto {
     size: string | undefined;
     notes: string | undefined;
     dateTimeOrdered: moment.Moment | undefined;
+    totalSales: number;
 
     constructor(data?: IOrderDto) {
         if (data) {
@@ -6752,6 +6844,7 @@ export class OrderDto implements IOrderDto {
             this.size = _data["size"];
             this.notes = _data["notes"];
             this.dateTimeOrdered = _data["dateTimeOrdered"] ? moment(_data["dateTimeOrdered"].toString()) : <any>undefined;
+            this.totalSales = _data["totalSales"];
         }
     }
 
@@ -6775,6 +6868,7 @@ export class OrderDto implements IOrderDto {
         data["size"] = this.size;
         data["notes"] = this.notes;
         data["dateTimeOrdered"] = this.dateTimeOrdered ? this.dateTimeOrdered.toISOString() : <any>undefined;
+        data["totalSales"] = this.totalSales;
         return data;
     }
 
@@ -6798,6 +6892,7 @@ export interface IOrderDto {
     size: string | undefined;
     notes: string | undefined;
     dateTimeOrdered: moment.Moment | undefined;
+    totalSales: number;
 }
 
 export class OrderDtoPagedResultDto implements IOrderDtoPagedResultDto {

@@ -1,7 +1,7 @@
 <div [@routerTransition]>
     <section class="content-header" >
-        <nav class="navbar navbar-light justify-content-between"style="  background-image: linear-gradient(to right, rgb(78, 215, 169), rgb(57, 185, 70));">
-            <div class="logo">FO<span class="yellow">OD</span></div>
+        <nav class="navbar navbar-light justify-content-between" >
+            <h1>Foods</h1>
             <form class="inline">
             <div class="col-12 text-right"style="font-size:20px"  >
                 <a id="btun"
@@ -10,7 +10,7 @@
                 (click)="createFood()" >
                     <i class="fa fa-plus-circle " style="font-size:30px"  ></i> 
                 </a>
-                <label class="cname text-white">{{"Add Food"|localize}}</label>
+                <label class="cname text-black">{{"Add Food"|localize}}</label>
             </div>
             </form>
           </nav>
@@ -18,7 +18,7 @@
     <section class="content px-2">
         <div class="container-fluid">
             <div class="card" id="div3">
-                <div class="card-header" style="  background-image: linear-gradient(to right, rgb(78, 215, 169), rgb(57, 185, 70));">
+                <div class="card-header" style="  background-image: linear-gradient(to right,#72b4ff   0%, #aeecfa 100%); ">
                     <div class="row">
                         <div class="col-md-6">&emsp;</div>
                         <div class="col-md-6">
@@ -31,12 +31,6 @@
                                 [(ngModel)]="keyword"
                                 (keyup.enter)="getDataPage(1)" 
                                 />
-                                <button 
-                                    type="button" 
-                                    class="btn bg-success" 
-                                    (click)="getDataPage(1)">
-                                        <i class="fas fa-search" ></i>
-                                    </button>
                             </div>
                         </div>
                     </div>
@@ -70,7 +64,9 @@
                                 >
                                     <td style="width: 80px;"><img  class="center" width="80" [src]="'data:' + food.imageType + ';base64,' + food.image" />   </td>
                                     <td>{{ food.name }}</td>
-                                    <td>{{food.availability?'True':'False'}}</td>
+                                    <td [ngClass]="{ 'available': food.availability, 'not-available': !food.availability }">
+                                        {{ food.availability ? 'Available' : 'Not Available' }}
+                                      </td>
                                     <td>{{ food.quantity }}</td>
                                     <td>{{ food.category?.categoryName }}</td>
                                     <td>{{ food.foodType?.foodTypeName }}</td>
@@ -79,14 +75,14 @@
                                     <td style="text-align:center">
                                         <button 
                                         type="button" 
-                                        class="btn btn-sm bg-blue"
+                                        class="btn btn-sm custom-edit"
                                         (click)="editFood(food.id)">
                                         {{'Edit'|localize}}
                                             <i class="fas fa-pencil-alt"></i>
                                         </button>
                                         <button 
                                         type="button" 
-                                        class="btn btn-md bg-danger mx-2"
+                                        class="btn btn-md custom-delete mx-2"
                                         (click)="delete(food)">
                                         {{'Delete'|localize}}
                                             <i class="fas fa-trash"></i>
@@ -100,7 +96,7 @@
             </div>
         </div>
         <br>
-        <div class="card-footer table-card-footer bg-light border-top"style="  background-image: linear-gradient(to right, rgb(78, 215, 169), rgb(57, 185, 70));">
+        <div class="card-footer table-card-footer bg-light border-top"style="  background-image: linear-gradient(to right,#72b4ff   0%, #aeecfa 100%);">
             <div class="row">
                 <div class="col-sm-4 col-12 text-sm-left text-center">
                     <button class="btn btn-secondary" (click)="refresh()">

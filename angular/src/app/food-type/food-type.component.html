@@ -1,8 +1,8 @@
 
 <div [@routerTransition]>
     <section class="content-header" >
-        <nav class="navbar navbar-light justify-content-between"  style="  background-image: linear-gradient(to right, rgb(78, 215, 169), rgb(57, 185, 70));">
-            <div class="logo">FOOD<span class="yellow">TYPE</span></div>
+        <nav class="navbar navbar-light justify-content-between" >
+            <h1>FoodType</h1>
             <form class="inline">
             <div class="col-12 text-right"style="font-size:20px"  >
                 <a id="btun"
@@ -11,15 +11,15 @@
                 (click)="createType()" >
                     <i class="fa fa-plus-circle " style="font-size:30px"  ></i> 
                 </a>
-                <label class="cname text-white">{{"Add Type"|localize}}</label>
+                <label class="cname text-black">{{"Add Type"|localize}}</label>
             </div>
             </form>
           </nav>
-    </section>
+    </section><br>
     <section class="content px-2">
         <div class="container-fluid">
             <div class="card" id="div3">
-                <div class="card-header"  style="  background-image: linear-gradient(to right, rgb(78, 215, 169), rgb(57, 185, 70));">
+                <div class="card-header" style="  background-image: linear-gradient(to right,#72b4ff   0%, #aeecfa 100%);">
                     <div class="row">
                         <div class="col-md-6">&emsp;</div>
                         <div class="col-md-6">
@@ -32,12 +32,7 @@
                                 [(ngModel)]="keyword"
                                 (keyup.enter)="getDataPage(1)" 
                                 />
-                                <button 
-                                    type="button" 
-                                    class="btn bg-success" 
-                                    (click)="getDataPage(1)">
-                                        <i class="fas fa-search" ></i>
-                                    </button>
+                              
                             </div>
                         </div>
                     </div>
@@ -67,14 +62,14 @@
                                     <td style="text-align:center">
                                         <button 
                                         type="button" 
-                                        class="btn btn-sm bg-blue"
+                                        class="btn btn-sm custom-edit"
                                         (click)="editType(foodType.id)">
                                             <i class="fas fa-pencil-alt"> </i>
                                             {{ "Edit" | localize }}
                                         </button>
                                         <button 
                                         type="button" 
-                                        class="btn btn-sm bg-danger mx-2"
+                                        class="btn btn-sm custom-delete mx-2"
                                         (click)="delete(foodType)">
                                             <i class="fas fa-trash"> </i>
                                             {{ "Delete" | localize }}
@@ -87,7 +82,7 @@
                 </div>
             </div>
         </div><br>
-        <div class="card-footer table-card-footer bg-light border-top"  style="  background-image: linear-gradient(to right, rgb(78, 215, 169), rgb(57, 185, 70));">
+        <div class="card-footer table-card-footer bg-light border-top"  style="  background-image: linear-gradient(to bottom,#72b4ff   0%, #aeecfa 100%);">
             <div class="row">
                 <div class="col-sm-4 col-12 text-sm-left text-center">
                     <button class="btn btn-secondary" (click)="refresh()">

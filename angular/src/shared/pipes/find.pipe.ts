@@ -7,11 +7,11 @@ import { Injector, Pipe, PipeTransform } from '@angular/core';
 export class SearchPipe implements PipeTransform {
 
     transform(items: any[], keyword: string, properties: string[]): any[] {
-        if (!keyword) {
+        if (!keyword) { //check code if empty
           return items;
         }
       
-        keyword = keyword.toLowerCase();
+        keyword = keyword.toLowerCase();//case sensitive filtering
       
         return items.filter(item => {
           for (const prop of properties) {

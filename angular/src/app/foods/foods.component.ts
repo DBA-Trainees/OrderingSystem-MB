@@ -63,6 +63,7 @@ export class FoodsComponent extends PagedListingComponentBase<FoodDto>  {
       .subscribe((result: FoodDtoPagedResultDto) => {
         this.foods = result.items;
         this.showPaging(result, pageNumber);
+        
       });
   }
 

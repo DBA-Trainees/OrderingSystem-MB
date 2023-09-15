@@ -1,75 +1,102 @@
-<div class="contain">
-  <header class="header">
-  <div class="logo">Wam<span class="yellow">Pipti</span></div>
-</header>
-<section class="home" id="home">
-  <div class="content">
-    <h1>Order Your Foods <span class="yellow">Easier & Faster.</span></h1>
-    <p>
-      Wampipti is a small food business delivery,
-      connecting consumers to us.
-    </p>
-    <a href="./app/foodList" class="home-btn">Go to Menu</a>
-  </div>
-  <div class="image">
-    <img src="assets/img/DBA.png" alt="" />
-  </div>
-</section>
-<section class="services" id="services">
-  <div class="top">
-    <h2><span class="yellow">Summary</span> of Your Orders</h2>
-    <p>
-      This section shows your expenses and quick preview of your orders!
-    </p>
+<div class="dashboard-river">
 
-  
-  <div class="container"  >
-    <div class="box" *ngFor="let order of orders;">
-      <div class="imgBx">
-        <img [src]="'data:image/png;base64,' + order.food.image" >
-              </div>
-      <div class="content">
-        <div>
-          <h2>{{order.food.name}}</h2>
-          <p>This delicacies is one of your order which came from the category of {{order.food.category?.categoryName}} and your
-             chosen size is {{order.size}} 
-            for the quantity of {{order.quantity}}. If you wish to modify your order kindly click the link below.
-          </p> <br>
-          <a href="./app/customer-cart" class="text-white" >View More >></a>
+  <div class="dashboard-container">
+
+    <div class="dashboard">
+
+      <div class="ui-row-1">
+
+        <div class="logo-comp">
+          <div><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 297 297" xml:space="preserve">
+              <g>
+                <path d="M48.523,73.196h18.131c5.597,0,10.137-4.536,10.137-10.134c0-5.6-4.54-10.137-10.137-10.137H48.523 c-5.599,0-10.137,4.537-10.137,10.137C38.387,68.66,42.925,73.196,48.523,73.196z" />
+                <path d="M47.628,123.657c0-5.598-4.54-10.137-10.137-10.137H19.357c-5.599,0-10.135,4.539-10.135,10.137 c0,5.597,4.536,10.135,10.135,10.135h18.134C43.088,133.792,47.628,129.254,47.628,123.657z" />
+                <path d="M277.643,95.387h-18.135c-5.597,0-10.137,4.539-10.137,10.135c0,5.601,4.54,10.137,10.137,10.137h18.135 c5.599,0,10.135-4.536,10.135-10.137C287.777,99.926,283.241,95.387,277.643,95.387z" />
+                <path d="M140.148,203.69v83.173c0,5.598,4.54,10.137,10.137,10.137c5.599,0,10.137-4.539,10.137-10.137V203.69h93.406 c5.597,0,10.137-4.539,10.137-10.136c0-5.598-4.54-10.137-10.137-10.137H227.05c3.911-8.197,5.898-17.617,5.898-28.209 c0-29.299-21.058-60.583-39.637-88.187c-5.055-7.506-9.829-14.599-13.809-21.124c-1.689-3.791-1.094-19.677,1.284-34.106 c0.487-2.938-0.344-5.942-2.271-8.212c-1.926-2.27-4.752-3.58-7.73-3.58h-40.998c-2.977,0-5.803,1.313-7.729,3.58 c-1.924,2.268-2.755,5.271-2.273,8.21c2.383,14.432,2.978,30.316,1.288,34.107c-3.984,6.527-8.759,13.619-13.813,21.126 c-18.579,27.604-39.639,58.887-39.639,88.186c0,10.592,1.987,20.012,5.902,28.209H46.745c-5.601,0-10.137,4.539-10.137,10.137 c0,5.597,4.536,10.136,10.137,10.136H140.148z M202.707,183.418H97.864c-6.701-7.003-9.968-16.27-9.968-28.209 c0-23.111,19.222-51.669,36.182-76.865c5.209-7.738,10.13-15.05,14.363-21.993c4.769-7.819,4.27-23.774,2.954-36.077h17.781 c-1.316,12.302-1.813,28.257,2.952,36.077c4.233,6.943,9.153,14.252,14.362,21.992c16.96,25.197,36.184,53.755,36.184,76.866 C212.675,167.148,209.406,176.417,202.707,183.418z" />
+              </g>
+            </svg></div>
+          <p>WAMPIPTI</p>
         </div>
       </div>
-    </div>
-    </div>
-  </div>
-    <br>
 
-  <div class="bottom">
-    <div class="box">
-      <img src="assets/img/price.png" alt="" />
-      <h4> <span>   {{ overallTotalPrice | currency : "PHP" }}</span></h4>
-      <h3>Original Price Amount</h3>
-      <small>Includes the 10 pesos shipping cost </small>
-   
-    
+      <div class="ui-row-2">
+
+        <div class="main-content">
+
+          <div class="header">
+
+            <div class="page-display">
+              <h1>Dashboard</h1>
+              <h2>Explore Your Order</h2>
+            </div>
+
+            <div class="clay-category">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+              </svg>
+              <a href="./app/foodList"> <p>Go to Menu</p> </a>  
+            </div>
+          </div>
+
+          <div class="featured-clay">
+            <div>
+              <div></div>
+
+              <div>
+                <h3> {{ overallTotalPrice | currency : "PHP" }}</h3>
+                <p>Original price amount which.</p>
+                <small>- includes the 10 pesos shipping fee.</small>
+              </div>
+            </div>
+
+            <div>
+              <div></div>
+
+              <div>
+                <h3>{{  calculateDiscountedPrice() | currency : "PHP" }}</h3>
+                <p>Discounted Price Amount</p>
+                <small> - 10% discount is applied</small>
+              </div>
+            </div>
+
+            <div>
+              <div></div>
+
+              <div>
+                <h3>{{  calculateDiscountedPrice() | currency : "PHP" }}</h3>
+                <p>Amount to Pay</p>
+                <div>---</div>
+                <h6>{{calculateSavings()|currency: "PHP" }}</h6> - saved amount
+              </div>
+            </div>
+
+          </div> <h4>Order Preview</h4>
+                      
+          <div class="container"  >
+            <div class="box" *ngFor="let order of orders;">
+              <div class="imgBx">
+                <img [src]="'data:image/png;base64,' + order.food.image" >
+                      </div>
+              <div class="content">
+                <div>
+                  <h2>{{order.food.name}}</h2>
+                  <p>This delicacies is one of your order which came from the category of {{order.food.category?.categoryName}} and your
+                    chosen size is {{order.size}} 
+                    for the quantity of {{order.quantity}}. If you wish to modify your order kindly click the link below.
+                  </p> <br>
+                  <a href="./app/customer-cart" class="text-white" >View More >></a>
+                </div>
+              </div>
+            </div>
+
+        </div>
+
+
+      </div>
+
     </div>
-    <div class="box">
-      <img src="assets/img/discount.jpg" alt="" />
-      <h4>{{  calculateDiscountedPrice() | currency : "PHP" }}</h4>
-      <h3>Discounted Price Amount</h3>
-      <small>Applying the 10% discount</small>
-    </div>
-    <div class="box">
-      <img src="assets/img/topay.png" alt="" />
-      <h4>{{  calculateDiscountedPrice() | currency : "PHP" }}</h4>
-      <h3>Amount to Pay</h3>
-    </div>
-    <div class="box">
-      <img src="assets/img/10.png" alt="" />
-      <h4>{{calculateSavings()|currency: "PHP" }}</h4>
-      <h3>Save Amount</h3>
-    </div>
+
   </div>
 
- 
-</section>
+</div>
 

@@ -35,7 +35,6 @@ export class FoodListInformationComponent extends AppComponentBase implements On
   saving =false;
   orders: OrderDto[]=[];
   order=new OrderDto;
-  // orderCreate= new CreateOrderDto();
   foods: FoodDto[]=[];
   keyword='';
   isActive:boolean|null;
@@ -51,14 +50,10 @@ export class FoodListInformationComponent extends AppComponentBase implements On
   availability:boolean|null;
   optCategories: number = null;
  
- 
-
-
-
   @Output() onSave = new EventEmitter<any>();
   refresh: any;
 
-constructor(
+  constructor(
   injector:Injector,
   private _foodService: FoodServiceProxy,  
   private _orderService:OrderServiceProxy,  
@@ -86,8 +81,6 @@ foodDetails(food:FoodDto): void{
   this.viewCartDetails(food.id)
 }
 
-  
-
 getAllFoods(): void {
   this._foodService
     .getAllFoodWithCategoryAndFoodType(
@@ -98,18 +91,15 @@ getAllFoods(): void {
     )
     .subscribe((res) => {
       this.foods = res.items;
-      
-     
+
     });
 }
 
-    cartButton(availableFoods: FoodDto): void {
+    cartButton(availableFoods: FoodDto): void { 
       
       this.order.foodId = availableFoods.id;
       this.order.quantity = this.foodQty;
       this.order.totalFoodAmount = availableFoods.price * this.foodQty;
-      // this.orderCreate.dateTimeOrdered = moment(Date.parse(myDateAndTime + "T00:00:00+0000"));
-      //this.orderCreate.dateTimeOrdered = moment(this.dateandtime)
       this.order.dateTimeOrdered=moment(this.dateandtime)
       this.order.size = availableFoods.size;
       this.food.categoryId=this.optCategories;
@@ -117,23 +107,10 @@ getAllFoods(): void {
       this._orderService.createOrUpdate(this. order).subscribe((res) => {
         this.notify.info(this.l("SavedSuccessfully"));
         this.onSave.emit();
+   
 
         this.router.navigate(["./app/customer-cart"]);
       });
-      
-    // if (this.id!=0){
-    //   this._orderService.update(this.order).subscribe(
-    //     () => {
-    //       this.notify.info(this.l(this.food.name+" "+ 'Saved Successfully'));
-    //       this.bsModalRef.hide();
-    //       this.onSave.emit();
-
-    //     },
-    //     () => {
-    //       this.saving = false;
-    //     }
-    //   );
-    // }
       
     }
     

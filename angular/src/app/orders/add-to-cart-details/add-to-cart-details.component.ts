@@ -16,7 +16,6 @@ enum fsize{
   styleUrls: ['./add-to-cart-details.component.css']
 })
 export class AddToCartDetailsComponent extends AppComponentBase implements OnInit {
-// foods: FoodDto[]=[];
 food = new FoodDto;
 order:OrderDto[]=[];
 orders = new OrderDto;
@@ -50,14 +49,23 @@ ngOnInit(): void {
 }
 
 updateQuantity(newQuantity: number) {
-  // Check if the new quantity is within the allowed range (e.g., minimum of 1)
   if (newQuantity >= 1) {
     this.foodQty = newQuantity;
-  } 
+    
+  }
 }
 
+incrementQuantity() {
+  if (this.foodQty < this.food.quantity) {
+    this.foodQty++;
+  }
+}
 
-
+decrementQuantity() {
+  if (this.foodQty > 1) {
+    this.foodQty--;
+  }
+}
 
 cartButton(availableFoods: number): void {
   this.orders.foodId = availableFoods;

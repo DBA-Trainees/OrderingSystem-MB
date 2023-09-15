@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Injector, OnInit, Output } from "@angular/core";
+import { Component, EventEmitter, Injector, OnInit, Output, SimpleChanges } from "@angular/core";
 import { appModuleAnimation } from "@shared/animations/routerTransition";
 import { AppComponentBase } from "@shared/app-component-base";
 import {
@@ -32,12 +32,63 @@ export class OrdersComponent extends PagedListingComponentBase<OrderDto> {
   keyword: string = "";
   isActive: boolean | null;
 
+  overallTotalPrice: number = 0;
+  total: number;
+  shippingCost: number=10;
+  overallSub:number=0;
+  // selectedDate: Date;
+
+
   constructor(
     injector: Injector,
     private _orderService: OrderServiceProxy
   ) {
     super(injector);
   }
+  individualPrice(order: OrderDto): number {
+    let updatedPrice = order.food?.price;
+    return updatedPrice * order.quantity;
+  }
+  calculateTotalPrice(): void {
+    const subtotal = this.orders.reduce((total, order) => {
+      return total + this.individualPrice(order);
+    }, 0);
+    this.overallTotalPrice = subtotal + this.shippingCost;
+  }
+
+  calculateDiscountedPrice(): number {
+    const discountAmount = this.overallTotalPrice * 0.10; // 10% discount  
+    // Calculate the discounted price by subtracting the discount amount
+    const discountedPrice = this.overallTotalPrice - discountAmount;
+    return discountedPrice;
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.orders) {
+      this.calculateTotalPrice();
+    }
+  }
+
+
+// // Add this method to your component
+// getTotalSalesForSelectedDate(): void {
+//   if (this.selectedDate) {
+//     const year = this.selectedDate.getFullYear();
+//     const month = this.selectedDate.getMonth() + 1; // Note: Month is zero-based
+//     const day = this.selectedDate.getDate();
+    
+//     this.calculateTotalSales(year, month, day);
+//   }
+// }
+
+// calculateTotalSales(year: number, month: number, day: number): void {
+//   // Make an API call to get the total sales for the selected date
+//   this._orderService.getTotalSalesByDate(year, month, day)
+//     .subscribe((totalSales: number) => {
+//       this.overallTotalPrice = totalSales;
+//     });
+// }
+
+
 
   protected list(
     request: PagedOrdersRequestDto,
@@ -57,6 +108,7 @@ export class OrdersComponent extends PagedListingComponentBase<OrderDto> {
       .pipe(
         finalize(() => {
           finishedCallback();
+          this.calculateTotalPrice();
         })
       )
       .subscribe((result: OrderDtoPagedResultDto) => {

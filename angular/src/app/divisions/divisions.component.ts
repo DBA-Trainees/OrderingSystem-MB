@@ -26,8 +26,6 @@ export class DivisionsComponent extends PagedListingComponentBase<DivisionDto> {
   isActive: boolean | null;
   advancedFiltersVisible = false;
 
-  //injecting proxies and http cliemt to the compomemt
-  //constructior when class is initiated 
   constructor(
     injector: Injector,
     private _divisionService: DivisionServiceProxy,
@@ -74,7 +72,7 @@ export class DivisionsComponent extends PagedListingComponentBase<DivisionDto> {
   }
 
   private showCreateOrEditDivisionModal(id?: number): void{
-    let createOrEditDivisionModal: BsModalRef;
+    let createOrEditDivisionModal: BsModalRef; 
     if(!id){
       createOrEditDivisionModal = this._modalService.show(
         CreateOrEditDivisionModalComponent,
@@ -91,7 +89,6 @@ export class DivisionsComponent extends PagedListingComponentBase<DivisionDto> {
     })
 
   }
-
 
   private showEditDivisionModal(id?: number): void{
     let editDivisionModal: BsModalRef;

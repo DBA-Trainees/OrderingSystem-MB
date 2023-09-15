@@ -19,9 +19,10 @@ namespace OrderSystem.Authorization
             context.CreatePermission(PermissionNames.Pages_FoodTypes, L("FoodTypes"));
             context.CreatePermission(PermissionNames.Pages_Foods, L("Foods"));
             context.CreatePermission(PermissionNames.Pages_Orders, L("Orders"));
-            //context.CreatePermission(PermissionNames.Pages_FoodList, L("FoodList"));
-
-
+            context.CreatePermission(PermissionNames.Pages_FoodList, L("FoodList"));
+            context.CreatePermission(PermissionNames.Pages_OrderVendor, L("OrderVendor"));
+            context.CreatePermission(PermissionNames.Pages_DashBoard, L("DashBoard"));
+            context.CreatePermission(PermissionNames.Pages_CustomerCart, L("CustomerCart"));
         }
 
         private static ILocalizableString L(string name)

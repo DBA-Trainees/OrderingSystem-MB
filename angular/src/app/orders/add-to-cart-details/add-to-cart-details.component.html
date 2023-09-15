@@ -39,7 +39,7 @@
             <label class="fs-6 text-mode pb-2 fw-700">Size</label>
                   <div class="col-sm-6 ">
                       <select 
-                      class="form-control-lg" 
+                      class="form-control size" 
                        id="foodSize"
                       name="foodSize" 
                       [(ngModel)]="food.size">
@@ -54,25 +54,30 @@
                       </option>
                        </select>
                       </div> 
-            </div>
+            </div><br> <br>
             <div class="mt-2 text-white">
               <div class="form-group required">
-                <label class="fs-6 text-mode pb-2 fw-500">Quantity </label>
-                <div class="mt-1">
-                  <div class="col-sm-6 ">
-                      <input 
-                      type="number"
-                        class="form-control"
-                        [value]="foodQty"
-                        min="1"
-                        [max]= food.quantity
-                        (input)="updateQuantity($event.target.valueAsNumber)"                                    
-                      />
-                    </div>
-                  </div>
+                <label class="fs-6 text-mode pb-2 fw-500">Quantity</label>
+                <div class="input-group">
+                  <button class="input-group-text minus" (click)="decrementQuantity()" [disabled]="foodQty === 1">-</button>
+                  <input
+                    type="number"
+                    class="form-control quantity"
+                    [value]="foodQty"
+                    min="1"
+                    [max]="food.quantity"
+                    (input)="updateQuantity($event.target.valueAsNumber)"
+                    readonly
+                  />
+                  <button class="input-group-text plus" (click)="incrementQuantity()" [disabled]="foodQty === food.quantity">+</button>
+                </div><br><br>
+                <div class="max-quantity-message mt-2" *ngIf="foodQty >= food.quantity">
+                  Maximum quantity reached!
                 </div>
               </div>
-  
+            </div>
+            
+
               <div class="fs-6 text-mode pb-2 fw-500">
                 <label class="fs-6 text-mode pb-2 fw-500 text-white">Notes </label>
                 <div class="col-sm-6">

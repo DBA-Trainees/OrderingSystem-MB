@@ -1,7 +1,7 @@
 
 
-<nav class="navbar " style="  background-image: linear-gradient(to right, rgb(78, 215, 169), rgb(57, 185, 70));">
-  <div class="logo">CA<span class="yellow">RT</span></div>
+<nav class="navbar navbar-light justify-content-center" >
+  <h3>Cart</h3> <!-- <img class="logo" src="assets/img/Blogo.png" alt="" /> -->
  
 </nav>
 <head>
@@ -14,12 +14,12 @@
 <body>
   <main>
     <div class="basket" >
-      <div class="basket-labels"  style="  background: radial-gradient(circle at 10% 20%, rgb(220, 217, 249) 0%, rgb(172, 224, 217) 89.8%); ">
+      <div class="basket-labels" style="background-color:	#CCCCFF;" >
         <ul>
-          <li class="item item-heading"><strong>Food Item</strong></li>
-          <li class="price"><strong>Individual <br> Price</strong></li>
-          <li class="quantity"><strong>Quantity</strong></li>
-          <li class="subtotal"><strong>Subtotal</strong></li>
+          <li class="item item-heading1"><strong>Food Item</strong></li>
+          <li class="price1"><strong>Individual <br> Price</strong></li>
+          <li class="quantity1"><strong>Quantity</strong></li>
+          <li class="subtotal1"><strong>Subtotal</strong></li>
         </ul>
       </div>
       <div class="basket-product"  *ngFor="let order of orders">
@@ -34,16 +34,22 @@
               <textarea type="text" class="form-control smaller-textarea" name="description" id="description"
               [(ngModel)]="order.notes" (change)="updateCart(order)">
           </textarea>
-
           </div>
         </div>
         <div class="price">{{ order.food.price | currency:'PHP'}}</div>
         <div class="quantity">
-          <input type="number"  [(ngModel)]="order.quantity"
+                  <button class="decre" (click)="decrementQuantity(this.order)" [disabled]="order.quantity === 1">-</button>
+          <input type="number"  [(ngModel)]="order.quantity" 
           [min]="1"
           [max]="order.food.quantity"
-          (change)="updateCart(order)" class="quantity-field">
+          (change)="updateCart(order)" class="quantity-field" readonly>
+          <button class="incre" (click)="incrementQuantity(order)"  [disabled]="order.quantity === order.food.quantity">+</button>
+          <br><br>
+          <div *ngIf="order.quantity === order.food.quantity" class="max-quantity-message">
+            Maximum quantity reached!
+          </div>
         </div>
+       
         <div class="subtotal">{{ individualPrice(order) | currency:'PHP'}}</div>
         <div class="remove" >
           <button (click)="delete(order)" >Remove</button>
@@ -55,7 +61,18 @@
      <!--pri essss-->
     <aside>
       <div class="summary">
-        <div class="summary-total-items"><span class="total-items"></span> <strong>Items in your Cart: {{totalItems}}</strong></div>
+
+        <div class="container">
+          <div class="text">
+            <span style="--i:1">Items</span>
+            <span style="--i:2">in</span>
+            <span style="--i:3">Your</span>
+            <span style="--i:4">Cart: </span>
+            <span style="--i:6">{{totalItems}}</span>
+          
+          </div>
+        </div>
+
         <div class="summary-subtotal">
           <div class="subtotal-title">Subtotal</div>
           <div class="subtotal-value final-value" id="basket-subtotal">{{ overallSub | currency : "PHP" }}</div>
@@ -74,6 +91,7 @@
           <button class="checkout-cta" (click)="proceedOrder()">Proceed to Checkout</button>
         </div>
       </div>
+      <br><br>
 
       <img src="assets/img/panda.gif" alt="" />
     </aside>

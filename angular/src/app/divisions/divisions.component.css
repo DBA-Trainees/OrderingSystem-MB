@@ -28,14 +28,14 @@
       border-image: 
         linear-gradient(
           to bottom, 
-          rgb(78, 215, 169), 
-          rgb(57, 185, 70)
+          rgb(68,121,225), 
+          rgb(99,185,219)
         ) 3 200%;
         
     }
     #btun {
       font-size: 15px;
-      color: #ffffff;
+      color: #145581;
     }
     .cname{
       font-size: 20px;
@@ -46,12 +46,55 @@
   right: auto;
 }
 
-.yellow {
-  color: var(--yellow);
+.custom-edit{
+  background-color: #45daff;
+  color:black;
+  border:blue
+}
+.custom-delete{
+  background-color: #ff4a4a;
+  color:white;
 }
 
-.logo {
-  font-size: 3.6rem;
-  font-weight: 700;
+@import url("https://fonts.googleapis.com/css?family=Sacramento&display=swap");
 
+h1 {
+  font-size: calc(15px + 15vh);
+  line-height: calc(15px + 15vh);
+align-items:  center;
+/*   text-shadow: 0 0 5px #f562ff, 0 0 15px #f562ff, 0 0 25px #f562ff,
+    0 0 20px #f562ff, 0 0 30px #890092, 0 0 80px #890092, 0 0 80px #890092;
+  color: #fccaff; */
+  text-shadow: 0 0 5px #1aff00, 0 0 15px #1aff00, 0 0 20px #1aff00, 0 0 40px #1aff00, 0 0 60px #179002, 0 0 10px #ff8d00, 0 0 98px #ff0000;
+    color: #029a42;
+  font-family: "Sacramento", cursive;
+  text-align: center;
+  animation: blink 10s infinite;
+  -webkit-animation: blink 12s infinite;
 }
+
+
+
+@keyframes blink {
+  20%,
+  24%,
+  55% {
+    color: #111;
+    text-shadow: none;
+  }
+
+  0%,
+  19%,
+  21%,
+  23%,
+  25%,
+  54%,
+  56%,
+  100% {
+
+    text-shadow: 0 0 5px #0062ff, 0 0 15px #0062ff, 0 0 20px #0062ff, 0 0 40px #0062ff, 0 0 60px #0044ff, 0 0 10px #ff8d00, 0 0 98px #ff0000;
+    color: #dfebff;
+  }
+}
+
+

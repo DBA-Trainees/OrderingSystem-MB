@@ -90,6 +90,7 @@ aside {
 
 .basket {
   width: 70%;
+  
 }
 
 .basket-module {
@@ -168,8 +169,9 @@ li.subtotal:before {
   border-bottom: 1px solid #ccc;
   padding: 1rem 0;
   position: relative;
-  background: radial-gradient(328px at 2.9% 15%, rgb(191, 224, 251) 0%, rgb(232, 233, 251) 25.8%, rgb(252, 239, 250) 50.8%, rgb(234, 251, 251) 77.6%, rgb(240, 251, 244) 100.7%);
+ background-image: linear-gradient(to bottom,#ffffff   0%, #aeecfa 100%);
 }
+
 
 .product-image {
   width: 30%;
@@ -192,14 +194,27 @@ li.subtotal:before {
 }
 
 .quantity-field {
-  background-color: #ccc;
+  background-color: #ffffff;
   border: 1px solid #aaa;
   border-radius: 4px;
   font-size: 0.625rem;
-  padding: 2px;
-  width: 3.75rem;
+  padding: 5px;
+  width: 2.60rem;
+justify-content: center;
+left: 422px;
+position: absolute;
+}
+.incre{
+  left: 457px;
+position: absolute;
+padding: 5px;
 }
 
+.decre{
+  left: 405px;
+position: absolute;
+padding: 5px;
+}
 aside {
   float: right;
   position: relative;
@@ -207,7 +222,7 @@ aside {
 }
 
 .summary {
-  background: radial-gradient(circle at 10% 20%, rgb(220, 217, 249) 0%, rgb(172, 224, 217) 89.8%);
+  background-color: #defffc;
   border: 1px solid #aaa;
   padding: 1rem;
   position: relative;
@@ -215,6 +230,7 @@ aside {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+  height:50vh;
 }
 
 .summary-total-items {
@@ -259,6 +275,8 @@ aside {
 .subtotal-value,
 .total-value {
   text-align: right;
+  font-size: 15px;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 .total-title {
@@ -271,14 +289,29 @@ aside {
   display: block;
 }
 
-.checkout-cta {
-  display: block;
-  float: none;
-  font-size: 0.75rem;
-  text-align: center;
-  text-transform: uppercase;
-  padding: 0.625rem 0;
-  width: 100%;
+
+
+.checkout-cta{
+  padding: 10px 30px;
+  background-color: #050801;
+  color: #03e9f4;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  letter-spacing: 4px;
+  overflow: hidden;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.checkout-cta:hover{
+    background: #03e9f4;
+    color: #050801;
+    box-shadow: 0 0 5px #03e9f4,
+                0 0 25px #03e9f4,
+                0 0 50px #03e9f4,
+                0 0 50px #03e9f4;
+     -webkit-box-reflect:below 1px linear-gradient(transparent, #0005);
 }
 
 .summary-delivery-selection {
@@ -359,10 +392,16 @@ aside {
 }
 
 .smaller-textarea {
-  font-size: 8px; /* You can adjust the font size to your preference */
-  width: 150px; /* Adjust the width as needed */
-  height: 40px; 
+  font-size: 10px; /* You can adjust the font size to your preference */
+  color:#000000;
+  font-family: ' monospace';
+  background-color: #ffffff;;
+  height: 40px;
+  width: 140px;
+  border:none;
+  border-radius: 10px;
 }
+
 
 
 
@@ -380,9 +419,122 @@ aside {
   justify-content: left;
 }
 
+@import url("https://fonts.googleapis.com/css?family=Sacramento&display=swap");
+h3 {
+  font-size: calc(15px + 15vh);
+  line-height: calc(15px + 15vh);
+  text-shadow: 0 0 5px #1aff00, 0 0 15px #1aff00, 0 0 20px #1aff00, 0 0 40px #1aff00, 0 0 60px #179002, 0 0 10px #ff8d00, 0 0 98px #ff0000;
+    color: #029a42;
+  font-family: "Sacramento", cursive;
+  text-align: center;
+  animation: blink 10s infinite;
+  -webkit-animation: blink 12s infinite;
+}
 
+@keyframes blink {
+  20%,
+  24%,
+  55% {
+    color: #111;
+    text-shadow: none;
+  }
 
+  0%,
+  19%,
+  21%,
+  23%,
+  25%,
+  54%,
+  56%,
+  100% {
 
+    text-shadow: 0 0 5px #0062ff, 0 0 15px #0062ff, 0 0 20px #0062ff, 0 0 40px #0062ff, 0 0 60px #0044ff, 0 0 10px #ff8d00, 0 0 98px #ff0000;
+    color: #fbfbfb;
+  }
+}
+.max-quantity-message{
+  color:red;
+  align-items: center;
+left: 385px;
+position: absolute;
+}
 
+.item-heading1{
+  font-size: 140%;
+  font-family: garamond;
+  font-style: bold;
+  text-shadow: 0 0 5px #0062ff, 0 0 15px #0062ff, 0 0 20px #0062ff, 0 0 40px #0062ff, 0 0 60px #0044ff, 0 0 10px #ff8d00, 0 0 98px #ff0000;
+  color: #000101;
 
+    padding-left: 4.375rem;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
 
+ .price1{
+  font-size: 140%;
+  font-family: garamond;
+  font-style: bold;
+  text-shadow: 0 0 5px #0062ff, 0 0 15px #0062ff, 0 0 20px #0062ff, 0 0 40px #0062ff, 0 0 60px #0044ff, 0 0 10px #ff8d00, 0 0 98px #ff0000;
+  color: #000101;
+    width: 15%;
+}
+
+.quantity1{
+  font-size: 140%;
+  font-family: garamond;
+  font-style: bold;
+  text-shadow: 0 0 5px #0062ff, 0 0 15px #0062ff, 0 0 20px #0062ff, 0 0 40px #0062ff, 0 0 60px #0044ff, 0 0 10px #ff8d00, 0 0 98px #ff0000;
+  color: #000101;
+    text-align: center;
+    width: 15%;
+}
+
+.subtotal1{
+  font-size: 140%;
+  font-family: garamond;
+  font-style: bold;
+  text-shadow: 0 0 5px #0062ff, 0 0 15px #0062ff, 0 0 20px #0062ff, 0 0 40px #0062ff, 0 0 60px #0044ff, 0 0 10px #ff8d00, 0 0 98px #ff0000;
+  color: #000101;
+    width: 15%;
+    text-align: right;
+   
+}
+
+.container {
+  width: 88%;
+  min-height: 10vh;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #14213d;
+}
+
+.text span {
+  font-size: 10px;
+  padding: 0 3px;
+  text-transform: uppercase;
+  color: #fff;
+  animation: zoomup 2s linear infinite;
+  animation-delay: calc(200ms * var(--i));
+}
+
+@keyframes zoomup {
+  0%,
+  100% {
+    color: #00c2ba;
+    filter: blur(1px);
+    text-shadow: 0 0 10px #00c2ba, 0 0 20px #00c2ba, 0 0 30px #00c2ba,
+      0 0 40px #00c2ba, 0 0 60px #00c2ba, 0 0 80px #00c2ba, 0 0 100px #00c2ba,
+      0 0 120px #00c2ba;
+  }
+
+  5%,
+  95% {
+    filter: blur(0);
+    color: #fff;
+    text-shadow: none;
+  }
+}

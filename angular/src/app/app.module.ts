@@ -56,7 +56,8 @@ import { FoodListInformationComponent } from './orders/food-information/food-inf
 import { CustomerCartComponent } from './customer-cart/customer-cart.component';
 import { CustomerDashboardComponent } from './customer-cart/customer-dashboard/customer-dashboard.component';
 import { AddToCartDetailsComponent } from './orders/add-to-cart-details/add-to-cart-details.component';
-import { VendorDashboardComponent } from './orderVendor/vendor-dashboard/vendor-dashboard.component';
+import { ReportsComponent } from './orders/reports/reports.component';
+import { NextStageComponent } from './orders/next-stage/next-stage.component';
 
 
 
@@ -107,7 +108,8 @@ import { VendorDashboardComponent } from './orderVendor/vendor-dashboard/vendor-
         CustomerCartComponent,
         CustomerDashboardComponent,
         AddToCartDetailsComponent,
-        VendorDashboardComponent,
+        ReportsComponent,
+        NextStageComponent,
      
     
        

@@ -1,7 +1,7 @@
 import { Component, Injector } from "@angular/core";
 import { appModuleAnimation } from "@shared/animations/routerTransition";
 import { PagedListingComponentBase, PagedRequestDto} from "@shared/paged-listing-component-base";
-import { CustomerDto, CustomerDtoPagedResultDto, CustomerServiceProxy, DivisionServiceProxy, DivisionDto } from "@shared/service-proxies/service-proxies";
+import { CustomerDto, CustomerDtoPagedResultDto, CustomerServiceProxy } from "@shared/service-proxies/service-proxies";
 import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
 import { finalize } from "rxjs/operators";
 import { CreateOrEditCustomersComponent } from "./create-or-edit-customers/create-or-edit-customers.component";

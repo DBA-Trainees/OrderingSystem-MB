@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 
 namespace OrderSystem.Foods
 {
-   // [AbpAuthorize(PermissionNames.Pages_Foods)]
+   
 
     public class FoodAppService : AsyncCrudAppService<Food, FoodDto, int, PagedFoodResultRequestDto, CreateFoodDto, FoodDto>, IFoodAppService
     {
@@ -62,25 +62,6 @@ namespace OrderSystem.Foods
                 .ToListAsync();
         return returnQuery;
         }
-
-        //public async Task<PagedResultDto<FoodDto>> GetAllFoodWithCategoryAndFoodType(PagedFoodResultRequestDto input)
-        //{
-        //    var food = await _foodRepository
-        //        .GetAll()
-        //        .Include(x => x.Category)
-        //        .Include(x => x.FoodType)
-        //        .Select(x => ObjectMapper
-        //        .Map<FoodDto>(x))
-        //        .ToListAsync();
-        //    return new PagedResultDto<FoodDto>(food.Count(), food);
-        //}
-
-
-        //public async Task<List<FoodDto>> GetAllFoodsAsync()
-        //{
-        //    var fuds = await _foodRepository.GetAllListAsync();
-        //    return ObjectMapper.Map<List<FoodDto>>(fuds);
-        //}
 
 
         public async Task<PagedResultDto<FoodDto>> GetAllFoodWithCategoryAndFoodType(PagedFoodResultRequestDto input)

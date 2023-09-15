@@ -23,6 +23,11 @@
 
         public const string Pages_Orders = "Pages.Orders";
 
-        //public const string Pages_FoodList = "Pages.FoodList";
+        public const string Pages_FoodList = "Pages.FoodList";
+
+        public const string Pages_OrderVendor = "Pages.OrderVendor";
+
+        public const string Pages_DashBoard = "Pages.DashBoard";
+        public const string Pages_CustomerCart= "Pages.CustomerCart";
     }
 }

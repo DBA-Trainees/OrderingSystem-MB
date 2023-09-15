@@ -1,7 +1,7 @@
 
 
 
-import { Component, Injector, OnInit, SimpleChanges } from "@angular/core";
+import { ChangeDetectorRef, Component, Injector, OnInit, SimpleChanges } from "@angular/core";
 import { Router, Routes } from "@angular/router";
 import { appModuleAnimation } from "@shared/animations/routerTransition";
 import {
@@ -47,29 +47,42 @@ export class CustomerCartComponent extends PagedListingComponentBase<OrderDto> {
   total: number;
   shippingCost: number=10;
   overallSub:number=0;
+ food=new FoodDto();
 
   constructor(
     injector: Injector,
     private _orderService: OrderServiceProxy,
     private _modalService: BsModalService,
     private BsModalRef:BsModalRef,
-    private router:Router
+    private router:Router,
+    private cdRef: ChangeDetectorRef
   ) {
     super(injector);
   }
 
+  incrementQuantity(order: OrderDto): void {
+    if (order.quantity < order.food.quantity) {
+      order.quantity++;
+      this.updateCart(order); // Update the cart after incrementing
+    }
+  }
+  
+  decrementQuantity(order: OrderDto): void {
+    if (order.quantity > 1) {
+      order.quantity--;
+      this.updateCart(order); // Update the cart after decrementing
+    }
+  }
+
   calculateTotalPrice(): void {
-    // Calculate the subtotal (sum of individual prices)
     const subtotal = this.orders.reduce((total, order) => {
       return total + this.individualPrice(order);
     }, 0);
 
-    // Add the shipping cost to the subtotal to get the total price
     this.overallTotalPrice = subtotal + this.shippingCost;
   }
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.orders) {
-      // Calculate the total price whenever orders change
       this.calculateTotalPrice();
     }
   }
@@ -81,7 +94,6 @@ export class CustomerCartComponent extends PagedListingComponentBase<OrderDto> {
   }
   ngOnChangesSubtotal(changes: SimpleChanges): void {
     if (changes.orders) {
-      // Calculate the total price whenever orders change
       this.calculateSubtotal();
     }
   }
@@ -104,7 +116,8 @@ export class CustomerCartComponent extends PagedListingComponentBase<OrderDto> {
         finalize(() => {
           finishedCallback();
           this.calculateTotalPrice();
-          this.calculateSubtotal()
+          this.calculateSubtotal();
+  
         })
       )
       .subscribe((result: OrderDtoPagedResultDto) => {
@@ -115,9 +128,6 @@ export class CustomerCartComponent extends PagedListingComponentBase<OrderDto> {
       });
   }
  
-
-
-
   protected delete(order: OrderDto): void {
     abp.message.confirm(
       this.l("You want to delete " + order.food.name),
@@ -137,8 +147,9 @@ export class CustomerCartComponent extends PagedListingComponentBase<OrderDto> {
   updateCart(order: OrderDto): void {
     this.calculateTotalPrice();
     this.calculateSubtotal();
+    this.calculateTotalPrice();
     this._orderService.update(order).subscribe(() => {
-      abp.notify.warn(this.l("Details Are Successfully Updated"));
+      abp.notify.success(this.l("Details Are Successfully Updated"));
      
     });
   }
@@ -149,9 +160,7 @@ export class CustomerCartComponent extends PagedListingComponentBase<OrderDto> {
   }
 
   proceedOrder() {
-    // Check if there are orders to proceed
     if (this.orders.length === 0) {
-      // Handle the case where there are no orders
       abp.notify.error(this.l("No Order To Proceed"));
       return;
     }

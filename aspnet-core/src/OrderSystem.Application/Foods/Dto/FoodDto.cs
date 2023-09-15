@@ -27,5 +27,8 @@ namespace OrderSystem.Foods.Dto
         public CategoriesDto Category { get; set; }
         public int FoodTypeId { get; set; }
         public FoodTypeDto FoodType { get; set; }
+        public int originalQuantity { get; set; }
+
+        public int FoodId { get; set; }
     }
 }

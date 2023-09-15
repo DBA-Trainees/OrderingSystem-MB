@@ -22,20 +22,14 @@
               id="customerName"
               required
               [(ngModel)]="customer.customerName"
-              #customerNameModel="ngModel"
-              #customerNameEl
-            />
-            <abp-validation-summary
-              [control]="customerNameModel"
-              [controlEl]="customerNameEl"
-            ></abp-validation-summary>
+            >
           </div>
         </div>
         <div class="form-group row required">
             <label 
             class="col-md-3 col-form-label" style="font-size: 18px;"
             for="divisionName">
-                {{ "Department" | localize }}
+                {{ "Division" | localize }}
             </label>
             <div class="col-md-9" >
                 <select style="border-color: black;" 

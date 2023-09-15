@@ -3,6 +3,7 @@ using Abp.Application.Services.Dto;
 using Abp.Authorization;
 using Abp.Domain.Repositories;
 using Abp.Runtime.Session;
+using Abp.UI;
 using Microsoft.EntityFrameworkCore;
 using OrderSystem.Authorization;
 using OrderSystem.Entities;
@@ -15,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace OrderSystem.Orders
 {
-   // [AbpAuthorize(PermissionNames.Pages_Orders)]
+  
     public class OrderAppService : AsyncCrudAppService<Order, OrderDto, int, PagedOrderResultRequestDto, CreateOrderDto, OrderDto>, IOrderAppService
     {
         private readonly IRepository<Order, int> _orderRepository;
@@ -26,10 +27,6 @@ namespace OrderSystem.Orders
             _foodRepository = foodRepository;
         }
 
-        //public override Task<OrderDto> CreateAsync(CreateOrderDto input)
-        //{
-        //    return base.CreateAsync(input);
-        //}
 
         public override Task DeleteAsync(EntityDto<int> input)
         {
@@ -63,15 +60,16 @@ namespace OrderSystem.Orders
         }
         public async Task<OrderDto> CreateOrUpdate(OrderDto input)
         {
-           var notexisting= ObjectMapper.Map<Order>(input);
-            var orderEx=await _orderRepository.GetAll().AsNoTracking()
-                . Where(x => x.FoodId==input.FoodId)
+            var notexisting = ObjectMapper.Map<Order>(input);
+            var orderEx = await _orderRepository.GetAll().AsNoTracking()
+                .Where(x => x.FoodId == input.FoodId)
                 .FirstOrDefaultAsync();
 
             try
             {
-                if (orderEx==null) {
-                    notexisting.DateTimeOrdered =input.DateTimeOrdered?.ToLocalTime();
+                if (orderEx == null)
+                {
+                    notexisting.DateTimeOrdered = input.DateTimeOrdered?.ToLocalTime();
                     await _orderRepository.InsertAsync(notexisting);
                     return ObjectMapper.Map<OrderDto>(notexisting);
                 }
@@ -88,10 +86,83 @@ namespace OrderSystem.Orders
                 throw ex;
             }
 
-        } 
+        }
+
+        //public async Task<OrderDto> CreateOrUpdate(OrderDto input)
+        //{
+        //    var notexisting = ObjectMapper.Map<Order>(input);
+        //    var orderEx = await _orderRepository.FirstOrDefaultAsync(x => x.FoodId == input.FoodId);
 
 
+        //    try
+        //    {
+        //        if (orderEx == null)
+        //        {
+        //            var food = await _foodRepository.GetAsync(notexisting.FoodId);
 
+        //            notexisting.DateTimeOrdered = input.DateTimeOrdered?.ToLocalTime();
+        //            await _orderRepository.InsertAsync(notexisting);
+        //            food.Quantity -= notexisting.Quantity;
+
+
+        //            // Update the food quantity when creating a new order
+        //            var foodItem = await _foodRepository.GetAsync(input.Id);
+        //            if (foodItem != null)
+        //            {
+        //                if (foodItem.Quantity >= input.Quantity)
+        //                {
+        //                    foodItem.Quantity -= input.Quantity;
+        //                    await _foodRepository.UpdateAsync(foodItem);
+        //                }
+        //                else
+        //                {
+        //                    // Handle not enough items in stock
+        //                    throw new UserFriendlyException("Not enough items in stock.");
+        //                }
+        //            }
+        //            else
+        //            {
+        //                // Handle invalid food item
+        //                throw new UserFriendlyException("Invalid food item.");
+        //            }
+
+        //            return ObjectMapper.Map<OrderDto>(notexisting);
+        //        }
+        //        else
+        //        {
+        //            orderEx.Quantity += input.Quantity;
+        //            orderEx.DateTimeOrdered = input.DateTimeOrdered?.ToLocalTime();
+        //            await _orderRepository.UpdateAsync(orderEx);
+
+        //            // Update the food quantity when updating an order
+        //            var foodItem = await _foodRepository.GetAsync(input.Id);
+        //            if (foodItem != null)
+        //            {
+        //                if (foodItem.Quantity >= input.Quantity)
+        //                {
+        //                    foodItem.Quantity -= input.Quantity;
+        //                    await _foodRepository.UpdateAsync(foodItem);
+        //                }
+        //                else
+        //                {
+        //                    // Handle not enough items in stock
+        //                    throw new UserFriendlyException("Not enough items in stock.");
+        //                }
+        //            }
+        //            else
+        //            {
+
+        //                throw new UserFriendlyException("Invalid food item.");
+        //            }
+
+        //            return ObjectMapper.Map<OrderDto>(orderEx);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
 
 
 
@@ -121,7 +192,24 @@ namespace OrderSystem.Orders
             return orderStatus;
 
         }
+        public async Task<double> GetTotalSalesByDateAsync(int year, int month, int day)
+        {
+            // Calculate the start and end of the specified day
+            DateTime startDate = new DateTime(year, month, day, 0, 0, 0);
+            DateTime endDate = new DateTime(year, month, day, 23, 59, 59);
+
+            // Query the database to sum the total sales within the specified date range
+            var Sales = await _orderRepository
+                .GetAll()
+                .Where(x => x.DateTimeOrdered >= startDate && x.DateTimeOrdered <= endDate)
+                .Select(x => ObjectMapper.Map<Order>(x))
+                .SumAsync(x => x.totalSales);
+
+            return Sales;
+        }
+
 
 
     }
+
 }

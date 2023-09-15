@@ -1,8 +1,8 @@
 
 <div [@routerTransition]>
     <section class="content-header" >
-        <nav class="navbar navbar-light justify-content-between" style="  background-image: linear-gradient(to right, rgb(78, 215, 169), rgb(57, 185, 70));">
-            <div class="logo">DIVI<span class="yellow">SION</span></div>
+        <nav class="navbar navbar-light justify-content-between" >
+            <h1>Division</h1>
             <form class="inline">
             <div class="col-12 text-right"style="font-size:20px"  >
                 <a id="btun"
@@ -11,7 +11,7 @@
                 (click)="createDiv()" >
                     <i class="fa fa-plus-circle " style="font-size:30px;"  ></i> 
                 </a>
-                <label class="cname text-white">{{"Add Division"|localize}}</label>
+                <label class="cname text-black">{{"Add Division"|localize}}</label>
 
             </div>
             </form>
@@ -22,25 +22,21 @@
     <section class="content px-2" >
         <div class="container-fluid" >
             <div class="card" id="div3"  >
-                <div class="card-header" style=" background-image: linear-gradient(to right, #A1FFCE  0%, #FAFFD1 100%); ">
+                <div class="card-header" style=" background-image: linear-gradient(to right,#72b4ff   0%, #aeecfa 100%); ">
                     <div class="row">
                         <div class="col-md-6">&emsp;</div>
                         <div class="col-md-6">
                             <div class="input-group">
                                 <input 
                                 type="text" 
-                                class="form-control" 
+                                class="form-control " 
                                 name="keyword"                                    
                                 [placeholder]="'SearchWithThreeDot' | localize" 
+                                
                                 [(ngModel)]="keyword"
                                 (keyup.enter)="getDataPage(1)" 
                                 />
-                                <button 
-                                    type="button" 
-                                    class="btn bg-success" 
-                                    (click)="getDataPage(1)">
-                                        <i class="fas fa-search" ></i>
-                                    </button>
+                             
                             </div>
                         </div>
                     </div>
@@ -69,14 +65,14 @@
                                     <td style="text-align:center">
                                         <button 
                                         type="button" 
-                                        class="btn btn-sm bg-blue"
+                                        class="btn btn-sm custom-edit"
                                         (click)="editDiv(division.id)">
                                             <i class="fas fa-pencil-alt"> </i>
                                             {{ "Edit" | localize }}
                                         </button>
                                         <button 
                                         type="button" 
-                                        class="btn btn-sm bg-danger mx-2"
+                                        class="btn btn-sm custom-delete mx-2"
                                         (click)="delete(division)">
                                             <i class="fas fa-trash"> </i>
                                             {{ "Delete" | localize }}
@@ -90,7 +86,7 @@
             </div>
         </div>
         <br>
-        <div class="card-footer table-card-footer bg-light border-top"  style="background-image: linear-gradient(to right, rgb(78, 215, 169), rgb(57, 185, 70));">
+        <div class="card-footer table-card-footer bg-light border-top"  style="background-image: linear-gradient(to bottom, #57a5fd, #c0f3ff);">
             <div class="row">
                 <div class="col-sm-4 col-12 text-sm-left text-center">
                     <button class="btn btn-secondary" (click)="refresh()">

@@ -1,40 +1,42 @@
-/* @keyframes moveabout {
 
-    from { left: -50px; }
-    to   { left:  330px; }
-}
-.babi {
-
-    position: absolute;
-    top: -2px;
-    left:330px;
-    animation: moveabout 2s linear;
-    border-bottom: 1px solid black;
-  
-  
-   
+.clay-category {
+  display: flex;
+  width: 100%;
+  height: 40%;
+  background: rgb(6, 21, 27);
+  box-shadow: 0 10px 20px 0 rgb(68,121,225), inset 0px -7px 12px 1px rgb(11, 40, 52);
+  border-radius: 20px;
+  transition: all 0.4s ease-in-out;
+  margin-right: 40px;
 }
 
+.clay-category svg {
+  fill: rgb(247, 255, 7);
+  width: 30px;
+  height: auto;
+  margin-left: 10px;
+  transition: all 0.4s ease-in-out;
+  margin-bottom: 5px;
+ 
+}
 
-#div1 {
-    font-family:Garamond ;
-    font-size: 30px;
-    animation: slide-right 1s;
-    text-align: right;
+.clay-category p {
+  color: rgb(8, 0, 0);
+  font-size: 20px;
+  letter-spacing: 1px;
+  transition: all 0.4s ease-in-out;
+ margin-left: 15px;
+ margin-top: 9px;
+ text-align: center;
+ text-shadow: 0 0 5px #0062ff, 0 0 15px #0062ff, 0 0 20px #0062ff, 0 0 40px #0062ff, 0 0 60px #0044ff, 0 0 10px #ff8d00, 0 0 98px #ff0000;
+ color: #fbfbfb;
+}
 
-  }
-  
-  @keyframes slide-right {
-    from {
-        right: 90%;
-        width: 300%; 
-      }
-    
-      to {
-      left: 0%;
-        width: 100%;
-      }
-    }
+.clay-category:hover > svg {
+  fill: rgb(247, 255, 7);
+  transition: all 0.4s ease-in-out;
+}
+
 
     #div3 {
       
@@ -45,36 +47,48 @@
       border-image: 
         linear-gradient(
           to bottom, 
-          rgb(255, 26, 0), 
-          hsla(149, 89%, 65%, 0)
-        ) 3 200%;
-    }
-
-     */
-     .yellow {
-      color: var(--yellow);
-    }
-    
-    .logo {
-      font-size: 3.6rem;
-      font-weight: 700;
-    
-    }
-     
-    #div3 {
-      
-      padding: 1rem;
-      color: rgb(0, 0, 0);
-      border-width: 3px;
-      border-style: solid;
-      border-image: 
-        linear-gradient(
-          to bottom, 
-          rgb(255, 26, 0), 
-          hsla(149, 89%, 65%, 0)
+          rgb(68,121,225), 
+          rgb(99,185,219)
         ) 3 200%;
        
     }
 
+    @import url("https://fonts.googleapis.com/css?family=Sacramento&display=swap");
+
     
-    
+h1 {
+  font-size: calc(15px + 15vh);
+  line-height: calc(15px + 15vh);
+  text-shadow: 0 0 5px #1aff00, 0 0 15px #1aff00, 0 0 20px #1aff00, 0 0 40px #1aff00, 0 0 60px #179002, 0 0 10px #ff8d00, 0 0 98px #ff0000;
+    color: #029a42;
+  font-family: "Sacramento", cursive;
+  text-align: center;
+  animation: blink 10s infinite;
+  -webkit-animation: blink 12s infinite;
+}
+
+@keyframes blink {
+  20%,
+  24%,
+  55% {
+    color: #111;
+    text-shadow: none;
+  }
+
+  0%,
+  19%,
+  21%,
+  23%,
+  25%,
+  54%,
+  56%,
+  100% {
+
+    text-shadow: 0 0 5px #0062ff, 0 0 15px #0062ff, 0 0 20px #0062ff, 0 0 40px #0062ff, 0 0 60px #0044ff, 0 0 10px #ff8d00, 0 0 98px #ff0000;
+    color: #dfebff;
+  }
+}
+
+
+
+

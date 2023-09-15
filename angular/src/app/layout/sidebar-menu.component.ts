@@ -46,8 +46,10 @@ export class SidebarMenuComponent extends AppComponentBase implements OnInit {
             new MenuItem(this.l('About'), '/app/about', 'fas fa-info-circle'),
             new MenuItem(this.l('HomePage'), '/app/home', 'fas fa-home'),
           
+            new MenuItem(this.l("Roles"),"/app/roles","fas fa-theater-masks","Pages.Roles"),
+            new MenuItem(this.l("Users"),"/app/users","fas fa-users","Pages.Users"),
+       
             
-           // new MenuItem(this.l("Admin"), "", "fas fa-user-gear", "Pages.Admin", [
                 new MenuItem(
                   this.l("Divisions"),
                   "/app/divisions",
@@ -61,11 +63,7 @@ export class SidebarMenuComponent extends AppComponentBase implements OnInit {
                     'Pages.Customers'
                     
                 ),
-                new MenuItem(this.l("Roles"),"/app/roles","fas fa-theater-masks","Pages.Roles"),
-                new MenuItem(this.l("Users"),"/app/users","fas fa-users","Pages.Users"),
-       //     ]),
-           
-        //    new MenuItem(this.l("Vendor"), "", "fas fa-user-tie", "Pages.Vendor", [
+               
             new MenuItem(
                 this.l('Category'),
                 '/app/categories',
@@ -87,20 +85,20 @@ export class SidebarMenuComponent extends AppComponentBase implements OnInit {
                 "Pages.Foods"
                
             ),
-            
-    //    ]),
+ 
 
-      //  new MenuItem(this.l("Customer"), "", "fas fa-user-circle", "Pages.Customer", [
             new MenuItem(
                 this.l('List of Foods'),
                 '/app/foodList',
                 'fas fa-list',
+                "Pages.FoodList"
                
             ),
             new MenuItem(
                 this.l('Cart'),
                 '/app/customer-cart',
                 'fas fa-cart-plus',
+                "Pages.CustomerCart"
             
             ),
 
@@ -108,28 +106,37 @@ export class SidebarMenuComponent extends AppComponentBase implements OnInit {
                 this.l('Dashboard'),
                 '/app/dashboard',
                 'fas fa-history',
-                
+                "Pages.DashBoard"
             ),
 
             new MenuItem(
                 this.l('Order'),
                 '/app/orders',
                 'fas fa-shopping-cart',
-                "Pages.Orders"
+                "Pages.OrderVendor"
             
             ),
 
             
+           
             new MenuItem(
-                this.l('Vendor Dashboard'),
-                '/app/vendorDashboard',
-                'fas fa-history',
+                this.l('Reports'),
+                '/app/reports',
+                'fas fa-user-friends',
+                
                 
             ),
-      
+            new MenuItem(
+                this.l('NextStage'),
+                '/app/nextStage',
+                'fas fa-user-friends',
+                
+                
+            ),
+
+
 
             
-     //   ]),
       
             new MenuItem(this.l('MultiLevelMenu'), '', 'fas fa-circle', '', [
                 new MenuItem('ASP.NET Boilerplate', '', 'fas fa-dot-circle', '', [

@@ -1847,6 +1847,9 @@ namespace OrderSystem.Migrations
                     b.Property<double>("TotalFoodAmount")
                         .HasColumnType("float");
 
+                    b.Property<int>("totalSales")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CustomerId");

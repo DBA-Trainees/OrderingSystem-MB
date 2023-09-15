@@ -18,7 +18,7 @@ export class CreateOrEditDivisionModalComponent extends AppComponentBase impleme
   division: DivisionDto = new DivisionDto();
   id: number = 0;
   divisions: DivisionDto[] =[];
-  //property decorator
+
   @Output() onSave = new EventEmitter<any>();
   notify: any;
 
@@ -26,11 +26,10 @@ export class CreateOrEditDivisionModalComponent extends AppComponentBase impleme
     injector: Injector,
     public bsModalRef: BsModalRef,
     private _divisionService: DivisionServiceProxy,
-   // private _router:Router
   ) {
     super(injector);
   }
-//method of the oninit interface 
+
   ngOnInit() {
     if (this.id) {
       this._divisionService. get(this.id).subscribe((res) => {
@@ -47,7 +46,6 @@ export class CreateOrEditDivisionModalComponent extends AppComponentBase impleme
           this.notify.info(this.l(this.division.divisionName+" "+" Saved Successully"));
           this.bsModalRef.hide();
           this.onSave.emit();
-          //this._router.navigate(["/app/division"])
         },
         () => {
           this.saving = false;
@@ -59,7 +57,6 @@ export class CreateOrEditDivisionModalComponent extends AppComponentBase impleme
           this.notify.info(this.l(this.division.divisionName+" "+" Created Successully"));
           this.bsModalRef.hide();
           this.onSave.emit();
-          //this._router.navigate(["/app/division"])
         },
         () => {
           this.saving = false;
